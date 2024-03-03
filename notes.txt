@@ -1,0 +1,37 @@
+*******************************************************************************
+ _____   __   __  ______   __   __          ______   _______    ___    _____
+ ||  \\  ||   ||  | ____|  ||   ||          | ____|  ||   ||   // \\   ||  \\
+ ||   || ||   ||  | |___   ||___||          | |___   ||   ||  ||___||  ||   ||
+ ||__//  ||   ||  |___  |  | ___ |          |___  |  || _ ||  | ___ |  ||__//
+ ||      \\___//   ___| |  ||   ||           ___| |  | / \ |  ||   ||  ||
+_||_______\___/___|_____|__||   ||__________|_____|__|/___\|__||___||__||______
+ 
+*******************************************************************************
+
+program:
+		takes argument-> stack_a formatted as a list of int
+		first arg should be at top of stack!
+		must display the smallest list of instructions possible to sort stack a
+		smallest number must be at top
+		each instruction must be seperated by a \n only
+
+goal:
+		sort the stack with the lowest number of operations
+
+if no parameters are specified: 
+		program must give back promt and not display anything
+
+errors: 
+		must display "Error"\n on the stderr!!
+	error examples:
+		some arguments aren't integers
+		some arguments are bigger than an integer
+		there are duplicates
+
+
+if (!int || function != 0)
+	write(1, "Error", 5);
+	return (0);
+
+
+int ** at len finct

@@ -13,6 +13,17 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef GET_NEXT_LINE_H
+#  define GET_NEXT_LINE_H
+
+#  ifndef BUFFER_SIZE
+#   define BUFFER_SIZE 42
+#  endif
+
+#  include <sys/types.h>
+#  include <fcntl.h>
+#  include <sys/stat.h>
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -20,6 +31,16 @@
 # include <string.h>
 # include <ctype.h>
 # include <stdarg.h>
+
+char	*get_next_line(int fd);
+int		ft_strlen(char *s);
+char	*ft_strjoin(char *base, char *add);
+int		ft_strchr(char *s, int c);
+char	*ft_buf(char *buf, int *x);
+char	*ft_next(char *buf, int fd);
+char	*ft_dup(char *str);
+char	*ft_rest(int x, char *buf);
+# endif
 
 int		ft_isascii(int c);
 int		ft_isprint(int c);

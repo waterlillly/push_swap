@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:48:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/03 07:46:31 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/03 10:24:02 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ long int	min(t_list *x)
 }
 */
 
-t_list	*parse_stack(t_list *a, t_list *b, int *operations)
+t_list	*parse_stack(t_list *a, t_list *b)
 {
 	int		middle;
 	
@@ -82,39 +82,35 @@ t_list	*parse_stack(t_list *a, t_list *b, int *operations)
 		{
 			pb(a, b);
 			middle--;
-			operations++;
 		}
 		if (b != 0 && a->data > b->data)
 		{
 			pa(a, b);
 			middle++;
-			operations++;
 		}
 		a = a->next;
 	}
 	while (a->prev != 0 && a->data > a->prev->data)
 		a = a->prev;
 	if (a->prev == 0)
-		return (*operations, a);
+		return (a);
 	else
-		parse_stack(a, b, &operations);
+		return (parse_stack(a, b));
 }
 
-t_list	*push_swap(t_list *a, int *operations)
+t_list	*push_swap(t_list *a)
 {
 	t_list	*b;
 	
-	b->data = NULL;
-	b->next = NULL;
-	b->prev = NULL;
+	b = NULL;
 	if (a != 0 && a->next != 0)
 	{
-		b = parse_stack(a, b, &operations);
+		b = parse_stack(a, b);
 		if (!b)
-			return (*operations, NULL);
-		return (*operations, b);
+			return (NULL);
+		return (b);
 	}
-	return (*operations, NULL);
+	return (NULL);
 }
 
 t_list	*stack_a(int x, char **input)
@@ -123,8 +119,7 @@ t_list	*stack_a(int x, char **input)
 	long int	y;
 	
 	y = 0;
-	a->prev = NULL;
-	a->next = NULL;
+	a = NULL;
 	while (*input[x])
 	{
 		if (ft_atoi(input[x]))
@@ -136,10 +131,10 @@ t_list	*stack_a(int x, char **input)
 		a->next = NULL;
 		x++;
 	}
-	if (*input[x] == NULL)
+	if (*input == NULL)
 	{
-		while (*input[x])
-			free(*input[x--]);
+		while (*input--)
+			free(*input);
 		free(input);
 		return (a);
 	}
@@ -151,12 +146,10 @@ int	main(int ac, char **av)
 	int			x;
 	char		**input;
 	t_list		*a;
-	int			*operations;
 
 	x = 0;
 	input = NULL;
 	a = NULL;
-	operations = 0;
 	if (ac < 2)
 		return (-1);
 	else if (ac == 2)
@@ -168,8 +161,6 @@ int	main(int ac, char **av)
 	}
 	if (stack_a(x, input) == NULL)
 		return (-1);
-	a = push_swap(a, &operations);
-	if (operations == -1)
-		return (-1);
+	a = push_swap(a);
 	return (0);
 }

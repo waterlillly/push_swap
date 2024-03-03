@@ -6,7 +6,7 @@
 #    By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 01:06:37 by lbaumeis          #+#    #+#              #
-#    Updated: 2024/03/03 06:58:25 by lbaumeis         ###   ########.fr        #
+#    Updated: 2024/03/03 10:24:08 by lbaumeis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ LIB_DIR = ~/push_swap/libft
 LIB_CFILES = $(wildcard $(LIB_DIR)/*.c)
 LIB_OFILES = $(LIB_CFILES:.c=.o)
 LIB_NAME = libft.a
-
 
 all: $(P_NAME)
 

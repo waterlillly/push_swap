@@ -6,7 +6,7 @@ CFILES += ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c
 CFILES += ft_strtrim.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c
 CFILES += ft_putendl_fd.c ft_putnbr_fd.c ft_split.c ft_itoa.c ft_strmapi.c
 CFILES += ft_printf.c ft_printchar.c ft_printstr.c ft_printnbr.c ft_printptr.c
-CFILES += ft_decideformat.c get_next_line.c get_next_line_utils.c
+CFILES += ft_decideformat.c
 
 OFILES = $(CFILES:.c=.o)
 

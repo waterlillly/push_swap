@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 01:06:58 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/03 06:59:15 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:24:37 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,26 @@ typedef struct s_list
 	t_list	*next;
 	t_list	*prev;
 }			t_list;
+
+int		len(t_list *x);
+t_list	*sort(t_list *a, t_list *b);
+//t_list	*parse_stack(t_list *a, t_list *b);
+t_list	*push_swap(t_list *a);
+t_list	*stack_a(int x, char **input);
+void	swap(t_list *x);
+void	sa(t_list *a);
+void	sb(t_list *b);
+void	ss(t_list *a, t_list *b);
+void	push(t_list *dst, t_list *src);
+void	pa(t_list *a, t_list *b);
+void	pb(t_list *a, t_list *b);
+void	rot(t_list *x);
+void	rev_rot(t_list *x);
+void	ra(t_list *a);
+void	rb(t_list *b);
+void	rr(t_list *a, t_list *b);
+void	rra(t_list *a);
+void	rrb(t_list *b);
+void	rrr(t_list *a, t_list *b);
 
 #endif

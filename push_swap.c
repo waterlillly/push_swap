@@ -6,11 +6,37 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:48:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/03 10:24:02 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:23:00 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_list	*sort(t_list *a, t_list *b)
+{
+	while (a != 0 && a->next != 0)
+	{
+		if (b == 0)
+			pb(a, b);
+		if (a->data < b->data)
+		{
+			pb(a, b);
+			while (b->data < b->next->data)
+			{
+				sb(b);
+				rb(b);
+			}
+		}
+		if (a->data > b->data)
+			pb(a, b);
+	}
+	if (a == 0)
+	{
+		while (b != 0)
+			pa(a, b);
+	}
+	return (a);
+}
 
 /*
 int	check_back(t_list *cur)
@@ -69,7 +95,6 @@ long int	min(t_list *x)
 	}
 	return (min);
 }
-*/
 
 t_list	*parse_stack(t_list *a, t_list *b)
 {
@@ -97,6 +122,7 @@ t_list	*parse_stack(t_list *a, t_list *b)
 	else
 		return (parse_stack(a, b));
 }
+*/
 
 t_list	*push_swap(t_list *a)
 {
@@ -105,7 +131,7 @@ t_list	*push_swap(t_list *a)
 	b = NULL;
 	if (a != 0 && a->next != 0)
 	{
-		b = parse_stack(a, b);
+		b = sort(a, b);
 		if (!b)
 			return (NULL);
 		return (b);

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:48:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/05 15:16:52 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:25:32 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,20 @@ int	check_sort(t_list *a)
 	return (0);
 }
 
+int	check_int(char *x)
+{
+	int	y;
+
+	y = 0;
+	while (x[y])
+	{
+		if (x[y] < 48 || x[y] > 57)
+			return (-1);
+		y++;
+	}
+	return (0);
+}
+
 int	check_input(char **input)
 {
 	int		x;
@@ -117,6 +131,8 @@ int	check_input(char **input)
 	while (*input[x])
 	{
 		z = input[x];
+		if (check_int(z) != 0)
+			return (error('i'));
 		if (x > 0)
 		{
 			y = x - 1;
@@ -132,22 +148,53 @@ int	check_input(char **input)
 	return (0);
 }
 
-char	**get_input(int ac, char **av, char **input)
+char	**one(char **av, char **input)
 {
-	int 	x;
+	input = ft_split(av[1], ' ');
+	if (input[1] == NULL)
+	{
+		ft_printf("Error: not enough input\n");
+		return (0);
+	}
+	return (input);
+}
 
-	x = 0;
+char	**two(int ac, char **av, char **input)
+{
+	int	x;
+
+	x = 1;
+	input = (char **)malloc(sizeof(char *) * ac);
+	if (!input)
+	{
+		ft_printf("Error: malloc\n");
+		return (0);
+	}
+	while (*av[x] && x <= ac)
+	{
+		*input = av[x];
+		x++;
+	}
+	input[ac - 1] = NULL;
+	return (input);
+}
+
+char	**get_input(int ac, char **av)
+{
+	char	**input;
+
+	input = NULL;
 	if (ac == 2)
-		input = ft_split(av[1], ' ');
+	{
+		input = one(av, input);
+		if (input == 0)
+			return (0);
+	}
 	else
 	{
-		x = 1;
-		while (*av[x] && x <= ac)
-		{
-			*input = av[x];
-			x++;
-		}
-		input[ac - 1] = NULL;
+		input = two(ac, av, input);
+		if (input == 0)
+			return (0);
 	}
 	if (check_input(input) != 0)
 	{
@@ -165,18 +212,15 @@ int	main(int ac, char **av)
 	input = NULL;
 	a = NULL;
 	if (ac < 2)
-		return (error('i'));
-	input = (char **)malloc(sizeof(char *) * ac);
-	if (!input)
-		return (error('m'));
+		return (-1);
 	a = (t_list *)malloc(sizeof(t_list));
 	if (!a)
 		return (error('m'));
-	input = get_input(ac, av, input);
+	input = get_input(ac, av);
 	if (!input)
 	{
 		ft_printf("Error: while getting input\n");
-		return (0);
+		return (-1);
 	}
 	a = stack_a(input, a);
 	if (!a)

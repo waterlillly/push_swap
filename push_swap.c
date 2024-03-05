@@ -18,24 +18,29 @@ t_list	*sort(t_list *a, t_list *b)
 	{
 		if (b == 0)
 			pb(a, b);
-		if (a->data < b->data)
+		if (b->next == 0)
+			pb(a, b);
+		//if (a->data < b->data)
+		//{
+			//pb(a, b);
+		while (b->data < b->next->data)
 		{
-			pb(a, b);
-			while (b->data < b->next->data)
-			{
-				sb(b);
-				rb(b);
-			}
+			sb(b);
+			rb(b);
 		}
-		if (a->data > b->data)
-			pb(a, b);
+		//}
+		//if (a->data > b->data)
+			//pb(a, b);
 	}
-	if (a == 0)
-	{
-		while (b != 0)
-			pa(a, b);
-	}
-	return (a);
+	if (a == 0 && (b->data > b->next->data))
+		return (b);
+	else
+		return (sort(b, a));
+	//{
+		//while (b != 0)
+			//pa(a, b);
+	//}
+	//return (a);
 }
 
 /*

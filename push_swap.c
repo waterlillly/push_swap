@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:48:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/05 16:25:32 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:19:03 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,9 @@ int	check_input(char **input)
 		if (x > 0)
 		{
 			y = x - 1;
-			while (*input[y] && y >= 0)
+			while (*input[y] && z && y >= 0)
 			{
-				if (z == input[y])
+				if (ft_strncmp((const char *)z, (const char *)input[y], ft_strlen(input[y]) != 0))
 					return (error('d'));
 				y--;
 			}
@@ -162,20 +162,23 @@ char	**one(char **av, char **input)
 char	**two(int ac, char **av, char **input)
 {
 	int	x;
+	int	y;
 
 	x = 1;
-	input = (char **)malloc(sizeof(char *) * ac);
+	y = 0;
+	input = (char **)malloc(sizeof(char *) * ac + 1);
 	if (!input)
 	{
 		ft_printf("Error: malloc\n");
 		return (0);
 	}
-	while (*av[x] && x <= ac)
+	while (av[x] && input[y] && x <= ac)
 	{
-		*input = av[x];
+		input[y] = av[x];
 		x++;
+		y++;
 	}
-	input[ac - 1] = NULL;
+	input[y] = NULL;
 	return (input);
 }
 
@@ -187,13 +190,13 @@ char	**get_input(int ac, char **av)
 	if (ac == 2)
 	{
 		input = one(av, input);
-		if (input == 0)
+		if (!input)
 			return (0);
 	}
 	else
 	{
 		input = two(ac, av, input);
-		if (input == 0)
+		if (!input)
 			return (0);
 	}
 	if (check_input(input) != 0)
@@ -213,9 +216,12 @@ int	main(int ac, char **av)
 	a = NULL;
 	if (ac < 2)
 		return (-1);
-	a = (t_list *)malloc(sizeof(t_list));
+	a = (t_list *)malloc(sizeof(t_list) + 1);
 	if (!a)
-		return (error('m'));
+	{
+		ft_printf("Error: malloc\n");
+		return (0);
+	}
 	input = get_input(ac, av);
 	if (!input)
 	{
@@ -224,7 +230,10 @@ int	main(int ac, char **av)
 	}
 	a = stack_a(input, a);
 	if (!a)
-		return (error('m'));
+	{
+		ft_printf("Error: malloc\n");
+		return (0);
+	}
 	if (check_sort(a) != 0)
 		return (error('s'));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 01:06:58 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/05 16:22:01 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:01:10 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,16 @@ typedef struct s_list
 }			t_list;
 
 int		error(char c);
-int		check_int(char *x);
-int		check_input(char **input);
-char	**one(char **av, char **input);
-char	**two(int ac, char **av, char **input);
-char	**get_input(int ac, char **av);
-//int		len(t_list *x);
+int		check_int_doubles(char **input);
+t_list	*input(int ac, char **av, t_list *stack);
+t_list	*create_node(int value);
+int		max(t_list **a);
+int		next_min(t_list **a, int repeat, int min);
+int		min(t_list **a, int repeat);
+int		mid(int ac, t_list **a);
 t_list	*sort(t_list *a, t_list *b);
-int		check_sort(t_list *a);
-//t_list	*parse_stack(t_list *a, t_list *b);
-t_list	*push_swap(t_list *a);
-t_list	*stack_a(char **input, t_list *a);
+int		check_sort(t_list **a);
+void	ft_free(t_list **a, t_list **b);
 void	swap(t_list *x);
 void	sa(t_list *a);
 void	sb(t_list *b);

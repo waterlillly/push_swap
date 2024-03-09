@@ -95,15 +95,15 @@ t_list	*stack_a(char **input, t_list *a)
 	return (push_swap(a));
 }
 
-int	check_int_doubles(char **input)
+int	check_int_doubles(t_list **a)
 {
 	int			x;
 	int			y;
-	const char	*in;
+	int 	*nbr;
 
 	x = 0;
 	y = 0;
-	in = (const char *)&input;
+	nbr = (int *)&a;
 	while (in[x] && ft_isdigit(in[x])
 	{
 		if (x > 0)

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:48:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/09 15:01:16 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:45:22 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	error(char c)
 	return (-1);
 }
 
-t_list	*sort(t_list *a, t_list *b)
+t_list	**sort(t_list **a, t_list **b)
 {
 	while (a != 0 && a->next != 0)
 	{

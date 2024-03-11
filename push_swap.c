@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:04:09 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/09 15:01:24 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:13:07 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ int	error(char c)
 	return (-1);
 }
 
-int	check_sort(t_list **a)
+int	check_sort(t_list **stack_a)
 {
+	t_list	*a;
+	
+	a = *stack_a;
 	while (a != 0 && a->next != 0 && a->data < a->next->data)
 		a = a->next;
 	if ((a->data > a->next->data || a->data == a->next->data) && a->next != 0)
@@ -37,59 +40,72 @@ int	check_sort(t_list **a)
 	return (0);
 }
 
-t_list	*create_node(int value)
+t_list	*create_node(t_list **s, int value)
 {
-	t_list	*node;
+	t_list	*n;
+	t_list	*stack;
 	
-	node = (t_list *)malloc(sizeof(t_list));
-	if (!node)
+	stack = *s;
+	n = (t_list *)malloc(sizeof(t_list));
+	if (!n)
 		return (0);
-	node->data = value;
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
+	n->data = value;
+	n->next = NULL;
+	n->prev = stack;
+	return (n);
 }
 
-t_list	*input(int ac, char **av, t_list *stack)
+t_list	**input(char **av, t_list **stack, int ac)
 {
 	int		x;
 	int		y;
+	t_list	*s;
 	t_list	*node;
 	
-	x = 0;
+	x = 1;
 	y = 0;
-	node = NULL;
-	while (av[x][y])
+	stack = (t_list **)malloc(sizeof(t_list *) * ac);
+	if (!stack)
 	{
+		ft_printf("Error: malloc\n");
+		return (0);
+	}
+	s = *stack;
+	node = NULL;
+	if (!av)
+		return (0);
+	while (av[x][y] && x < ac)
+	{
+		y = 0;
 		while (av[x][y] && ft_isdigit(av[x][y]))
 			y++;
-		if (av[x][y] == '\0')
-		{
-			node = create_node(ft_atoi(av[x]));
-			if(!node)
-				return (0);
-			node->prev = stack;
-			stack->next = node;
-			stack = stack->next;
-		}
+		node = create_node(&s, ft_atoi((const char *)av[x]));
+		if(!node)
+			return (0);
+		s = node;
+		s = s->next;
 		x++;
-		y = 0;
 	}
-	stack->next = NULL;
+	node = create_node(&s, 0);
+	if(!node)
+		return (0);
+	s = node;
+	s = s->next;
+	*stack = &s;// other way around was also wrong
 	return (stack);
 }
 
 int	max(t_list **a)
 {
-	int		x;
+	int		max;
 	t_list	*cur;
 	
-	x = cur->data;
-	cur = &*a;
+	cur = *a;
+	max = cur->data;
 	while (cur != 0 && cur->next != 0)
 	{
-		if (x < cur->next->data)
-			x = cur->next->data;
+		if (max < cur->next->data)
+			max = cur->next->data;
 		cur = cur->next;
 	}
 	return (max);
@@ -100,7 +116,7 @@ int	next_min(t_list **a, int repeat, int min)
 	t_list	*cur;
 	int		new_min;
 
-	cur = &(*a);
+	cur = *a;
 	new_min = min + 1;
 	if (repeat == 0)
 		return (min);
@@ -123,7 +139,7 @@ int	min(t_list **a, int repeat)
 	int		min;
 	t_list	*cur;
 	
-	cur = &*a;
+	cur = *a;
 	min = cur->data;
 	while (cur != 0 && cur->next != 0)
 	{
@@ -156,8 +172,8 @@ void	ft_free(t_list **a, t_list **b)
 	t_list	*alist;
 	t_list	*blist;
 
-	alist = &(*a);
-	blist = &(*b);
+	alist = *a;
+	blist = *b;
 	while (alist != 0 && alist->next != 0 && blist != 0 && blist->next != 0)
 	{
 		alist = alist->next;
@@ -180,26 +196,73 @@ void	ft_free(t_list **a, t_list **b)
 	free(b);
 }
 
+/*
+int	len(t_list **stack)
+{
+	int		len;
+	t_list	*s;
+	//t_list	*new;
+
+	len = 0;
+	s = *stack;
+	//new = NULL;
+	while (s != 0 && s->next != 0)
+	{
+		len++;
+		s = s->next;
+	}
+	//new = (t_list *)malloc(sizeof(t_list) * (len + 1));
+	//if (!new)
+	//	return (0);
+	//new = *stack;
+	return (len);
+}
+*/
+
+t_list	**sort(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*a;
+	t_list	*b;
+	
+	a = NULL;
+	b = NULL;
+	a = *stack_a;
+	b = *stack_b;
+	if (a != 0 && b == 0)
+	{
+		pb(a, b);
+		pb(a, b);
+		b->next = NULL;
+	}
+	while (a != 0 && a->next != 0)
+	{
+		while (b->data > b->next->data)
+		{
+			sb(b);
+			rb(b);
+		}
+	}
+	if (a == 0 && (b->data < b->next->data))
+		return (stack_b);
+	else
+		return (sort(stack_b, stack_a));
+}
+
 int	main(int ac, char **av)
 {
 	t_list	**a;
 	t_list	**b;
-	int		x;
 	
 	a = NULL;
 	b = NULL;
-	x = 1;
 	if (ac == 1 || ac == 2)
 		return (error('i'));
 	else if (ac == 0)
 		return (0);
-	a = (t_list **)malloc(sizeof(t_list *) * (ac - 1));
-	if (!a)
-		return (error('m'));
-	b = (t_list **)malloc(sizeof(t_list *) * (ac - 1));
+	b = (t_list **)malloc(sizeof(t_list *) * ac);
 	if (!b)
 		return (error('m'));
-	a = input(ac, av, a);
+	a = input(av, a, ac);
 	if (!a)
 		return (error('w'));
 	sort(a, b);

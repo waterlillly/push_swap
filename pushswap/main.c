@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:34:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/13 06:06:38 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/13 10:29:46 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 		else if (check_sort(a) == 1)
 			error(33);
 		else
-			push_swap(a, b);
+			dd_sort(a, b);
 		if (check_sort(a) == 1)
 		{
 			ft_free(a, b);

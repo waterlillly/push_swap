@@ -6,13 +6,11 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:26:00 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/13 06:11:52 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:30:41 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
 
 void	add_head_node(t_list **stack, t_list *s, t_list *node, char id)//insert as first|head
 {

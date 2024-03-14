@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:11:59 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/13 10:29:13 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:55:09 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	error(int nbr);
 int		check_doubles(int ac, int pos, t_list **stack);
 int		check_sort(t_list **stack_a);
 int		check_input(int ac, char **av);
+int		first_check(int ac, char **av);
 
 /*creations.c*/
 void	add_head_node(t_list **stack, t_list *s, t_list *node, char id);

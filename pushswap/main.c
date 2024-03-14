@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:34:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/13 10:29:46 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:54:33 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	main(int ac, char **av)
 	t_list	**a;
 	t_list	**b;
 	
+	if (first_check(ac, av) == 1)
+		return (0);
 	if (check_input(ac, av) == 1)
 	{
 		a = stack(ac);

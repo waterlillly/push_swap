@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 06:09:14 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/13 06:20:47 by lbaumeis         ###   ########.fr       */
+/*   Created: 2024/03/14 13:56:14 by lbaumeis          #+#    #+#             */
+/*   Updated: 2024/03/14 13:56:22 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "push_swap.h"
 
@@ -97,6 +98,30 @@ int	check_sort(t_list **stack_a)
 	return (1);
 }
 
+int	first_check(int ac, char **av)
+{
+	int	x;
+
+	x = 1;
+	if (ac <= 2)
+		return (0);
+	while (x < ac && *av[x])
+	{
+		if (ft_atoi((const char *)av[x]) < ft_atoi((const char *)av[x + 1]))
+			x++;
+		else if (ft_atoi((const char *)av[x]) == ft_atoi((const char *)av[x + 1]))
+		{
+			write(1, "doubles in input", 16);
+			return (0);
+		}
+		else
+			return (0);
+	}
+	if (x == ac)
+		write(1, "is sorted", 9);
+	return (1); 	
+}
+
 int	check_input(int ac, char **av)
 {
 	int		x;
@@ -104,9 +129,7 @@ int	check_input(int ac, char **av)
 
 	x = 1;
 	y = 0;
-	if (ac <= 2)
-		return (0);
-	while (*av[x])
+	while (*av[x] && x < ac)
 	{
 		while (av[x][y] && y != -1)
 		{

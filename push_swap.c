@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:04:09 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/11 17:13:07 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:48:18 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ t_list	**input(char **av, t_list **stack, int ac)
 	if(!node)
 		return (0);
 	s = node;
-	s = s->next;
-	*stack = &s;// other way around was also wrong
+	s->next = NULL;
 	return (stack);
 }
 
@@ -248,25 +247,65 @@ t_list	**sort(t_list **stack_a, t_list **stack_b)
 		return (sort(stack_b, stack_a));
 }
 
+void	add(t_list *cur, int value)
+{
+	t_list	*node;
+
+	if (cur == head)
+	{
+		node->data = value;
+		node->next = cur->next;
+		cur->next = node;
+	}
+	else if (cur == NULL)
+	{
+		node->data = value;
+		node->next = (*head);
+		
+	}
+	else if (cur != NULL)
+	{
+		node->data = value;
+		node->next = cur->next;
+		cur->next = node;
+	}
+	
+	
+}
+
 int	main(int ac, char **av)
 {
-	t_list	**a;
-	t_list	**b;
+	t_list	*a;
+	t_list	*b;
+	t_list	*head;
+	int		x;
 	
+	x = 1;
 	a = NULL;
 	b = NULL;
+	head = NULL;
 	if (ac == 1 || ac == 2)
 		return (error('i'));
 	else if (ac == 0)
 		return (0);
-	b = (t_list **)malloc(sizeof(t_list *) * ac);
-	if (!b)
+	else
+	{
+		a = (t_list *)malloc(sizeof(t_list *) * ac);
+		if (!a)
+			return (0);
+		while (*av[x] && x <= ac)
+		{
+			
+		}
+	}
+	stack_b = (t_list **)malloc(sizeof(t_list *) * ac);
+	if (!stack_b)
 		return (error('m'));
-	a = input(av, a, ac);
-	if (!a)
-		return (error('w'));
-	sort(a, b);
-	if (check_sort(a) == 0)
-		ft_free(a, b);
+	//a = input(av, a, ac);
+	//if (!a)
+	//	return (error('w'));
+	sort(stack_a, stack_b);
+	if (check_sort(stack_a) == 0)
+		ft_free(stack_a, stack_b);
 	return (0);
 }

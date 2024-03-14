@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 01:06:58 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/11 16:43:51 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:40:59 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ typedef struct s_list
 	int		data;
 	t_list	*next;
 	t_list	*prev;
+	t_list	*head;
+	t_list	*tail;
+	t_list	*cur;
 }			t_list;
+
 
 int		error(char c);
 int		check_int_doubles(char **input);
@@ -34,6 +38,7 @@ int		max(t_list **a);
 int		next_min(t_list **a, int repeat, int min);
 int		min(t_list **a, int repeat);
 int		mid(int ac, t_list **a);
+void	add(t_list *stack, int value);
 t_list	*create_tlist(t_list **stack);
 t_list	**sort(t_list **stack_a, t_list **stack_b);
 int		check_sort(t_list **a);

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:34:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/14 15:26:20 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:00:39 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,21 @@ int	main(int ac, char **av)
 			return (0);
 		a = fill_stack(a, av, ac);
 		if (!a)
-			ft_free(a, b);
+			return (ft_free(a), ft_free(b), 0);
 		b = stack(ac);
 		if (!b)
-			return (ft_free(a, b), 0);
+			return (ft_free(a), 0);
 		if (check_sort(a) != 1)
-			a = dd_sort(a, b);
+			dd_sort(a, b);
 		else if (check_sort(a) == 1)
 		{
 			ft_printf("is sorted");
-			ft_free(a, b);
-			return (0);
+			return (ft_free(a), ft_free(b), 0);
 		}
 		else
 		{
 			ft_printf("not sorted");
-			return (0);
+			return (ft_free(a), ft_free(b), 0);
 		}
 	}
 	return (0);

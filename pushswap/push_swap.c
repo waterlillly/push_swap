@@ -6,21 +6,25 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:10:23 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/14 15:26:27 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:57:40 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	**dd_sort(t_list **stack_a, t_list **stack_b)
+void	dd_sort(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*a;
 	t_list	*b;
 	//int		min;
 	//int		max;
 
+	a = NULL;
+	b = NULL;
 	a = *stack_a;
 	b = *stack_b;
+	if (!a || !b)
+		return ;
 	//min = ft_min(stack_a, 0);
 	//max = ft_max(stack_a);
 	while (check_sort(stack_a) != 1)
@@ -51,7 +55,7 @@ t_list	**dd_sort(t_list **stack_a, t_list **stack_b)
 			if (a->data < a->next->data)
 			{
 				if (a->next->data < a->prev->data)
-					return (0);
+					return ;
 				else
 					dd_sort(stack_a, stack_b);
 			}
@@ -70,7 +74,6 @@ t_list	**dd_sort(t_list **stack_a, t_list **stack_b)
 		pa(stack_a, stack_b);
 		dd_sort(stack_a, stack_b);
 	}
-	return (stack_a);
 }
 
 int	ft_max(t_list **a)

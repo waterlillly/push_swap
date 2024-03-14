@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:11:59 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/14 15:26:29 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:00:46 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,25 @@ typedef struct s_list
 }			t_list;
 
 /*push_swap.c*/
-t_list	**dd_sort(t_list **stack_a, t_list **stack_b);
+void	dd_sort(t_list **stack_a, t_list **stack_b);
 int		ft_max(t_list **a);
 int		next_min(t_list **a, int repeat, int min);
 int		ft_min(t_list **a, int repeat);
 int		ft_mid(int ac, t_list **a);
 
 /*check_ups.c*/
-void	ft_free(t_list **a, t_list **b);
+void	ft_free(t_list **l);
 void	error(int nbr);
 int		check_doubles(int ac, char **av);
-int		check_sort(t_list **stack_a);
+int		check_sort(t_list **stack);
 int		check_input(int ac, char **av);
 int 	is_sorted(int ac, char **av);
 
 /*creations.c*/
-void	add_head_node(t_list **stack, t_list *s, t_list *node, char id);
-void	add_tail_node(t_list **stack, t_list *s, t_list *node);
-void	insert_node(t_list **stack, t_list *s, t_list *node);
-void	add_node(t_list **stack, int value, char id);
+void	add_head_node(t_list *s, t_list *node, char id);
+void	add_tail_node(t_list *s, t_list *node);
+void	insert_node(t_list *s, t_list *node);
+t_list	*add_node(t_list **stack, int value, char id);
 t_list	**fill_stack(t_list **stack, char **input, int len);
 t_list	**stack(int	len);
 

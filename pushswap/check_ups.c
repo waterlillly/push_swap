@@ -6,39 +6,29 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:56:14 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/14 15:26:10 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:00:14 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ft_free(t_list **a, t_list **b)
+void ft_free(t_list **l)
 {
-	t_list *alist;
-	t_list *blist;
+	t_list *list;
 
-	alist = *a;
-	blist = *b;
-	while (alist != 0 && alist->next != 0 && blist != 0 && blist->next != 0)
+	list = NULL;
+	list = *l;
+	while (list != 0 && list->next != 0)
+		list = list->next;
+	while (list->prev != 0)
 	{
-		alist = alist->next;
-		blist = blist->next;
+		free(list);
+		list = list->prev;
 	}
-	while (alist->prev != 0 && blist->prev != 0)
-	{
-		free(alist);
-		alist = alist->prev;
-		free(blist);
-		blist = blist->prev;
-	}
-	alist = 0;
-	blist = 0;
-	a = 0;
-	b = 0;
-	free(alist);
-	free(blist);
-	free(a);
-	free(b);
+	list = 0;
+	free(list);
+	l = 0;
+	free(l);
 }
 
 void error(int nbr)
@@ -86,11 +76,12 @@ int check_doubles(int ac, int pos, t_list **stack)
 }
 */
 
-int check_sort(t_list **stack_a)
+int check_sort(t_list **stack)
 {
 	t_list *a;
 
-	a = *stack_a;
+	a = NULL;
+	a = *stack;
 	while (a != 0 && a->next != 0 && a->data < a->next->data)
 		a = a->next;
 	if (a->data > a->next->data && a->next != 0)
@@ -102,19 +93,14 @@ int is_sorted(int ac, char **av)
 {
 	int x;
 
-	x = 1;
 	if (ac <= 2)
 		return (0);
-	while (x < ac && *av[x])
-	{
-		if (ft_atoi((const char *)av[x]) < ft_atoi((const char *)av[x + 1]))
-			x++;
-		else
-			return (0);
-	}
+	x = 1;
+	while (x < ac && ft_atoi(av[x]) < ft_atoi(av[x + 1]))
+		x++;
 	if (x == ac)
 	{
-		ft_printf("is already sorted");
+		ft_printf("is sorted");
 		return (1);
 	}
 	return (0);
@@ -154,20 +140,19 @@ int check_input(int ac, char **av)
 
 	x = 1;
 	y = 0;
-	while (*av[x] && x < ac)
+	while (av[x][y] && x < ac)
 	{
-		while (av[x][y] && y != -1)
+		while (av[x][y])
 		{
 			if (ft_isdigit(av[x][y]))
 				y++;
 			else
 				return (0);
 		}
-		y =  0;
+		y = 0;
 		x++;
 	}
-	if (check_doubles(ac, av) == 1)
+	if (x == ac && check_doubles(ac, av) == 1)
 		return (1);
-	else
-		return (0);
+	return (0);
 }

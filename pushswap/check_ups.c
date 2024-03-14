@@ -6,17 +6,16 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:56:14 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/14 13:56:22 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:26:10 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push_swap.h"
 
-void	ft_free(t_list **a, t_list **b)
+void ft_free(t_list **a, t_list **b)
 {
-	t_list	*alist;
-	t_list	*blist;
+	t_list *alist;
+	t_list *blist;
 
 	alist = *a;
 	blist = *b;
@@ -42,10 +41,10 @@ void	ft_free(t_list **a, t_list **b)
 	free(b);
 }
 
-void	error(int nbr)
+void error(int nbr)
 {
-	char	*err[5];
-	
+	char *err[5];
+
 	err[0] = "Error: malloc\n";
 	err[1] = "Error: wrong input\n";
 	err[2] = "Error: doubles in input\n";
@@ -56,12 +55,12 @@ void	error(int nbr)
 	else
 		write(2, &(err[nbr]), ft_strlen(err[nbr]));
 }
-
-int	check_doubles(int ac, int pos, t_list **stack)
+/*
+int check_doubles(int ac, int pos, t_list **stack)
 {
-	t_list	*s;
-	int		value;
-	int		x;
+	t_list *s;
+	int value;
+	int x;
 
 	s = *stack;
 	value = 0;
@@ -85,11 +84,12 @@ int	check_doubles(int ac, int pos, t_list **stack)
 	}
 	return (0);
 }
+*/
 
-int	check_sort(t_list **stack_a)
+int check_sort(t_list **stack_a)
 {
-	t_list	*a;
-	
+	t_list *a;
+
 	a = *stack_a;
 	while (a != 0 && a->next != 0 && a->data < a->next->data)
 		a = a->next;
@@ -98,9 +98,9 @@ int	check_sort(t_list **stack_a)
 	return (1);
 }
 
-int	first_check(int ac, char **av)
+int is_sorted(int ac, char **av)
 {
-	int	x;
+	int x;
 
 	x = 1;
 	if (ac <= 2)
@@ -109,23 +109,48 @@ int	first_check(int ac, char **av)
 	{
 		if (ft_atoi((const char *)av[x]) < ft_atoi((const char *)av[x + 1]))
 			x++;
-		else if (ft_atoi((const char *)av[x]) == ft_atoi((const char *)av[x + 1]))
-		{
-			write(1, "doubles in input", 16);
-			return (0);
-		}
 		else
 			return (0);
 	}
 	if (x == ac)
-		write(1, "is sorted", 9);
-	return (1); 	
+	{
+		ft_printf("is already sorted");
+		return (1);
+	}
+	return (0);
 }
 
-int	check_input(int ac, char **av)
+int	check_doubles(int ac, char **av)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
+	int	z;
+
+	x = 1;
+	y = 0;
+	z = 2;
+	while (*av[x] && x < ac)
+	{
+		y = ft_atoi(av[x]);
+		while (*av[z] && z < ac)
+		{
+			if (y == ft_atoi(av[z]))
+			{
+				error(2);
+				return (0);
+			}
+			z++;
+		}
+		x++;
+		z = x + 1;
+	}
+	return (1);
+}
+
+int check_input(int ac, char **av)
+{
+	int x;
+	int y;
 
 	x = 1;
 	y = 0;
@@ -133,12 +158,16 @@ int	check_input(int ac, char **av)
 	{
 		while (av[x][y] && y != -1)
 		{
-			if (ft_isdigit(av[x][y]) == 1)
+			if (ft_isdigit(av[x][y]))
 				y++;
 			else
 				return (0);
 		}
+		y =  0;
 		x++;
 	}
-	return (1);
+	if (check_doubles(ac, av) == 1)
+		return (1);
+	else
+		return (0);
 }

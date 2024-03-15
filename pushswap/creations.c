@@ -51,7 +51,7 @@ t_list	**fill_stack(t_list **stack, char **input)
 	add_node(head, ft_atoi(input[x]));
 	s = s->next;
 	x++;
-	while (**input && s && s->next)
+	while (input[x] && s && s->next)
 	{
 		add_node(stack, ft_atoi(input[x]));
 		s = s->next;
@@ -82,7 +82,7 @@ char	**two(int ac, char **av, char **input)
 	input = (char **)malloc(sizeof(char *) * ac);
 	if (!input)
 		return (NULL);
-	while (av[x] && input[y] && x <= ac)
+	while (av[x] && input[y] && x < ac)
 	{
 		input[y] = av[x];
 		x++;

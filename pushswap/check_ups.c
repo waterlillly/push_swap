@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:56:14 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/14 16:00:14 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:56:19 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,101 @@ void ft_free(t_list **l)
 	free(l);
 }
 
-void error(int nbr)
+void msg(int nbr)
 {
-	char *err[5];
+	char *msg[9];
 
-	err[0] = "Error: malloc\n";
-	err[1] = "Error: wrong input\n";
-	err[2] = "Error: doubles in input\n";
-	err[3] = "Error: not sorted\n";
-	err[4] = "Error: unclear||->in function\n";
-	if (nbr == 33)
-		write(1, "already sorted :)", 17);
-	else
-		write(2, &(err[nbr]), ft_strlen(err[nbr]));
+	msg[0] = "Error: malloc\n";
+	msg[1] = "Error: wrong input\n";
+	msg[2] = "Error: doubles in input\n";
+	msg[3] = "Error: not sorted\n";
+	msg[4] = "Error: unclear||->in function\n";
+	msg[5] = "Error: filling stack\n";
+	msg[6] = "sorted! :)\n";
+	msg[7] = "Error: unable to sort\n";
+	msg[8] = "Error: in split-function\n";
+	ft_printf("%s", msg[nbr]);
 }
+
+int check_sort(t_list **stack)
+{
+	t_list *a;
+
+	if (!stack)
+		return (0);
+	a = NULL;
+	a = *stack;
+	while (a != 0 && a->next != 0 && a->data < a->next->data)
+		a = a->next;
+	if (a->data > a->next->data && a->next != 0)
+		return (0);
+	return (1);
+}
+
+int is_sorted(int ac, char **av)
+{
+	int x;
+
+	x = 1;
+	while (**av && x < ac && ft_atoi(av[x]) < ft_atoi(av[x + 1]))
+		x++;
+	if (x == ac)
+		return (msg(6), 0);
+	else if (check_input(ac, av) == 1)
+		return (1);
+	return (msg(4), 0);
+}
+
+int	check_doubles(int ac, char **av)
+{
+	int	x;
+	long int	y;
+	int	z;
+
+	x = 1;
+	y = 0;
+	z = 2;
+	while (**av && x < ac)
+	{
+		y = ft_atoi(av[x]);
+		if (y > 2147483647 || y < -2147483648)
+			return (0);
+		while (**av && z < ac)
+		{
+			if ((int)y == ft_atoi(av[z]))
+				return (msg(2), 0);
+			z++;
+		}
+		x++;
+		z = x + 1;
+	}
+	return (1);
+}
+
+int check_input(int ac, char **av)
+{
+	int x;
+	int y;
+
+	x = 1;
+	y = 0;
+	while (**av && x < ac)
+	{
+		while (av[x][y])
+		{
+			if (ft_isdigit(av[x][y]))
+				y++;
+			else
+				return (0);
+		}
+		y = 0;
+		x++;
+	}
+	if (x == ac && check_doubles(ac, av) == 1)
+		return (1);
+	return (0);
+}
+
 /*
 int check_doubles(int ac, int pos, t_list **stack)
 {
@@ -75,84 +156,3 @@ int check_doubles(int ac, int pos, t_list **stack)
 	return (0);
 }
 */
-
-int check_sort(t_list **stack)
-{
-	t_list *a;
-
-	a = NULL;
-	a = *stack;
-	while (a != 0 && a->next != 0 && a->data < a->next->data)
-		a = a->next;
-	if (a->data > a->next->data && a->next != 0)
-		return (0);
-	return (1);
-}
-
-int is_sorted(int ac, char **av)
-{
-	int x;
-
-	if (ac <= 2)
-		return (0);
-	x = 1;
-	while (x < ac && ft_atoi(av[x]) < ft_atoi(av[x + 1]))
-		x++;
-	if (x == ac)
-	{
-		ft_printf("is sorted");
-		return (1);
-	}
-	return (0);
-}
-
-int	check_doubles(int ac, char **av)
-{
-	int	x;
-	int	y;
-	int	z;
-
-	x = 1;
-	y = 0;
-	z = 2;
-	while (*av[x] && x < ac)
-	{
-		y = ft_atoi(av[x]);
-		while (*av[z] && z < ac)
-		{
-			if (y == ft_atoi(av[z]))
-			{
-				error(2);
-				return (0);
-			}
-			z++;
-		}
-		x++;
-		z = x + 1;
-	}
-	return (1);
-}
-
-int check_input(int ac, char **av)
-{
-	int x;
-	int y;
-
-	x = 1;
-	y = 0;
-	while (av[x][y] && x < ac)
-	{
-		while (av[x][y])
-		{
-			if (ft_isdigit(av[x][y]))
-				y++;
-			else
-				return (0);
-		}
-		y = 0;
-		x++;
-	}
-	if (x == ac && check_doubles(ac, av) == 1)
-		return (1);
-	return (0);
-}

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:48:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/11 14:45:22 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:44:09 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,6 @@ char	**get_input(int ac, char **av)
 		input = two(ac, av, input);
 		if (!input)
 			return (0);
-	}
-	if (check_doubles(input) != 0)
-	{
-		ft_printf("Error: wrong input\n");
-		return (0);
 	}
 	return (input);
 }

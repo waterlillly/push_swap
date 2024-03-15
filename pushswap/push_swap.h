@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:11:59 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/14 16:00:46 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:54:43 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,20 @@ int		ft_mid(int ac, t_list **a);
 
 /*check_ups.c*/
 void	ft_free(t_list **l);
-void	error(int nbr);
+void	msg(int nbr);
 int		check_doubles(int ac, char **av);
 int		check_sort(t_list **stack);
 int		check_input(int ac, char **av);
 int 	is_sorted(int ac, char **av);
 
 /*creations.c*/
-void	add_head_node(t_list *s, t_list *node, char id);
-void	add_tail_node(t_list *s, t_list *node);
-void	insert_node(t_list *s, t_list *node);
-t_list	*add_node(t_list **stack, int value, char id);
-t_list	**fill_stack(t_list **stack, char **input, int len);
-t_list	**stack(int	len);
+void	add_node(t_list **head, int value);
+t_list	**fill_stack(t_list **stack, char **input);
+t_list	**stack(int	ac, char **av);
+int		ft_arr_len(char **arr);
+char	**get_input(int ac, char **av);
+char	**two(int ac, char **av, char **input);
+char	**one(char **av, char **input);
 
 /*operations.c*/
 void	swap(t_list **stack);

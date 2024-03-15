@@ -6,101 +6,179 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:26:00 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/14 16:01:03 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:55:52 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	add_head_node(t_list *s, t_list *node, char id)//insert as first|head
+
+void	add_node(t_list **head, int value)
+{
+	t_list	*node;
+	t_list	*temp;
+
+	node = NULL;
+	temp = *head;
+	node = (t_list *)malloc(sizeof(t_list));
+	if (!node)
+		return ;
+	node->data = value;
+	node->next = NULL;
+	if (*head == NULL)
+	{
+		node->prev = NULL;
+		*head = node;
+	}
+	else
+	{
+		while (temp->next != 0)
+			temp = temp->next;
+		node->prev = temp;
+		temp->next = node;
+	}
+}
+
+t_list	**fill_stack(t_list **stack, char **input)
+{
+	t_list	**head;
+	t_list	*s;
+	int		x;
+	
+	head = stack;
+	s = *stack;
+	x = 1;
+	add_node(head, ft_atoi(input[x]));
+	s = s->next;
+	x++;
+	while (**input && s && s->next)
+	{
+		add_node(stack, ft_atoi(input[x]));
+		s = s->next;
+		x++;
+	}
+	add_node(stack, 0);
+	return (head);
+}
+
+char	**one(char **av, char **input)
+{
+	input = ft_split(av[1], ' ');
+	if (!input)
+		return (msg(8), NULL);
+	if (input[1] == NULL)
+		return (msg(2), NULL);
+	else
+		return (input);
+}
+
+char	**two(int ac, char **av, char **input)
+{
+	int	x;
+	int	y;
+
+	x = 1;
+	y = 0;
+	input = (char **)malloc(sizeof(char *) * ac);
+	if (!input)
+		return (NULL);
+	while (av[x] && input[y] && x <= ac)
+	{
+		input[y] = av[x];
+		x++;
+		y++;
+	}
+	input[y] = NULL;
+	return (input);
+}
+
+char	**get_input(int ac, char **av)
+{
+	char	**input;
+
+	input = NULL;
+	if (ac == 2)
+	{
+		input = one(av, input);
+		if (!input)
+			return (0);
+	}
+	else
+	{
+		input = two(ac, av, input);
+		if (!input)
+			return (0);
+	}
+	return (input);
+}
+
+int	ft_arr_len(char **arr)
+{
+	int	x;
+
+	x = 0;
+	while (arr[x] != NULL)
+		x++;
+	return (x);
+}
+
+t_list	**stack(int	ac, char **av)
+{
+	t_list	**stack;
+	char	**input;
+	int		len;
+
+	stack = NULL;
+	input = NULL;
+	len = 0;
+	if (av == NULL)
+		len = ac;
+	else
+	{
+		input = get_input(ac, av);
+		if (!input)
+			return (NULL);
+		len = ft_arr_len(input) + 1;
+	}
+	stack = (t_list **)malloc(sizeof(t_list *) * len);
+	if (!stack)
+		return (NULL);
+	if (av != NULL)
+	{
+		stack = fill_stack(stack, input);
+		if (!stack)
+			return (msg(5), ft_free(stack), NULL);
+	}
+	return (stack);
+}
+/*
+void	add_head_node(t_list *head, t_list *node, char id)//insert as first|head
 {
 	if (id == 'f')
 	{
 		node->prev = NULL;
 		node->next = NULL;
-		s = node;
+		head = node;
 	}
 	else if (id == 'h')
 	{
 		node->prev = NULL;
-		node->next = s;
-		s->prev = node;
+		node->next = head;
+		head->prev = node;
 	}
 }
 
-void	add_tail_node(t_list *s, t_list *node)//insert as tail
+void	add_tail_node(t_list *head, t_list *node)//insert as tail
 {
 	node->next = NULL;
-	node->prev = s;
-	s->next = node;
+	node->prev = head;
+	head->next = node;
 }
 
-void	insert_node(t_list *s, t_list *node)//insert after specific node
+void	insert_node(t_list *head, t_list *node)//insert after specific node
 {
-	node->next = s->next;
-	node->prev = s;
-	s->next = node;
+	node->next = head->next;
+	node->prev = head;
+	head->next = node;
 }
-
-t_list	*add_node(t_list **stack, int value, char id)
-{
-	t_list	*s;
-	t_list	*node;
-
-	s = *stack;
-	node = NULL;
-	node = (t_list *)malloc(sizeof(t_list));
-	if (!node)
-		return (0);
-	node->data = value;
-	if (id == 'f' || id == 'h')//insert as first|head
-		add_head_node(s, node, id);
-	else if (id == 't')//insert as tail
-		add_tail_node(s, node);
-	else if (id == 'x')//insert after specific node
-		insert_node(s, node);
-	if (!node)
-		return (0);
-	return (node);
-}
-
-t_list	**fill_stack(t_list **stack, char **input, int len)
-{
-	t_list	*s;
-	int		x;
-	
-	s = NULL;
-	s = *stack;
-	if (!s)
-		return (0);
-	x = 1;
-	s = add_node(stack, ft_atoi((const char *)input[x]), 'h');
-	if (!s)
-		return (0);
-	s = s->next;
-	x++;
-	while (*input[x] && x < len && s && s->next)
-	{
-		s = add_node(stack, ft_atoi((const char *)input[x]), 'h');
-		if (!s)
-			return (0);
-		s = s->next;
-		x++;
-	}
-	add_node(stack, 0, 't');
-	s = *stack;
-	if (stack == NULL)
-		return (0);
-	return (stack);
-}
-
-t_list	**stack(int	len)
-{
-	t_list	**stack;
-
-	stack = NULL;
-	stack = (t_list **)malloc(sizeof(t_list *) * len);
-	if (!stack)
-		return (0);
-	return (stack);
-}
+*/

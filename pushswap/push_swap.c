@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:10:23 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/14 15:57:40 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:43:27 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	ft_mid(int ac, t_list **a)
 	x = (ac - 1) / 2;
 	mid_min = ft_min(a, x);
 	if (mid_min == 2147483647)
-		return (error(4), 0);
+		return (msg(4), 0);
 	else
 		return (mid_min);
 }

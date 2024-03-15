@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:00:30 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/14 15:26:24 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:44:37 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ void	push(t_list **dst, t_list **src)
 	from = *src;
 	to = *dst;
 	if (to == 0)
-		add_node(dst, from->data, 'f');
+		add_node(dst, from->data);
 	else if (from == 0)//do nothing if src is empty!
 		ft_printf("error: src_stack is empty");
 	else
 	{
-		add_node(dst, from->data, 'h');
+		add_node(dst, from->data);
 		if (from->next == 0)
 			src = NULL;
 	}

@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-
 void	add_node(t_list **head, int value)
 {
 	t_list	*node;

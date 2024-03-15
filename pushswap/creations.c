@@ -82,11 +82,7 @@ char	**two(int ac, char **av, char **input)
 	if (!input)
 		return (NULL);
 	while (av[x] && input[y] && x < ac)
-	{
-		input[y] = av[x];
-		x++;
-		y++;
-	}
+		input[y++] = av[x++];
 	input[y] = NULL;
 	return (input);
 }

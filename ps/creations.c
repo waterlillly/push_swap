@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   creations.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/18 17:25:05 by lbaumeis          #+#    #+#             */
+/*   Updated: 2024/03/18 18:09:48 by lbaumeis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_list	*add_node(t_list *head, int value)
@@ -34,18 +46,23 @@ t_list	*fill_stack(t_list *stack, char **input)
 	int		x;
 	
 	head = stack;
-	s = stack;
-	x = 1;
-	add_node(head, atoi(input[x]));
-	s = s->next;
-	x++;
+	head->prev = NULL;
+	head->next = NULL;
+	s = head->next;
+	s->prev = head;
+	x = 0;
+	if (!stack)
+	{
+		head = add_node(stack, ft_atoi(input[x]));
+		x++;
+	}
 	while (input[x] && s && s->next)
 	{
-		add_node(stack, atoi(input[x]));
+		s = add_node(stack, ft_atoi(input[x]));
 		s = s->next;
 		x++;
 	}
-	add_node(stack, 0);
+	s = head;
 	return (head);
 }
 
@@ -115,27 +132,23 @@ t_list	*stack(int	ac, char **av)
 	stack = NULL;
 	input = NULL;
 	len = 0;
-	if (av == NULL)
-		len = ac;
-	else
-	{
-		input = get_input(ac, av);
-		if (!input)
-			return (NULL);
+	input = get_input(ac, av);
+	if (!input)
+		return (NULL);
+	if (ac == 2)
 		len = ft_arr_len(input) + 1;
-	}
+	else
+		len = ac;
 	stack = (t_list *)malloc(sizeof(t_list) * len);
 	if (!stack)
 		return (NULL);
-	if (av != NULL)
-	{
-		stack = fill_stack(stack, input);
-		if (!stack)
-			return (msg(5), ft_free(stack), NULL);
-	}
+	stack = fill_stack(stack, input);
+	if (!stack)
+		return (msg(5), ft_free(stack), NULL);
 	return (stack);
 }
 
+/*
 int	ft_countstrs(char const *s, char c)
 {
 	int	counter;
@@ -259,3 +272,4 @@ int ft_strlen(const char *str)
 		x++;
 	return (x);
 }
+*/

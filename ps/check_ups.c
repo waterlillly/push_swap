@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_ups.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/18 17:25:00 by lbaumeis          #+#    #+#             */
+/*   Updated: 2024/03/18 18:09:46 by lbaumeis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "push_swap.h"
 
@@ -27,7 +39,7 @@ void msg(int nbr)
 	msg[6] = "sorted! :)\n";
 	msg[7] = "Error: unable to sort\n";
 	msg[8] = "Error: in split-function\n";
-	printf("%s", msg[nbr]);
+	ft_printf("%s", msg[nbr]);
 }
 
 int check_sort(t_list *stack)
@@ -36,7 +48,6 @@ int check_sort(t_list *stack)
 
 	if (!stack)
 		return (0);
-	a = NULL;
 	a = stack;
 	while (a && a->next && a->data < a->next->data)
 	{
@@ -50,21 +61,28 @@ int check_sort(t_list *stack)
 int is_sorted(int ac, char **av)
 {
 	int x;
+	int	y;
 
 	x = 1;
-	while (**av && x < ac && atoi(av[x]) < atoi(av[x + 1]))
-		x++;
-	if (x == ac)
-		return (msg(6), 0);
-	else if (check_input(ac, av) == 1)
-		return (1);
+	y = 0;
+	if (check_input(ac, av) == 1)
+	{
+		while (**av && x < ac && ft_atoi(av[x]) < ft_atoi(av[x + 1]))
+			x++;
+		if (ac == 2)
+			y = ft_arr_len(av) + 1;
+		else
+			y = ac;
+		if (x == y)
+			return (msg(6), 1);
+	}
 	return (msg(4), 0);
 }
 
 int	check_doubles(int ac, char **av)
 {
 	int	x;
-	long int	y;
+	int	y;
 	int	z;
 
 	x = 1;
@@ -72,12 +90,12 @@ int	check_doubles(int ac, char **av)
 	z = 2;
 	while (**av && x < ac)
 	{
-		y = atoi(av[x]);
-		if (y > 2147483647 || y < -2147483648)
-			return (0);
+		y = ft_atoi(av[x]);
+	//	if (y > 2147483647 || y < -2147483648)
+	//		return (0);
 		while (**av && z < ac)
 		{
-			if ((int)y == atoi(av[z]))
+			if (y == ft_atoi(av[z]))
 				return (msg(2), 0);
 			z++;
 		}
@@ -87,7 +105,7 @@ int	check_doubles(int ac, char **av)
 	return (1);
 }
 
-int check_input(int ac, char **av)
+int check_input(int ac, char **av)//check doubles in here
 {
 	int x;
 	int y;

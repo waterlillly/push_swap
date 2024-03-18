@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/18 17:22:12 by lbaumeis          #+#    #+#             */
+/*   Updated: 2024/03/18 18:09:56 by lbaumeis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -5,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdio.h>
+# include "libft.h"
 
 typedef struct s_list	t_list;
 

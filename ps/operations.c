@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/18 17:25:26 by lbaumeis          #+#    #+#             */
+/*   Updated: 2024/03/18 18:09:53 by lbaumeis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "push_swap.h"
 
@@ -29,20 +41,20 @@ void	swap(t_list *stack)
 void	sa(t_list *a)
 {
 	swap(a);
-	printf("sa\n");
+	ft_printf("sa\n");
 }
 
 void	sb(t_list *b)
 {
 	swap(b);
-	printf("sb\n");
+	ft_printf("sb\n");
 }
 
 void	ss(t_list *a, t_list *b)
 {
 	swap(a);
 	swap(b);
-	printf("ss\n");
+	ft_printf("ss\n");
 }
 
 /*	~~~~~~~~~~~~~~~~~~~~~~~~PUSH FROM-TO STACK~~~~~~~~~~~~~~~~~~~~~~~~~~~~	*/
@@ -58,7 +70,7 @@ void	push(t_list *dst, t_list *src)
 	if (to == 0)
 		add_node(dst, from->data);
 	else if (from == 0)//do nothing if src is empty!
-		printf("error: src_stack is empty");
+		ft_printf("error: src_stack is empty");
 	else
 	{
 		add_node(dst, from->data);
@@ -72,7 +84,7 @@ void	push(t_list *dst, t_list *src)
 void	pa(t_list *a, t_list *b)
 {
 	push(a, b);
-	printf("pa\n");
+	ft_printf("pa\n");
 }
 
 /*_____PUSH_A_TO_B_____*/
@@ -80,7 +92,7 @@ void	pa(t_list *a, t_list *b)
 void	pb(t_list *a, t_list *b)
 {
 	push(b, a);
-	printf("pb\n");
+	ft_printf("pb\n");
 }
 
 /*	~~~~~~~~~~~~~~~~~~~~~~~~~~~~ROTATE STACK~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	*/
@@ -141,37 +153,37 @@ void	rev_rot(t_list *stack)
 void	ra(t_list *a)
 {
 	rot(a);
-	printf("ra\n");
+	ft_printf("ra\n");
 }
 
 void	rb(t_list *b)
 {
 	rot(b);
-	printf("rb\n");
+	ft_printf("rb\n");
 }
 
 void	rr(t_list *a, t_list *b)
 {
 	rot(a);
 	rot(b);
-	printf("rr\n");
+	ft_printf("rr\n");
 }
 
 void	rra(t_list *a)
 {
 	rev_rot(a);
-	printf("rra\n");
+	ft_printf("rra\n");
 }
 
 void	rrb(t_list *b)
 {
 	rev_rot(b);
-	printf("rrb\n");
+	ft_printf("rrb\n");
 }
 
 void	rrr(t_list *a, t_list *b)
 {
 	rev_rot(a);
 	rev_rot(b);
-	printf("rrr\n");
+	ft_printf("rrr\n");
 }

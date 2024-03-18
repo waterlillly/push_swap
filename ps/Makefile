@@ -1,5 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/03/18 17:23:35 by lbaumeis          #+#    #+#              #
+#    Updated: 2024/03/18 18:09:52 by lbaumeis         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
+LIB_FLAGS = -L. -lft
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -11,7 +24,7 @@ P_NAME = push_swap
 all: $(P_NAME)
 
 $(P_NAME): $(OFILES)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LIB_FLAGS)
 
 clean:
 	rm -f $(OFILES)

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:22:12 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/18 18:09:56 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:40:06 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_list
 }			t_list;
 
 /*push_swap.c*/
-int	sort_three(t_list *stack);
+int		sort_three(t_list *stack);
 int		ft_max(t_list *a);
 int		next_min(t_list *a, int repeat, int min);
 int		ft_min(t_list *a, int repeat);

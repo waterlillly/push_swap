@@ -6,13 +6,13 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:10:23 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/15 15:43:27 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:07:52 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	dd_sort(t_list **stack_a, t_list **stack_b)
+void	dd_sort(t_list *stack_a, t_list *stack_b)
 {
 	t_list	*a;
 	t_list	*b;
@@ -21,8 +21,8 @@ void	dd_sort(t_list **stack_a, t_list **stack_b)
 
 	a = NULL;
 	b = NULL;
-	a = *stack_a;
-	b = *stack_b;
+	a = stack_a;
+	b = stack_b;
 	if (!a || !b)
 		return ;
 	//min = ft_min(stack_a, 0);
@@ -76,12 +76,12 @@ void	dd_sort(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-int	ft_max(t_list **a)
+int	ft_max(t_list *a)
 {
 	int		max;
 	t_list	*cur;
 	
-	cur = *a;
+	cur = a;
 	max = cur->data;
 	while (cur != 0 && cur->next != 0)
 	{
@@ -92,12 +92,12 @@ int	ft_max(t_list **a)
 	return (max);
 }
 
-int	next_min(t_list **a, int repeat, int min)
+int	next_min(t_list *a, int repeat, int min)
 {
 	t_list	*cur;
 	int		new_min;
 
-	cur = *a;
+	cur = a;
 	new_min = min + 1;
 	if (repeat == 0)
 		return (min);
@@ -115,12 +115,12 @@ int	next_min(t_list **a, int repeat, int min)
 		return (2147483647);
 }
 
-int	ft_min(t_list **a, int repeat)
+int	ft_min(t_list *a, int repeat)
 {
 	int		min;
 	t_list	*cur;
 	
-	cur = *a;
+	cur = a;
 	min = cur->data;
 	while (cur != 0 && cur->next != 0)
 	{
@@ -134,7 +134,7 @@ int	ft_min(t_list **a, int repeat)
 		return (min);
 }
 
-int	ft_mid(int ac, t_list **a)
+int	ft_mid(int ac, t_list *a)
 {
 	int		mid_min;
 	int		x;

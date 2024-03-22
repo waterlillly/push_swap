@@ -6,61 +6,53 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:26:00 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/18 16:44:15 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/22 00:39:44 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	add_node(t_list **head, int value)
+t_list	*add_node(t_list *stack, int value)
 {
 	t_list	*node;
-	t_list	*temp;
 
 	node = NULL;
-	temp = *head;
 	node = (t_list *)malloc(sizeof(t_list));
 	if (!node)
-		return ;
+		return (0);
 	node->data = value;
-	node->next = NULL;
-	if (*head == NULL)
-	{
-		node->prev = NULL;
-		*head = node;
-	}
-	else
-	{
-		while (temp->next != 0)
-			temp = temp->next;
-		node->prev = temp;
-		temp->next = node;
-	}
-	node->next = NULL;
+	node->next = stack;
+	stack->prev = node;
+	node->prev = NULL;
+	stack = node;
+	return (stack);
 }
 
-t_list	**fill_stack(t_list **stack, char **input)
+t_list	*stack(t_list *stack, int *input, int elements)
 {
-	t_list	**head;
 	t_list	*s;
 	int		x;
 	
-	head = stack;
-	s = *stack;
-	x = 1;
-	add_node(head, ft_atoi(input[x]));
-	s = s->next;
-	x++;
-	while (input[x] && s && s->next)
+	if (stack == NULL)
 	{
-		add_node(stack, ft_atoi(input[x]));
-		s = s->next;
-		x++;
+		stack = (t_list *)malloc(sizeof(t_list) * (elements + 1));
+		if (!stack)
+			return (0);
 	}
-	add_node(stack, 0);
-	return (head);
+	s = stack;
+	x = 0;
+	while (input[x])
+		x++;
+	while (*input && x >= 0)
+	{
+		s = add_node(stack, input[x]);
+		if (!s)
+			return (0);
+		x--;
+	}
+	return (s);
 }
-
+/*
 char	**one(char **av, char **input)
 {
 	input = ft_split(av[1], ' ');
@@ -117,35 +109,8 @@ int	ft_arr_len(char **arr)
 		x++;
 	return (x);
 }
+*/
 
-t_list	**stack(int	ac, char **av)
-{
-	t_list	**stack;
-	char	**input;
-	int		len;
-
-	input = NULL;
-	len = 0;
-	if (av == NULL)
-		len = ac;
-	else
-	{
-		input = get_input(ac, av);
-		if (!input)
-			return (NULL);
-		len = ft_arr_len(input) + 1;
-	}
-	stack = (t_list **)malloc(sizeof(t_list *) * len);
-	if (!stack)
-		return (NULL);
-	if (av != NULL)
-	{
-		stack = fill_stack(stack, input);
-		if (!stack)
-			return (msg(5), ft_free(stack), NULL);
-	}
-	return (stack);
-}
 /*
 void	add_head_node(t_list *head, t_list *node, char id)//insert as first|head
 {

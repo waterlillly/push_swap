@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:00:30 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/15 15:44:37 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:11:06 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@
 /*	~~~~~~~~~~~~~~~~~~SWAP FIRST TWO INSIDE SAME LIST~~~~~~~~~~~~~~~~~~~~~	*/
 /*	**********************************************************************	*/
 
-void	swap(t_list **stack)
+void	swap(t_list *s)
 {
-	t_list	*s;
 	int		new_head;
 	int		old_head;
 
-	s = *stack;
 	new_head = 0;
 	old_head = 0;
 	if (s != 0 && s->next != 0)//if only one or no elements: do nothing
@@ -37,19 +35,19 @@ void	swap(t_list **stack)
 
 /*_____SWAP_OPERATIONS_____*/
 
-void	sa(t_list **a)
+void	sa(t_list *a)
 {
 	swap(a);
 	ft_printf("sa\n");
 }
 
-void	sb(t_list **b)
+void	sb(t_list *b)
 {
 	swap(b);
 	ft_printf("sb\n");
 }
 
-void	ss(t_list **a, t_list **b)
+void	ss(t_list *a, t_list *b)
 {
 	swap(a);
 	swap(b);
@@ -59,28 +57,24 @@ void	ss(t_list **a, t_list **b)
 /*	~~~~~~~~~~~~~~~~~~~~~~~~PUSH FROM-TO STACK~~~~~~~~~~~~~~~~~~~~~~~~~~~~	*/
 /*	**********************************************************************	*/
 
-void	push(t_list **dst, t_list **src)
-{
-	t_list	*from;
-	t_list	*to;
-	
-	from = *src;
-	to = *dst;
-	if (to == 0)
-		add_node(dst, from->data);
-	else if (from == 0)//do nothing if src is empty!
+void	push(t_list *dst, t_list *src)
+{	
+	if (src == 0)//do nothing if src is empty!
 		ft_printf("error: src_stack is empty");
 	else
 	{
-		add_node(dst, from->data);
-		if (from->next == 0)
-			src = NULL;
+		dst = add_node(dst, src->data);
+		if (!dst)
+			return ;
+		src->data = src->next->data;
+		src = src->next;
+		src->prev = src->prev->prev;
 	}
 }
 
 /*_____PUSH_B_TO_A_____*/
 
-void	pa(t_list **a, t_list **b)
+void	pa(t_list *a, t_list *b)
 {
 	push(a, b);
 	ft_printf("pa\n");
@@ -88,7 +82,7 @@ void	pa(t_list **a, t_list **b)
 
 /*_____PUSH_A_TO_B_____*/
 
-void	pb(t_list **a, t_list **b)
+void	pb(t_list *a, t_list *b)
 {
 	push(b, a);
 	ft_printf("pb\n");
@@ -99,89 +93,85 @@ void	pb(t_list **a, t_list **b)
 
 /*_____ROTATE_STACK->HEAD_BECOMES_TAIL_____*/
 
-void	rot(t_list **stack)
+void	rot(t_list *s)
 {
-	t_list	*x;
 	t_list	*new_head;
 	t_list	*new_tail;
 	
-	x = *stack;
 	new_head = NULL;
 	new_tail = NULL;
-	if (x != 0 && x->next != 0)//if only one or none elements: do nothing-> needed here???
+	if (s != 0 && s->next != 0)//if only one or none elements: do nothing-> needed here???
 	{
-		new_tail->data = x->data;
+		new_tail->data = s->data;
 		new_tail->next = NULL;
 		new_head->prev = NULL;	
-		new_head->data = x->next->data;
-		x = x->next;
-		new_head->next = x->next;//?
-		while (x != 0 && x->next != NULL)
-			x = x->next;
-		new_tail->prev = x;
-		x->next = new_tail;
+		new_head->data = s->next->data;
+		s = s->next;
+		new_head->next = s->next;//?
+		while (s != 0 && s->next != NULL)
+			s = s->next;
+		new_tail->prev = s;
+		s->next = new_tail;
 	}
 }
 
 /*_____REVERSE_ROTATE_STACK->TAIL_BECOMES_HEAD_____*/
 
-void	rev_rot(t_list **stack)
+void	rev_rot(t_list *s)
 {
-	t_list	*x;
 	t_list	*new_head;
 	t_list	*new_tail;
 	
-	x = *stack;
 	new_head = NULL;
 	new_tail = NULL;
-	if (x != 0 && x->next != 0)//if only one or none elements: do nothing-> needed here???
+	if (s != 0 && s->next != 0)//if only one or none elements: do nothing-> needed here???
 	{
 		new_head->prev = NULL;
-		new_head->next = x;
-		x->prev = new_head;
-		while (x->next != 0 && x->next->next != NULL)
-			x = x->next;
-		new_head->data = x->next->data;
-		new_tail->data = x->data;
+		new_head->next = s;
+		s->prev = new_head;
+		while (s->next != 0 && s->next->next != NULL)
+			s = s->next;
+		new_head->data = s->next->data;
+		new_tail->data = s->data;
 		new_tail->next = NULL;
-		new_head->prev = x->prev;
+		new_head->prev = s->prev;
 	}
 }
 
 /*_____ROTATE_OPERATIONS_____*/
 
-void	ra(t_list **a)
+void	ra(t_list *a)
 {
 	rot(a);
 	ft_printf("ra\n");
 }
 
-void	rb(t_list **b)
+void	rb(t_list *b)
 {
 	rot(b);
 	ft_printf("rb\n");
 }
 
-void	rr(t_list **a, t_list **b)
+void	rr(t_list *a, t_list *b)
 {
 	rot(a);
 	rot(b);
 	ft_printf("rr\n");
 }
 
-void	rra(t_list **a)
+void	rra(t_list *a)
 {
 	rev_rot(a);
 	ft_printf("rra\n");
 }
 
-void	rrb(t_list **b)
+void	rrb(t_list *b)
 {
 	rev_rot(b);
 	ft_printf("rrb\n");
 }
 
-void	rrr(t_list **a, t_list **b)
+void	rrr(t_list *a, t_list *b)
 {
 	rev_rot(a);
 	rev_rot(b);

@@ -12,6 +12,56 @@
 
 #include "push_swap.h"
 
+void	make_b_three(t_list *a, t_list *b)
+{
+	int	x;
+	
+	x = 0;
+	while (b)
+	{
+		x++;
+		b = b->next;
+	}
+	while (x <= 3)
+	{
+		pb(a, b);
+		x++;
+	}
+}
+
+t_list	*sort(t_list *a)
+{
+	t_list	*b;
+	
+	b = NULL;
+	if (elements == 3)
+		sort_three(a);
+	else
+	{
+		b = (t_list *)malloc(sizeof(t_list) * (elements + 1));
+		if (!b)
+			return (ft_free(a), 0);
+	}
+	if (elements == 4)
+	{
+		while (a->data != min(a))
+			ra(a);
+		pb(a, b);
+		sort_three(a);
+		pa(a, b);
+	}
+	while (check_sort(a) != 1 || b)
+	{
+		ra(a);
+		make_b_three(a, b);
+		sort_three(b);
+		pa(a, b);
+		pa(a, b);
+		pa(a, b);
+	}
+	return (ft_free(b), a);
+}	
+
 void	dd_sort(t_list *stack_a, t_list *stack_b)
 {
 	t_list	*a;
@@ -90,6 +140,73 @@ int	ft_max(t_list *a)
 		cur = cur->next;
 	}
 	return (max);
+}
+
+int	sort_three_a(t_list *stack)
+{
+	if (stack->next->data < stack->next->next->data)
+	{
+		if (stack->data < stack->next->next->data)
+			return (1);
+		else
+			return (0);
+	}
+	else
+	{
+		if (stack->data < stack->next->next->data)
+		{
+			rra(stack);
+			sa(stack);
+			return (1);
+		}
+		else
+		{
+			rra(stack);
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int	sort_three_b(t_list *stack)
+{
+	if (stack->next->data < stack->next->next->data)
+	{
+		if (stack->data < stack->next->next->data)
+		{
+			sa(stack);
+			return (1);
+		}
+		else
+		{
+			ra(stack);
+			return (1);
+		}
+	}
+	else
+	{
+		if (stack->data > stack->next->next->data)
+		{
+			sa(stack);
+			rra(stack);
+			return (1);
+		}
+		else
+			return (0);
+	}
+	return (0);
+}	
+
+int	sort_three(t_list *stack)
+{
+	if (stack && stack->next && stack->next->next)
+	{
+		if (stack->data < stack->next->data)
+			return (sort_three_a(stack));
+		else
+			return (sort_three_b(stack));
+	}
+	return (0);
 }
 
 int	next_min(t_list *a, int repeat, int min)

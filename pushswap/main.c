@@ -17,12 +17,10 @@ int	main(int ac, char **av)
 	int		*arr;
 	int		elements;
 	t_list	*a;
-	t_list	*b;
 	
 	arr = NULL;
 	elements = 0;
 	a = NULL;
-	b = NULL;
 	arr = check_input(ac, av);
 	if (!arr)
 		return (0);
@@ -31,18 +29,19 @@ int	main(int ac, char **av)
 	free(arr);
 	if (!a)
 		return (ft_free(a), 0);
-	//if (elements == 3)	
-	//	sort_three(a);
-	if (elements > 1)
+	if (elements < 2)
+		return (0);
+	else if (elements == 2)
 	{
-		b = (t_list *)malloc(sizeof(t_list) * (elements + 1));
-		if (!b)
-			return (ft_free(a), 0);
-		dd_sort(a, b);
-	}
-	if (check_sort(a) == 1 && !b)
-		return (ft_free(a), ft_free(b), 0);
+		if (a->data < a->next->data)
+			return (ft_printf("sorted!"), ft_free(a), 0);
+		else
+			sa(a);
+	}	
+	else if (elements >= 3)
+		a = sort(a);
+	if (check_sort(a))	
+		return (ft_free(a), 0);
 	else
-		return (ft_free(a), ft_free(b), 0);
-	return (0);
+		return (ft_printf("sorry, not possible to sort"), 0);	
 }

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:56:14 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/22 01:51:58 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:20:26 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,6 @@ void ft_free(t_list *s)
 	free(s->prev);
 	s = 0;
 	free(s);
-}
-
-int	arr_len(int *arr)
-{
-	int	x;
-	
-	x = 0;
-	while (arr[x])
-		x++;
-	return (x);
 }
 
 void msg(int nbr)
@@ -161,10 +151,7 @@ int	check_doubles(int *arr)
 		else
 			x++;
 	}
-	if (x == arr_len(arr))
-		return (1);
-	else
-		return (0);
+	return (1);
 }
 
 int	presorted(int *arr)
@@ -172,16 +159,14 @@ int	presorted(int *arr)
 	int	x;
 	
 	x = 0;
-	while (*arr)
+	while (arr[x] && arr[x + 1])
 	{
-		while (arr[x] < arr[x + 1])
-		{
+		if (arr[x] < arr[x + 1])
 			x++;
-			if (x == arr_len(arr))
-				return (ft_printf("no need to sort\n"), 1);
-		}
+		else
+			return (0);
 	}
-	return (0);
+	return (ft_printf("no need to sort\n"), 1);
 }
 
 int *check_input(int ac, char **av)

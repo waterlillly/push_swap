@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:11:59 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/22 01:00:23 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:20:50 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int		ft_mid(int ac, t_list *s);
 
 /*check_ups.c*/
 void	ft_free(t_list *s);
-int		arr_len(int *arr);
 void	msg(int nbr);
 int		check_sort(t_list *stack);
 int		*get_input(int ac, char **av);

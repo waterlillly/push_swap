@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:56:14 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/25 20:20:26 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:05:49 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ void msg(int nbr)
 	ft_printf("%s\n", msg[nbr]);
 }
 
+int	arr_len(int **arr)
+{
+	int	x;
+
+	x = 0;
+	while (arr[x])
+		x++;
+	return (x);
+}
+
 int check_sort(t_list *s)
 {
 	if (!s)
@@ -53,7 +63,7 @@ int check_sort(t_list *s)
 	return (0);
 }
 
-int	*get_split_input(int ac, char **av)
+int	**get_split_input(int ac, char **av)
 {
 	char	**s;
 	int		x;
@@ -85,13 +95,15 @@ int	*get_split_input(int ac, char **av)
 	return (NULL);
 }
 
-int	*get_input(int ac, char **av)
+int	**get_input(int ac, char **av)
 {
 	int		x;
+	int		y;
 	char	**s;
 
 	s = NULL;
 	x = 1;
+	y = 0;
 	if (ac > 2)
 	{
 		s = (char **)malloc(sizeof(char *) * ac);
@@ -99,62 +111,62 @@ int	*get_input(int ac, char **av)
 			return (0);
 		while (av[x])
 		{
-			*s = av[x];
+			s[y] = av[x];
 			x++;
+			y++;
 		}
-		*s = NULL;
+		s[y] = NULL;
 		return (convert_check(s));
 	}
 	return (0);
 }
 
-int	*convert_check(char **s)
+int	**convert_check(char **s)
 {
 	int	x;
-	int	*arr;
+	int	arr[x];/////////////////////////////////////////////////////////
 
 	x = 0;
-	arr = NULL;
 	while (s[x])
 		x++;
-	arr = (int *)malloc(sizeof(int) * (x + 1));
-	if (!arr)
-		return (NULL);
 	x = 0;
 	while (s[x])
 	{
-		arr[x] = ft_atoi(s[x]);
+		*arr[x] = ft_atoi(s[x]);
 		if (!arr[x])
-			return (ft_printf("invalid input\n"), free(arr), NULL);
-		x++;
+			return (ft_printf("invalid input\n"), free(arr), free(s), NULL);
+		else
+			x++;
 	}
 	return (free(s), arr);
 }
 
-int	check_doubles(int *arr)
+int	check_doubles(int **arr)
 {
 	int	x;
 	int	y;
 	int	z;
 
-	x = 0;
+	x = 1;
 	y = 0;
 	z = 0;
-	while (arr[x] && arr[x + 1])
+	while (arr[x] && x < arr_len(arr))
 	{
-		y = arr[x];
-		z = x + 1;
-		while (arr[z] && y != arr[z])
-			z++;
-		if (y == arr[z])
-			return (ft_printf("doubles in input\n"), 0);
-		else
-			x++;
+		y = *arr[x];
+		z = x;
+		x--;
+		while (x >= 0)
+		{
+			if (y == *arr[x])
+				return (ft_printf("doubles in input\n"), free(arr), 0);
+			x--;
+		}
+		x = z + 1;
 	}
 	return (1);
 }
 
-int	presorted(int *arr)
+int	presorted(int **arr)
 {
 	int	x;
 	
@@ -169,9 +181,9 @@ int	presorted(int *arr)
 	return (ft_printf("no need to sort\n"), 1);
 }
 
-int *check_input(int ac, char **av)
+int **check_input(int ac, char **av)
 {
-	int		*arr;
+	int		**arr;
 
 	arr = NULL;
 	if (ac < 2 || (ac == 2 && av[1][0] == 0))
@@ -189,7 +201,7 @@ int *check_input(int ac, char **av)
 			return (NULL);
 	}
 	if (presorted(arr))
-		return (free(arr), NULL);
+		return (NULL);
 	else if (check_doubles(arr))
 		return (arr);
 	else

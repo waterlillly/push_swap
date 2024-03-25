@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:10:23 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/22 01:07:52 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:46:10 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	make_b_three(t_list *a, t_list *b)
 	}
 }
 
-t_list	*sort(t_list *a)
+t_list	*sort(t_list *a, int elements)
 {
 	t_list	*b;
 	
@@ -40,11 +40,11 @@ t_list	*sort(t_list *a)
 	{
 		b = (t_list *)malloc(sizeof(t_list) * (elements + 1));
 		if (!b)
-			return (ft_free(a), 0);
+			return (ft_free(a), NULL);
 	}
 	if (elements == 4)
 	{
-		while (a->data != min(a))
+		while (a->data != ft_min(a, 0))
 			ra(a);
 		pb(a, b);
 		sort_three(a);
@@ -62,6 +62,7 @@ t_list	*sort(t_list *a)
 	return (ft_free(b), a);
 }	
 
+/*
 void	dd_sort(t_list *stack_a, t_list *stack_b)
 {
 	t_list	*a;
@@ -125,6 +126,7 @@ void	dd_sort(t_list *stack_a, t_list *stack_b)
 		dd_sort(stack_a, stack_b);
 	}
 }
+*/
 
 int	ft_max(t_list *a)
 {
@@ -260,7 +262,7 @@ int	ft_mid(int ac, t_list *a)
 	x = (ac - 1) / 2;
 	mid_min = ft_min(a, x);
 	if (mid_min == 2147483647)
-		return (msg(4), 0);
+		return (0);
 	else
 		return (mid_min);
 }

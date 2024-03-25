@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:26:00 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/22 00:39:44 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:18:12 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_list	*add_node(t_list *stack, int value)
 	return (stack);
 }
 
-t_list	*stack(t_list *stack, int *input, int elements)
+t_list	*stack(t_list *stack, int **input, int elements)
 {
 	t_list	*s;
 	int		x;
@@ -45,7 +45,7 @@ t_list	*stack(t_list *stack, int *input, int elements)
 		x++;
 	while (*input && x >= 0)
 	{
-		s = add_node(stack, input[x]);
+		s = add_node(stack, *input[x]);
 		if (!s)
 			return (0);
 		x--;

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:34:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/22 01:34:16 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:15:17 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 {
-	int		*arr;
+	int		**arr;
 	int		elements;
 	t_list	*a;
 	
@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 			sa(a);
 	}	
 	else if (elements >= 3)
-		a = sort(a);
+		a = sort(a, elements);
 	if (check_sort(a))	
 		return (ft_free(a), 0);
 	else

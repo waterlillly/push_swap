@@ -34,6 +34,9 @@ int		ft_max(t_list *s);
 int		next_min(t_list *s, int repeat, int min);
 int		ft_min(t_list *s, int repeat);
 int		ft_mid(int ac, t_list *s);
+int		sort_three_a(t_list *stack);
+int		sort_three_b(t_list *stack);
+int		sort_three(t_list *stack);
 
 /*check_ups.c*/
 void	ft_free(t_list *s);
@@ -49,7 +52,6 @@ int		*check_input(int ac, char **av);
 /*creations.c*/
 t_list	*add_node(t_list *stack, int value);
 t_list	*stack(t_list *stack, int *input, int elements);
-//int		ft_arr_len(char **arr);
 //char	**get_input(int ac, char **av);
 //char	**two(int ac, char **av, char **input);
 //char	**one(char **av, char **input);

@@ -115,6 +115,27 @@ void	rot(t_list *s)
 	}
 }
 
+/*_____ROTATE_OPERATIONS_____*/
+
+void	ra(t_list *a)
+{
+	rot(a);
+	ft_printf("ra\n");
+}
+
+void	rb(t_list *b)
+{
+	rot(b);
+	ft_printf("rb\n");
+}
+
+void	rr(t_list *a, t_list *b)
+{
+	rot(a);
+	rot(b);
+	ft_printf("rr\n");
+}
+
 /*_____REVERSE_ROTATE_STACK->TAIL_BECOMES_HEAD_____*/
 
 void	rev_rot(t_list *s)
@@ -138,26 +159,7 @@ void	rev_rot(t_list *s)
 	}
 }
 
-/*_____ROTATE_OPERATIONS_____*/
-
-void	ra(t_list *a)
-{
-	rot(a);
-	ft_printf("ra\n");
-}
-
-void	rb(t_list *b)
-{
-	rot(b);
-	ft_printf("rb\n");
-}
-
-void	rr(t_list *a, t_list *b)
-{
-	rot(a);
-	rot(b);
-	ft_printf("rr\n");
-}
+/*_____REV_ROTATE_OPERATIONS_____*/
 
 void	rra(t_list *a)
 {

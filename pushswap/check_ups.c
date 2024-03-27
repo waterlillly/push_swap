@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:56:14 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/25 22:05:49 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/26 23:30:36 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void msg(int nbr)
 	ft_printf("%s\n", msg[nbr]);
 }
 
-int	arr_len(int **arr)
+int	arr_len(char **arr)
 {
 	int	x;
 
@@ -63,7 +63,7 @@ int check_sort(t_list *s)
 	return (0);
 }
 
-int	**get_split_input(int ac, char **av)
+char	**get_split_input(char **av)
 {
 	char	**s;
 	int		x;
@@ -72,76 +72,80 @@ int	**get_split_input(int ac, char **av)
 	s = NULL;
 	x = 0;
 	y = 0;
-	if (ac == 2)
+	while (av[1][x])
 	{
-		while (av[1][x])
-		{
-			if (av[1][x] == ' ')
-				y++;
-			x++;
-		}
-		if (y == 0)
-			return (ft_printf("only one number\n"), NULL);
-		else if (av[1] == NULL)
-			return (ft_printf("empty input\n"), NULL);
-		else
-		{
-			s = ft_split(av[1], ' ');
-			if (!s)
-				return (0);
-			return (convert_check(s));		
-		}
+		if (av[1][x] == ' ')
+			y++;
+		x++;
+	}
+	if (y == 0)
+		return (ft_printf("only one number\n"), NULL);
+	else
+	{
+		//s = (char **)malloc(sizeof(char *) * (y + 2));
+		//if (!s)
+			//return (0);
+		s = ft_split(av[1], ' ');
+		if (!s)
+			return (0);
+		return (s);		
 	}
 	return (NULL);
 }
 
-int	**get_input(int ac, char **av)
+char	**get_input(int ac, char **av)
 {
 	int		x;
 	int		y;
 	char	**s;
+	char	*next;
 
-	s = NULL;
 	x = 1;
 	y = 0;
-	if (ac > 2)
+	next = NULL;
+	s = (char **)malloc(sizeof(char *) * ac);
+	if (!s)
+		return (0);
+	while (av[x])
 	{
-		s = (char **)malloc(sizeof(char *) * ac);
-		if (!s)
+		next = ft_strdup(av[x]);
+		if (!next)
 			return (0);
-		while (av[x])
-		{
-			s[y] = av[x];
-			x++;
-			y++;
-		}
-		s[y] = NULL;
-		return (convert_check(s));
+		s[y] = next;
+		next = NULL;
+		x++;
+		y++;
 	}
-	return (0);
+	s[y] = 0;
+	if (!s || y != (ac - 1))
+		return (free(s), free(next), NULL);
+	return (free(next), s);
 }
 
+/*
 int	**convert_check(char **s)
 {
 	int	x;
-	int	arr[x];/////////////////////////////////////////////////////////
+	int	**arr;
 
 	x = 0;
 	while (s[x])
 		x++;
+	arr = (int **)malloc(sizeof(int *) * (x + 1));
+	if (!arr)
+		return (0);
 	x = 0;
-	while (s[x])
+	while (s[x] && arr[x])
 	{
 		*arr[x] = ft_atoi(s[x]);
-		if (!arr[x])
-			return (ft_printf("invalid input\n"), free(arr), free(s), NULL);
-		else
-			x++;
+		x++;
 	}
+	arr[x] = 0;
 	return (free(s), arr);
 }
+*/
 
-int	check_doubles(int **arr)
+int	check_doubles(char **arr)
 {
 	int	x;
 	int	y;
@@ -150,14 +154,14 @@ int	check_doubles(int **arr)
 	x = 1;
 	y = 0;
 	z = 0;
-	while (arr[x] && x < arr_len(arr))
+	while (arr[x])
 	{
-		y = *arr[x];
+		y = ft_atoi(arr[x]);
 		z = x;
 		x--;
 		while (x >= 0)
 		{
-			if (y == *arr[x])
+			if (y == ft_atoi(arr[x]))
 				return (ft_printf("doubles in input\n"), free(arr), 0);
 			x--;
 		}
@@ -166,14 +170,14 @@ int	check_doubles(int **arr)
 	return (1);
 }
 
-int	presorted(int **arr)
+int	presorted(char **arr)
 {
 	int	x;
 	
 	x = 0;
 	while (arr[x] && arr[x + 1])
 	{
-		if (arr[x] < arr[x + 1])
+		if (ft_atoi(arr[x]) < ft_atoi(arr[x + 1]))
 			x++;
 		else
 			return (0);
@@ -181,16 +185,16 @@ int	presorted(int **arr)
 	return (ft_printf("no need to sort\n"), 1);
 }
 
-int **check_input(int ac, char **av)
+char **check_input(int ac, char **av)
 {
-	int		**arr;
+	char	**arr;
 
 	arr = NULL;
 	if (ac < 2 || (ac == 2 && av[1][0] == 0))
 		return (NULL);
 	else if (ac == 2)
 	{
-		arr = get_split_input(ac, av);
+		arr = get_split_input(av);
 		if (!arr)
 			return (NULL);
 	}

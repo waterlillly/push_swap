@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:34:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/25 21:15:17 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:24:09 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,30 @@
 
 int	main(int ac, char **av)
 {
-	int		**arr;
+	char	**arr;
 	int		elements;
 	t_list	*a;
 	
-	arr = NULL;
-	elements = 0;
 	a = NULL;
 	arr = check_input(ac, av);
 	if (!arr)
 		return (0);
 	elements = arr_len(arr);
+	if (elements < 2)
+		return (free(arr), 0);
 	a = stack(a, arr, elements);
 	free(arr);
 	if (!a)
 		return (ft_free(a), 0);
-	if (elements < 2)
-		return (0);
 	else if (elements == 2)
 	{
-		if (a->data < a->next->data)
+		if (a && a->next && (a->data < a->next->data))
 			return (ft_printf("sorted!"), ft_free(a), 0);
 		else
 			sa(a);
 	}	
 	else if (elements >= 3)
-		a = sort(a, elements);
+		sort(a, elements);
 	if (check_sort(a))	
 		return (ft_free(a), 0);
 	else

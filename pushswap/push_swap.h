@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:11:59 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/25 21:17:03 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/27 01:30:33 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,30 @@ typedef struct s_list
 }			t_list;
 
 /*push_swap.c*/
-//void	dd_sort(t_list *stack_a, t_list *stack_b);
 int		ft_max(t_list *s);
 int		next_min(t_list *s, int repeat, int min);
 int		ft_min(t_list *s, int repeat);
 int		ft_mid(int ac, t_list *s);
 void	make_b_three(t_list *a, t_list *b);
-t_list	*sort(t_list *a, int elements);
-int		sort_three_a(t_list *stack);
-int		sort_three_b(t_list *stack);
-int		sort_three(t_list *stack);
+void	sort(t_list *a, int elements);
+void	sort_three_a(t_list *stack);
+void	sort_three_b(t_list *stack);
+void	sort_three(t_list *stack);
 
 /*check_ups.c*/
 void	ft_free(t_list *s);
 void	msg(int nbr);
-int		arr_len(int **arr);
+int		arr_len(char **arr);
 int		check_sort(t_list *stack);
-int		**get_input(int ac, char **av);
-int		**get_split_input(int ac, char **av);
-int		**convert_check(char **s);
-int		check_doubles(int **arr);
-int		presorted(int **arr);
-int		**check_input(int ac, char **av);
+char	**get_input(int ac, char **av);
+char	**get_split_input(char **av);
+int		check_doubles(char **arr);
+int		presorted(char **arr);
+char	**check_input(int ac, char **av);
 
 /*creations.c*/
 t_list	*add_node(t_list *stack, int value);
-t_list	*stack(t_list *stack, int **input, int elements);
-//char	**get_input(int ac, char **av);
-//char	**two(int ac, char **av, char **input);
-//char	**one(char **av, char **input);
+t_list	*stack(t_list *stack, char **input, int elements);
 
 /*operations.c*/
 void	swap(t_list *s);

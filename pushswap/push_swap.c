@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:10:23 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/25 20:46:10 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/03/27 10:06:12 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	make_b_three(t_list *a, t_list *b)
 	}
 }
 
-t_list	*sort(t_list *a, int elements)
+void	sort(t_list *a, int elements)
 {
 	t_list	*b;
 	
@@ -40,7 +40,10 @@ t_list	*sort(t_list *a, int elements)
 	{
 		b = (t_list *)malloc(sizeof(t_list) * (elements + 1));
 		if (!b)
-			return (ft_free(a), NULL);
+		{
+			ft_free(a);
+			return ;
+		}
 	}
 	if (elements == 4)
 	{
@@ -59,7 +62,8 @@ t_list	*sort(t_list *a, int elements)
 		pa(a, b);
 		pa(a, b);
 	}
-	return (ft_free(b), a);
+	ft_free(b);
+	return ;
 }	
 
 /*
@@ -144,71 +148,70 @@ int	ft_max(t_list *a)
 	return (max);
 }
 
-int	sort_three_a(t_list *stack)
+void	sort_three_a(t_list *stack)
 {
-	if (stack->next->data < stack->next->next->data)
+	t_list	*s;
+
+	s = stack;
+	if (s->next->data < s->next->next->data)
 	{
-		if (stack->data < stack->next->next->data)
-			return (1);
-		else
-			return (0);
+		//if (s->data < s->next->next->data)
+		//	return ;
+		//else
+		return ;
 	}
 	else
 	{
-		if (stack->data < stack->next->next->data)
+		if (s->data < s->next->next->data)
 		{
-			rra(stack);
-			sa(stack);
-			return (1);
+			rra(s);
+			sa(s);
 		}
 		else
-		{
-			rra(stack);
-			return (1);
-		}
+			rra(s);
 	}
-	return (0);
 }
 
-int	sort_three_b(t_list *stack)
+void	sort_three_b(t_list *stack)
 {
-	if (stack->next->data < stack->next->next->data)
+	t_list	*s;
+	
+	s = stack;
+	if (s->next->data < s->next->next->data)
 	{
-		if (stack->data < stack->next->next->data)
-		{
-			sa(stack);
-			return (1);
-		}
+		if (s->data < s->next->next->data)
+			sa(s);
 		else
-		{
-			ra(stack);
-			return (1);
-		}
+			ra(s);
 	}
 	else
 	{
-		if (stack->data > stack->next->next->data)
+		if (s->data > s->next->next->data)
 		{
-			sa(stack);
-			rra(stack);
-			return (1);
+			sa(s);
+			rra(s);
 		}
 		else
-			return (0);
+			return ;
 	}
-	return (0);
 }	
 
-int	sort_three(t_list *stack)
+void	sort_three(t_list *stack)
 {
-	if (stack && stack->next && stack->next->next)
+	if (!stack || !stack->next)
+		return ;
+	else if (stack && stack->next)
 	{
-		if (stack->data < stack->next->data)
-			return (sort_three_a(stack));
+		stack = stack->next;
+		if (!stack || !stack->next)
+			return ;
 		else
-			return (sort_three_b(stack));
+			stack = stack->prev;
+		if ((int)stack->data < (int)stack->next->data)
+			sort_three_a(stack);
+		else
+			sort_three_b(stack);
 	}
-	return (0);
 }
 
 int	next_min(t_list *a, int repeat, int min)

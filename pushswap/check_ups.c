@@ -102,7 +102,7 @@ char	**get_input(int ac, char **av)
 
 	x = 1;
 	y = 0;
-	next = NULL;
+	//next = NULL;
 	s = (char **)malloc(sizeof(char *) * ac);
 	if (!s)
 		return (0);
@@ -116,9 +116,7 @@ char	**get_input(int ac, char **av)
 		x++;
 		y++;
 	}
-	s[y] = 0;
-	if (!s || y != (ac - 1))
-		return (free(s), free(next), NULL);
+	s[y] = NULL;
 	return (free(next), s);
 }
 

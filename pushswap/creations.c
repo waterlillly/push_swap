@@ -21,9 +21,14 @@ t_list	*add_node(t_list *stack, int value)
 	if (!node)
 		return (0);
 	node->data = value;
-	node->next = stack;
-	stack->prev = node;
 	node->prev = NULL;
+	if (!stack)
+		node->next = NULL;
+	else
+	{
+		node->next = stack;
+		stack->prev = node;
+
 	stack = node;
 	return (stack);
 }

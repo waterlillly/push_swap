@@ -6,12 +6,12 @@
 #    By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 01:06:37 by lbaumeis          #+#    #+#              #
-#    Updated: 2024/04/02 06:09:49 by lbaumeis         ###   ########.fr        #
+#    Updated: 2024/04/04 19:05:50 by lbaumeis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g
 LIB_FLAGS = -L. -lft
 
 .c.o:

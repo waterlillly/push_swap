@@ -5,190 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 17:25:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/18 18:09:55 by lbaumeis         ###   ########.fr       */
+/*   Created: 2024/04/05 20:00:37 by lbaumeis          #+#    #+#             */
+/*   Updated: 2024/04/08 03:06:44 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	sort_three(t_list *stack)
+t_list	**fill_stack_a(int ac, char **av)
 {
-	int	x;
-	int	y;
-	int	z;
-
-	x = 0;
-	y = 0;
-	z = 0;
-	x = stack->data;
-	y = stack->next->data;
-	z = stack->next->next->data;
-	if (x && y && z)
-	{
-		if (x < y)
-		{
-			if (y < z)
-			{
-				if (x < z)
-					return (1);
-				else
-					return (msg(4), 0);
-			}
-			else
-			{
-				if (x < z)
-				{
-					rra(stack);
-					sa(stack);
-					return (1);
-				}
-				else
-				{
-					rra(stack);
-					return (1);
-				}
-			}
-		}
-		else
-		{
-			if (y < z)
-			{
-				if (x < z)
-				{
-					sa(stack);
-					return (1);
-				}
-				else
-				{
-					ra(stack);
-					return (1);
-				}
-			}
-			else
-			{
-				if (x > z)
-				{
-					sa(stack);
-					rra(stack);
-					return (1);
-				}
-				else
-					return (msg(4), 0);
-			}
-		}
-	}
-	return (0);
-}
-
-/*			
-		if (a->data < a->prev->data)
-		{
-			if (a->data < a->next->data)
-			{
-				if (a->next->data < a->prev->data)
-					ra(stack_a);
-				else
-					sa(stack_a);
-			}
-			else
-				rra(stack_a);
-		}
-		else
-		{
-			if (a->data < a->next->data)
-			{
-				if (a->next->data < a->prev->data)
-					return ;
-				else
-					dd_sort(stack_a, stack_b);
-			}
-			else
-			{
-				sa(stack_a);
-				if (a->next->data < a->prev->data)
-					rra(stack_a);
-				else
-					ra(stack_a);
-			}
-		}
-	}
-	if (b != 0)
-	{
-		pa(stack_a, stack_b);
-		dd_sort(stack_a, stack_b);
-	}
-}
-*/
-
-int	ft_max(t_list *a)
-{
-	int		max;
-	t_list	*cur;
+	t_list	*a;
+	t_list	**stack_a;
+	char	**tokens;
+	int		i;
 	
-	cur = a;
-	max = cur->data;
-	while (cur != 0 && cur->next != 0)
+	a = malloc(sizeof(t_list *));
+	if (!a)
+		return (NULL);
+	stack_a = &a;
+	tokens = NULL;
+	i = 0;
+	if (ac == 2 && is_valid(av[1]))
 	{
-		if (max < cur->next->data)
-			max = cur->next->data;
-		cur = cur->next;
-	}
-	return (max);
-}
-
-int	next_min(t_list *a, int repeat, int min)
-{
-	t_list	*cur;
-	int		new_min;
-
-	cur = a;
-	new_min = min + 1;
-	if (repeat == 0)
-		return (min);
-	else if (repeat > 0)
-	{
-		while (cur != 0 && cur->next != 0)
+		tokens = ft_split(av[1], ' ');
+		if (!tokens)
+			return (NULL);
+		while (tokens[i])
 		{
-			if (new_min > min && new_min >= cur->data)
-				new_min = cur->data;
-			cur = cur->next;
+			add_node(stack_a, ft_atoi(tokens[i]));
+			i++;
 		}
-		return (next_min(a, repeat - 1, new_min));
 	}
 	else
-		return (2147483647);
+		parse_and_fill(stack_a, ac, av);
+	stack_a = &a;
+	return (stack_a);
 }
 
-int	ft_min(t_list *a, int repeat)
+void	print_stack(t_list **stack)
 {
-	int		min;
-	t_list	*cur;
-	
-	cur = a;
-	min = cur->data;
-	while (cur != 0 && cur->next != 0)
+	t_list	*s;
+
+	s = *stack;
+	if (!s)
 	{
-		if (min > cur->data)
-			min = cur->data;
-		cur = cur->next;
+		ft_printf("error\n");
+		return ;
 	}
-	if (repeat > 0)
-		return (next_min(a, repeat, min));
-	else
-		return (min);
+	while (s && s->next)
+	{
+		ft_printf("%d\n", s->data);
+		s = s->next;
+	}
 }
 
-int	ft_mid(int ac, t_list *a)
+void	parse_and_fill(t_list **stack_a, int ac, char **av)
 {
-	int		mid_min;
-	int		x;
+	int		i;
+	int		value;
+	t_list	*a;
 
-	mid_min = 0;
-	x = (ac - 1) / 2;
-	mid_min = ft_min(a, x);
-	if (mid_min == 2147483647)
-		return (msg(4), 0);
-	else
-		return (mid_min);
+	i = 1;
+	value = 0;
+	a = *stack_a;
+	while (i < ac)
+	{
+		value = ft_atoi(av[i]);
+		add_node(&a, value);
+		i++;
+	}
+}
+
+int	is_valid(char *str)
+{
+	while (*str)
+	{
+		if (ft_isdigit(*str) || (*str == '-' && ft_isdigit(*str++)))
+			str++;
+		else if (*str == ' ' && (*str++ == '-' || ft_isdigit(*str++)))
+			str++;
+		else
+			return (0);
+	}
+	return (1);
 }

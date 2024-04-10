@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:00:37 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/08 03:06:44 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/10 01:33:48 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 t_list	**fill_stack_a(int ac, char **av)
 {
-	t_list	*a;
 	t_list	**stack_a;
 	char	**tokens;
 	int		i;
 	
-	a = malloc(sizeof(t_list *));
-	if (!a)
+	stack_a = malloc(sizeof(t_list *));
+	if (!stack_a)
 		return (NULL);
-	stack_a = &a;
+	*stack_a = NULL;
 	tokens = NULL;
 	i = 0;
 	if (ac == 2 && is_valid(av[1]))
@@ -38,42 +37,36 @@ t_list	**fill_stack_a(int ac, char **av)
 	}
 	else
 		parse_and_fill(stack_a, ac, av);
-	stack_a = &a;
 	return (stack_a);
 }
 
 void	print_stack(t_list **stack)
 {
-	t_list	*s;
-
-	s = *stack;
-	if (!s)
+	if (!(*stack))
 	{
 		ft_printf("error\n");
 		return ;
 	}
-	while (s && s->next)
+	while ((*stack))
 	{
-		ft_printf("%d\n", s->data);
-		s = s->next;
+		ft_printf("%d\n", (*stack)->data);
+		(*stack) = (*stack)->next;
 	}
 }
 
 void	parse_and_fill(t_list **stack_a, int ac, char **av)
 {
 	int		i;
-	int		value;
 	t_list	*a;
 
 	i = 1;
-	value = 0;
 	a = *stack_a;
 	while (i < ac)
 	{
-		value = ft_atoi(av[i]);
-		add_node(&a, value);
+		add_node(stack_a, ft_atoi(av[i]));
 		i++;
 	}
+	stack_a = &a;
 }
 
 int	is_valid(char *str)

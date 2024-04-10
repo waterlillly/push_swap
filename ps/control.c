@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 16:27:38 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/08 02:32:09 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/10 01:46:03 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 int	stack_size(t_list **stack)
 {
 	int		x;
-	t_list	*s;
 
 	x = 0;
-	s = *stack;
-	while (s && s->next)
+	while ((*stack))
 	{
 		x++;
-		s = s->next;
+		(*stack) = (*stack)->next;
 	}
 	return (x);
 }
@@ -30,17 +28,15 @@ int	stack_size(t_list **stack)
 int	find_min(t_list **stack)
 {
 	int		min;
-	t_list	*s;
 
 	min = INT_MAX;
-	s = *stack;
-	if (!s)
-		return (ft_printf("wrong min\n"));
-	while (s && s->next)
+	if (!(*stack))
+		return (ft_printf("wrong min\n"), 0);
+	while ((*stack) && (*stack)->next)
 	{
-		if (s->data < min)
-			min = s->data;
-		s = s->next;
+		if ((*stack)->data < min)
+			min = (*stack)->data;
+		(*stack) = (*stack)->next;
 	}
 	return (min);
 }
@@ -48,33 +44,28 @@ int	find_min(t_list **stack)
 int	find_max(t_list **stack)
 {
 	int		max;
-	t_list	*s;
 
 	max = INT_MIN;
-	s = *stack;
-	if (!s)
-		return (ft_printf("wrong max\n"));
-	while (s && s->next)
+	if (!(*stack))
+		return (ft_printf("wrong max\n"), 0);
+	while ((*stack) && (*stack)->next)
 	{
-		if (s->data > max)
-			max = s->data;
-		s = s->next;
+		if ((*stack)->data > max)
+			max = (*stack)->data;
+		(*stack) = (*stack)->next;
 	}
 	return (max);
 }
 
 int	is_sorted(t_list **stack)
 {
-	t_list	*s;
-
-	s = *stack;
-	if (s == NULL || s->next == NULL)
+	if (!(*stack) || !(*stack)->next)
 		return (0);
-	while (s && s->next)
+	while ((*stack) && (*stack)->next)
 	{
-		if (s->data > s->next->data)
+		if ((*stack)->data > (*stack)->next->data)
 			return (0);
-        s = s->next;
+        (*stack) = (*stack)->next;
 	}
 	return (1);
 }

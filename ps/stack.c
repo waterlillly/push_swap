@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 00:52:22 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/08 02:21:49 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/10 01:56:20 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,74 +15,67 @@
 void	add_node(t_list **stack, int value)
 {
 	t_list	*node;
-	t_list	*s;
 
-	s = *stack;
-	node = malloc(sizeof(t_list *));
+	node = malloc(sizeof(t_list));
 	if (!node)
 		return ;
 	node->data = value;
 	node->next = NULL;
-	if (!s)
+	if (!(*stack))
 	{
 		node->prev = NULL;
-		s = node;
+		*stack = node;
 	}
 	else
 	{
-		node->prev = s;
-		s->next = node;
-		s = s->next;
+		while ((*stack)->next)
+			(*stack) = (*stack)->next;
+		node->prev = (*stack);
+		(*stack)->next = node;
 	}
 }
 
 void	push(t_list **src, t_list **dst)
 {
 	t_list	*new;
-	t_list	*s;
-	t_list	*d;
 
-	s = *src;
-	d = *dst;
-	if (!s)
+	if (!(*src))
 		return ;
-	new = (t_list *)malloc(sizeof(t_list));
+	new = malloc(sizeof(t_list));
 	if (!new)
 		return ;
-	new->data = s->data;
+	new->data = (*src)->data;
 	new->prev = NULL;
-	if (!d)
+	if (!(*dst))
 	{
 		new->next = NULL;
-		d = new;
+		(*dst) = new;
 	}
 	else
 	{
-		new->next = d;
-		d->prev = new;
-		d = d->prev;
+		new->next = (*dst);
+		(*dst)->prev = new;
+		(*dst) = (*dst)->prev;
 	}
-	if (s && s->next)
+	if ((*src) && (*src)->next)
 	{
-		s = s->next;
-		s->prev = NULL;
+		(*src) = (*src)->next;
+		(*src)->prev = NULL;
 	}
 	else
-		s = NULL;
+		(*src) = NULL;
 }
 
 void	swap(t_list **stack)
 {
 	int		temp;
-	t_list	*s;
 
 	temp = 0;
-	s = *stack;
-	if (s && s->next)
+	if (*stack && (*stack)->next)
 	{
-		temp = s->data;
-		s->data = s->next->data;
-		s->next->data = temp;
+		temp = (*stack)->data;
+		(*stack)->data = (*stack)->next->data;
+		(*stack)->next->data = temp;
 	}
 }
 
@@ -90,14 +83,12 @@ void	rotate(t_list **stack)
 {
 	t_list	*temp;
 	t_list	*last;
-	t_list	*s;
-	
-	s = *stack;
-	if (s && s->next)
+
+	if (*stack && (*stack)->next)
 	{
-		temp = s;
-		s = s->next;
-		last = s;
+		temp = *stack;
+		*stack = (*stack)->next;
+		last = *stack;
 		while (last->next)
 			last = last->next;
 		temp->next = NULL;
@@ -110,19 +101,17 @@ void	reverse_rotate(t_list **stack)
 {
 	t_list	*last;
 	t_list	*prev_to_last;
-	t_list	*s;
-	
-	s = *stack;
-	if (s && s->next)
+
+	if (*stack && (*stack)->next)
 	{
-		last = s;
+		last = *stack;
 		while (last->next)
 			last = last->next;
 		prev_to_last = last->prev;
 		prev_to_last->next = NULL;
 		last->prev = NULL;
-		last->next = s;
-		s->prev = last;
-		s = last;
+		last->next = *stack;
+		(*stack)->prev = last;
+		*stack = last;
 	}
 }

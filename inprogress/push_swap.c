@@ -6,11 +6,12 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:08:51 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/14 23:21:13 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:19:04 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "math.h"
 
 t_list	*create_node(int data)
 {
@@ -33,7 +34,7 @@ void	add_node(t_list **stack, t_list *new_node)
 	if (!new_node)
 		return ;
 	s = *stack;
-	if (!stack)
+	if (!stack || !*stack)
 		s = new_node;
 	else
 	{
@@ -50,6 +51,8 @@ void	input_args(int ac, char **av, t_list **stack_a)
 {
 	int		i;
 	t_list  *a;
+
+	
 
 	i = 1;
 	a = *stack_a;

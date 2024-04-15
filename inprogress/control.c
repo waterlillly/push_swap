@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:46 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/04 20:09:49 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:28:16 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ void	ft_free_list(t_list **stack)
 {
 	t_list  *s;
 
+	if (!stack){
+		return ;
+	}
+	s = NULL;
 	s = *stack;
-	if (s->next != 0)
+	if (s->next != NULL)
 		s = s->next;
 	while (s != NULL && s->next != NULL)
 	{
@@ -168,4 +172,18 @@ int	is_sorted(t_list **stack)
 		s = s->next;
 	}
 	return (1);
+}
+
+
+t_list * get_last_Node(t_list **stack){
+	t_list * current = *stack;
+	if(!current)
+		return NULL;
+
+		
+	while (current->next != NULL)
+	{
+		current = current->next;
+	}
+	return current;
 }

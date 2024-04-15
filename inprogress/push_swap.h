@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:35 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/14 23:01:02 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:28:16 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,29 @@
 # include "libft.h"
 # include <limits.h>
 
-typedef struct s_list t_list;
 
-typedef struct s_list
-{
-	int 	data;
-	t_list	*next;
-	t_list	*prev;
-} 				t_list;
+
+
+// typedef struct s_list t_list;
+
+// typedef struct s_list
+// {
+// 	int 	data;
+// 	t_list	*next;
+// 	t_list	*prev;
+// } 				t_list;
+
+typedef struct s_list {
+	int data;
+	struct s_list * next;
+	struct s_list * prev;
+	
+} t_list;
 
 /*MAIN+ETC*/
-int		ft_find(char *str, int c);
-int		valid_arg(char **av);
-int		main(int ac, char **av);
+//int		ft_find(char *str, int c);
+//int		valid_arg(char **av);
+//int		main(int ac, char **av);
 
 /*PUSH SWAP->INPUT*/
 t_list	*create_node(int data);
@@ -53,6 +63,8 @@ int		sort_stack(t_list **stack_a, t_list **stack_b);//chat gpt shit, platzhalter
 int		find_min(t_list **stack);
 int		find_max(t_list **stack);
 int		is_sorted(t_list **stack);
+
+t_list * get_last_Node(t_list **stack);
 
 /*PUSH SWAP OPERATIONS*/
 void	swap(t_list **stack);

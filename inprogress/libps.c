@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:08 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/04 20:09:11 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:29:46 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,21 @@ int	ss(t_list **a, t_list **b)
 
 void	push(t_list **src_stack, t_list **dst_stack)
 {
-	t_list	*first;
+	t_list	*s;
 	
     if (!src_stack || !*src_stack)
 		return ;
-    first = *src_stack;
-    if (first->next == first)// Only one element in the src stack
+    s = *src_stack;
+    if (!s->next)
     {
-		add_node(dst_stack, first);
-        *src_stack = NULL;
+		add_node(dst_stack, s->data);
+        s = NULL;
     }
 	else
 	{
-        *src_stack = first->next;
-        first->prev->next = first->next;
-        first->next->prev = first->prev;
-        add_node(dst_stack, first);
+        add_node(dst_stack, s->data);
+		s = s->next;
+        s->prev = NULL;
     }
 }
 

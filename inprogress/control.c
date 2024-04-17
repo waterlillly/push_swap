@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:46 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/04 20:09:49 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:06:51 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	ft_free_list(t_list **stack)
 {
 	t_list  *s;
 
+	if (!stack)
+		return ;
 	s = *stack;
 	if (s->next != 0)
 		s = s->next;
@@ -37,14 +39,13 @@ void	ft_free_list(t_list **stack)
 		free(s->prev);
 		s = s->next;
 	}
-	free(s->prev);
 	s = NULL;
 	free(s);
 }
 
 int	presorted(char **arr, int x)
 {
-	while (arr[x] && arr[x + 1] && valid(arr[x]) && valid (arr[x + 1]))
+	while (arr[x] && arr[x + 1])
 	{
 		if (ft_atoi(arr[x]) < ft_atoi(arr[x + 1]))
 			x++;
@@ -57,18 +58,13 @@ int	presorted(char **arr, int x)
 		return (0);
 }
 
-int	valid(char *str)
-{
-	if (ft_atoi(str))
-		return (1);
-	return (0);
-}
-
 int	stack_size(t_list **stack)
 {
 	int		x;
 	t_list  *s;
 
+	if (!stack)
+		return (-1);
 	x = 0;
 	s = *stack;
 	while (s)
@@ -76,9 +72,11 @@ int	stack_size(t_list **stack)
 		x++;
 		s = s->next;
 	}
+	stack = &s;
 	return (x);
 }
 
+/*
 int	sort_stack(t_list **stack_a, t_list **stack_b)
 {
 	int	min;
@@ -123,6 +121,7 @@ int	sort_stack(t_list **stack_a, t_list **stack_b)
 	}
 	return (steps);
 }
+*/
 
 int	find_min(t_list **stack)
 {

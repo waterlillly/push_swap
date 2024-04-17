@@ -6,63 +6,48 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:08:51 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/14 23:21:13 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:23:50 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*create_node(int data)
+void	add_node(t_list **stack, int value)
 {
 	t_list	*node;
+	t_list	*s;
 
 	node = malloc(sizeof(t_list));
 	if (!node)
-		return (NULL);
-	node->data = data;
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
-}
-
-void	add_node(t_list **stack, t_list *new_node)
-{
-	t_list	*last;
-	t_list	*s;
-
-	if (!new_node)
 		return ;
-	s = *stack;
+	node->data = value;
+	node->prev = NULL;
 	if (!stack)
-		s = new_node;
+	{
+		node->next = NULL;
+		stack = &node;
+	}
 	else
 	{
-		last = s->prev;
-		new_node->next = s;
-		new_node->prev = last;
-		last->next = new_node;
-		s->prev = new_node;
+		s = *stack;
+		node->next = s;
+		s->prev = node;
+		stack = &node;
 	}
-	stack = &s;
 }
 
-void	input_args(int ac, char **av, t_list **stack_a)
+void	input_args(char **av, t_list **stack_a)
 {
 	int		i;
-	t_list  *a;
+	t_list	*a;
 
 	i = 1;
 	a = *stack_a;
 	if (presorted(av, i))
 		return ;
-	while (i < ac)
+	while (av[i])
 	{
-		if (!valid(av[i]))
-		{
-			ft_printf("error: invalid input");
-			return ;
-		}
-		add_node(stack_a, create_node(ft_atoi(av[i])));
+		add_node(stack_a, ft_atoi(av[i]));
 		i++;
 	}
 	stack_a = &a;
@@ -75,6 +60,7 @@ void	input_split(char **av, t_list **stack_a)
 	t_list  *a;
 
 	i = 0;
+	input = NULL;
 	input = ft_split(av[1], ' ');
 	a = *stack_a;
 	if (presorted(input, i))
@@ -84,13 +70,7 @@ void	input_split(char **av, t_list **stack_a)
 	}
 	while (input[i])
 	{
-		if (!valid(input[i]))
-		{
-			ft_free(input);
-			ft_printf("error: invalid input");
-			return ;
-		}
-		add_node(stack_a, create_node(ft_atoi(input[i])));
+		add_node(stack_a, ft_atoi(input[i]));
 		i++;
 	}
 	stack_a = &a;
@@ -98,17 +78,13 @@ void	input_split(char **av, t_list **stack_a)
 }
 
 void	parse_arguments(int ac, char **av, t_list **stack)
-{
-	t_list  *a;
-	
-	a = *stack;
+{	
 	if (ac < 2)
 		return ;
 	else if (ac == 2)
 		input_split(av, stack);
 	else if (ac > 2)
-		input_args(ac, av, stack);
-	stack = &a;
+		input_args(av, stack);
 }
 
 int	make_b_three(t_list **stack_a, t_list **stack_b)
@@ -133,35 +109,54 @@ int	make_b_three(t_list **stack_a, t_list **stack_b)
 	return (y);
 }
 
-int	sort(t_list **stack_a, t_list **stack_b, int counter)
+int	sort_more(t_list **stack_a, int elements)
 {
+	t_list	**stack_b;
 	t_list	*a;
-	int		elements;
+	int		c;
 
+	stack_b = NULL;
 	a = *stack_a;
-	elements = stack_size(stack_a);
-	if (elements == 3)
-		counter += sort_three(stack_a);
-	else if (elements == 4)
+	c = 0;
+	if (elements == 4)
 	{
 		while (a->data != find_min(stack_a))
-			counter += ra(stack_a);
-		counter += pb(stack_a, stack_b);
-		counter += sort_three(stack_a);
-		counter += pa(stack_a, stack_b);
+			c += ra(stack_a);
+		c += pb(stack_a, stack_b);
+		c += sort_three(stack_a);
+		c += pa(stack_a, stack_b);
 	}
 	else
 	{
 		while (!is_sorted(stack_a))
 		{
-			counter += ra(stack_a);
-			counter += make_b_three(stack_a, stack_b);
-			counter += sort_three(stack_b);
-			counter += pa(stack_a, stack_b);
-			counter += pa(stack_a, stack_b);
-			counter += pa(stack_a, stack_b);
+			c += ra(stack_a);
+			c += make_b_three(stack_a, stack_b);
+			c += sort_three(stack_b);
+			c += pa(stack_a, stack_b);
+			c += pa(stack_a, stack_b);
+			c += pa(stack_a, stack_b);
 		}
 	}
+	stack_a = &a;
+	return (c);
+}
+
+int	sort(t_list **stack_a, int counter)
+{
+	t_list	*a;
+	int		elements;
+
+	if (!stack_a)
+		return (0);
+	elements = 0;
+	a = *stack_a;
+	elements = stack_size(stack_a);
+	if (elements == 3)
+		counter += sort_three(stack_a);
+	else
+		counter += sort_more(stack_a, elements);
+	stack_a = &a;
 	return (counter);
 }
 

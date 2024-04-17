@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/14 23:33:14 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:21:43 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int main(int ac, char **av)
 {
     t_list **stack_a;
 	t_list  *a;
-    t_list **stack_b;
 	int		counter;
 	
 	if (ac <= 1 || (ac == 2 && !valid_arg(av)))
@@ -76,16 +75,13 @@ int main(int ac, char **av)
 	a = malloc(sizeof(t_list));
 	if (!a)
 		return (0);
-	stack_a = &a;
-	stack_b = NULL;
 	parse_arguments(ac, av, stack_a);
 	stack_a = &a;
 	if (!stack_a)
 		return (0);
-	counter += sort(stack_a, stack_b, counter);
+	counter += sort(stack_a, counter);
 	if (is_sorted(stack_a))
 		ft_printf("done with: %d steps\n", counter);
 	ft_free_list(stack_a);
-	ft_free_list(stack_b);
     return (0);
 }

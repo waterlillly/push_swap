@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:08 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/18 21:11:56 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:51:43 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,12 @@ int	ss(t_list **a, t_list **b)
 
 void	push(t_list **src, t_list **dst)
 {
-	int		temp;
 	t_list	*s;
-	t_list	*d;
 
-	temp = 0;
 	s = *src;
-	d = *dst;
 	if (!s)
 		return ;
-	temp = s->data;
-	add(&d, temp);
+	add(dst, s->data);
 	if (s->next)
 	{
 		s = s->next;
@@ -81,14 +76,13 @@ void	push(t_list **src, t_list **dst)
 	else
 		s = NULL;
 	*src = s;
-	*dst = d;
 }
 
 /*_____PUSH_B_TO_A_____*/
 
 int	pa(t_list **a, t_list **b)
 {
-	push(a, b);
+	push(b, a);
 	ft_printf("pa\n");
 	return (1);
 }
@@ -97,7 +91,7 @@ int	pa(t_list **a, t_list **b)
 
 int	pb(t_list **a, t_list **b)
 {
-	push(b, a);
+	push(a, b);
 	ft_printf("pb\n");
 	return (1);
 }

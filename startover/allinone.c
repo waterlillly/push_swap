@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/18 20:51:45 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:59:25 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ void	add(t_list **head, int value)
 		return ;
 	node->data = value;
 	node->prev = NULL;
-	node->next = *head;
 	if (*head)
+	{
+		node->next = *head;
 		(*head)->prev = node;
+	}
+	else
+		node->next = NULL;
 	*head = node;
 }
 

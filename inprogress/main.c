@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/17 20:21:43 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:33:24 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	ft_find(char *str, int c)
 	}
 	if (c == '\0')
 		return (1);
-	else if (occ == 0)
-		return (-1);
 	return (occ);
 }
 
@@ -39,12 +37,11 @@ int	valid_arg(char **av)
 
 	x = 0;
 	in = av[1];
-	if (ft_find(in, ' ') == -1)
+	if (ft_find(in, ' ') == 0)
 	{
 		if (ft_atoi(in) >= INT_MIN && ft_atoi(in) <= INT_MAX)
 			return (ft_printf("only one number\n"), 0);
-		else
-			return (ft_printf("not valid\n"), 0);
+		return (ft_printf("not valid\n"), 0);
 	}
 	if (in[0] == '-')
 		x++;

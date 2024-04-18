@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:08:51 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/17 20:23:50 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:27:55 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int	sort_more(t_list **stack_a, int elements)
 			c += pa(stack_a, stack_b);
 		}
 	}
-	stack_a = &a;
+	*stack_a = a;
 	return (c);
 }
 
@@ -156,7 +156,7 @@ int	sort(t_list **stack_a, int counter)
 		counter += sort_three(stack_a);
 	else
 		counter += sort_more(stack_a, elements);
-	stack_a = &a;
+	*stack_a = a;
 	return (counter);
 }
 

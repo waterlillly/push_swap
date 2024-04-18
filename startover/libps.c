@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:08 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/18 20:16:52 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:11:56 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,27 +109,21 @@ int	pb(t_list **a, t_list **b)
 
 void	rot(t_list **stack)
 {
-    t_list	*new_head;
-	t_list	*new_tail;
-	t_list	*s;
-	
-	new_head = NULL;
-	new_tail = NULL;
-	s = *stack;
-	if (!s || !s->next)
-		return ;
-	new_tail = s;
-	new_tail->next = NULL;
-	s = s->next;
-	new_head = s;
-	new_head->prev = NULL;
-	new_head->next = s->next;
-	while (s->next)
-		s = s->next;
-	new_tail->prev = s;
-	*stack = new_head;
-}
+	t_list	*temp;
+	t_list	*last;
 
+	if (*stack && (*stack)->next)
+	{
+		temp = *stack;
+		*stack = (*stack)->next;
+		last = *stack;
+		while (last->next)
+			last = last->next;
+		temp->next = NULL;
+		last->next = temp;
+		temp->prev = last;
+	}
+}
 /*_____ROTATE_OPERATIONS_____*/
 
 int	ra(t_list **a)
@@ -158,28 +152,22 @@ int	rr(t_list **a, t_list **b)
 
 void	rev_rot(t_list **stack)
 {
-    t_list	*new_head;
-	t_list	*new_tail;
-	t_list	*s;
+	t_list	*last;
+	t_list	*prev_to_last;
 
-	new_head = NULL;
-	new_tail = NULL;
-	s = *stack;
-	if (!s || !s->next)
-		return ;
-	while (s->next->next)
-		s = s->next;
-	new_tail = s;
-	new_tail->next = NULL;
-	new_tail->prev = s->prev;
-	new_head = s->next;
-	new_head->prev = NULL;
-	while (s)
-		s = s->prev;
-	new_head->next = s;
-	*stack = new_head;
+	if (*stack && (*stack)->next)
+	{
+		last = *stack;
+		while (last->next)
+			last = last->next;
+		prev_to_last = last->prev;
+		prev_to_last->next = NULL;
+		last->prev = NULL;
+		last->next = *stack;
+		(*stack)->prev = last;
+		*stack = last;
+	}
 }
-
 /*_____REV_ROT_OPERATIONS_____*/
 
 int	rra(t_list **a)

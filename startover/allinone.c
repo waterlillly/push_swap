@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/18 19:49:35 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:51:45 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,28 @@ int	arr_len(char **input)
 	return (x);
 }
 
+int	check_doubles(char **input, int x)
+{
+	int	y;
+	int	z;
+
+	y = 0;
+	z = x + 1;
+	while (input[x])
+	{
+		y = ft_atoi(input[x]);
+		while (input[z])
+		{
+			if (y == ft_atoi(input[z]))
+				return (0);
+			z++;
+		}
+		x++;
+		z = x + 1;
+	}
+	return (1);
+}
+
 void	fill_stack(int ac, char **av, t_list **head)
 {
 	char	**input;
@@ -61,11 +83,9 @@ void	fill_stack(int ac, char **av, t_list **head)
 
 	input = NULL;
 	x = 0;
-	y = 0;
 	if (ac > 2)
 	{
 		x = 1;
-		y = arr_len(av) - 1;
 		input = av;
 	}
 	else if (ac == 2)
@@ -73,8 +93,13 @@ void	fill_stack(int ac, char **av, t_list **head)
 		input = ft_split(av[1], ' ');
 		if (!input)
 			return ;
-		y = arr_len(input) - 1;
 	}
+	if (!check_doubles(input, x))
+	{
+		ft_printf("doubles in input\n");
+		return ;
+	}
+	y = arr_len(input) - 1;
 	while (input[y] && y >= x)
 	{
 		add(head, ft_atoi(input[y]));

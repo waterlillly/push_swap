@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/18 20:13:36 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:11:16 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,56 @@ void	ft_free_list(t_list **stack)
 	}
 	s = NULL;
 	free(s);
+}
+
+int	check_doubles(int ac, char **av)
+{
+	int	x;
+	int	y;
+	int	z;
+
+	x = 1;
+	y = 0;
+	z = 2;
+	while (**av && x < ac)
+	{
+		y = ft_atoi(av[x]);
+		while (**av && z < ac)
+		{
+			if (y == ft_atoi(av[z]))
+				return (0);
+			z++;
+		}
+		x++;
+		z = x + 1;
+	}
+	return (1);
+}
+
+int	check_int_doubles(t_list **a)
+{
+	int			x;
+	int			y;
+	int 	*nbr;
+
+	x = 0;
+	y = 0;
+	nbr = (int *)&a;
+	while (in[x] && ft_isdigit(in[x])
+	{
+		if (x > 0)
+		{
+			y = x - 1;
+			while (in[x] && y >= 0)
+			{
+				if (ft_strncmp(in[y], in[x], ft_strlen(in[x]) == 0)
+					return (error('d'));
+				else
+					y--;
+			}
+		}
+		x++;
+	}
+	return (0);
 }
 */

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/18 20:17:05 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:44:40 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_list
 int		is_sorted(t_list *stack);
 void	add(t_list **head, int value);
 int		arr_len(char **input);
+int		check_doubles(char **input, int x);
 void	fill_stack(int ac, char **av, t_list **head);
 int		ft_find(char *str, int c);
 int		valid_arg(char **av);

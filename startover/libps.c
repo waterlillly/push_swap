@@ -63,6 +63,35 @@ int	ss(t_list **a, t_list **b)
 void	push(t_list **src, t_list **dst)
 {
 	t_list	*s;
+	t_list	*d;
+
+	s = *src;
+	d = *dst;
+	if (!s)
+		return ;
+	if (!d || !d->next)
+	{
+		*dst = s;
+	}
+	else
+	{
+		s->next = d;
+		d->prev = s;
+		*dst = s;
+	}
+	if (s->next)
+	{
+		s = s->next;
+		s->prev = NULL;
+	}
+	else
+		s = NULL;
+	*src = s;
+}
+
+void	push(t_list **src, t_list **dst)
+{
+	t_list	*s;
 
 	s = *src;
 	if (!s)

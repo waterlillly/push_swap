@@ -133,15 +133,16 @@ int	valid_arg(char **av)
 {
 	int		x;
 	char	*in;
+	char    c;
 
 	x = 0;
 	in = av[1];
-	if (ft_find(in, ' ') == 0)
-	{
-		if (ft_atoi(in) >= INT_MIN && ft_atoi(in) <= INT_MAX)
-			return (ft_printf("only one number\n"), 0);
-		return (ft_printf("not valid\n"), 0);
-	}
+	c = in[ft_strlen(in)];
+	if (ft_find(in, ' ') == 0 && (ft_isdigit(c)
+					&& (ft_atoi(in) >= INT_MIN && ft_atoi(in) <= INT_MAX)))
+		return (0);
+	else if (c == ' ' || c == '-')
+		return (ft_printf("invalid\n"), 0);
 	if (in[0] == '-')
 		x++;
 	else if (in[0] == ' ')
@@ -152,8 +153,15 @@ int	valid_arg(char **av)
 			x++;
 		while (in[x] && ft_isdigit(in[x]))
 			x++;
-		if (in[x] == ' ' && (in[x + 1] == '-' || ft_isdigit(in[x + 1])))
+		if (in[x] == ' ' && (in[x + 1] == '-' && ft_isdigit(in[x + 1])))
 			x++;
+		else if (in[x] == ' ' && ft_isdigit(in[x + 1]))
+			x++;
+		else if (in[x] == ' ' && (in[x + 1] == '-' || in[x + 1] == ' ')
+					 && in[x + 2] == '\0')
+			return (ft_printf("error: invalid input\n"), 0);
+		else
+			return (ft_printf("error\n"), 0);
 	}
 	return (1);
 }

@@ -39,11 +39,6 @@ int	main(int ac, char **av)
 		return (0);
 	else
 		fill_stack(ac, av, &a);
-	b = malloc(sizeof(t_list));
-	if (!b)
-		return (0);
-	b->next = NULL;
-	b->prev = NULL;
 	x = pb(&a, &b);
 	ft_printf("%d steps\n", x);
 	ft_printf("a:\n");

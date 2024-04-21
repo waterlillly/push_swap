@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/18 20:44:40 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/21 16:49:26 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_list
 	t_list	*prev;
 } 				t_list;
 
-int		is_sorted(t_list *stack);
+int		is_sorted(t_list **stack);
 void	add(t_list **head, int value);
 int		arr_len(char **input);
 int		check_doubles(char **input, int x);
@@ -37,10 +37,10 @@ int		valid_arg(char **av);
 int		sort_three(t_list **stack);
 int		sort_three_b(t_list **stack);
 int		sort_three_a(t_list **stack);
-int		sort(t_list **stack_a);
-int		sort_more(t_list **stack_a, int elements);
+int		sort(t_list **stack_a, t_list **stack_b);
+int		sort_more(t_list **stack_a, t_list **stack_b, int elements);
 int		make_b_three(t_list **stack_a, t_list **stack_b);
-int		stack_size(t_list *stack);
+int		stack_size(t_list **stack);
 int		find_min(t_list *stack);
 int		find_max(t_list *stack);
 

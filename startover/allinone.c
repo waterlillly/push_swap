@@ -6,23 +6,24 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/18 21:59:25 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/21 16:50:09 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	is_sorted(t_list *stack)
+int	is_sorted(t_list **stack)
 {
 	t_list	*s;
 
-	s = stack;
+	s = *stack;
 	while (s && s->next)
 	{
 		if (s->data > s->next->data)
 			return (0);
 		s = s->next;
 	}
+	*stack = s;
 	return (1);
 }
 
@@ -190,14 +191,14 @@ int	make_b_three(t_list **stack_a, t_list **stack_b)
 	return (y);
 }
 
-int	sort_more(t_list **stack_a, int elements)
+int	sort_more(t_list **stack_a, t_list **stack_b, int elements)
 {
-	t_list	*b;
 	t_list	*a;
+	t_list	*b;
 	int		c;
 
-	b = NULL;
 	a = *stack_a;
+	b = *stack_b;
 	c = 0;
 	if (elements == 4)
 	{
@@ -209,7 +210,7 @@ int	sort_more(t_list **stack_a, int elements)
 	}
 	else
 	{
-		while (!is_sorted(a))
+		while (!is_sorted(&a))
 		{
 			c += ra(stack_a);
 			c += make_b_three(stack_a, &b);
@@ -220,10 +221,11 @@ int	sort_more(t_list **stack_a, int elements)
 		}
 	}
 	*stack_a = a;
+	*stack_b = b;
 	return (c);
 }
 
-int	sort(t_list **stack_a)
+int	sort(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*a;
 	int		counter;
@@ -234,11 +236,11 @@ int	sort(t_list **stack_a)
 	elements = 0;
 	if (!a)
 		return (0);
-	elements = stack_size(a);
+	elements = stack_size(stack_a);
 	if (elements == 3)
 		counter = sort_three(stack_a);
 	else
-		counter = sort_more(stack_a, elements);
+		counter = sort_more(stack_a, stack_b, elements);
 	*stack_a = a;
 	return (counter);
 }
@@ -309,12 +311,12 @@ int	sort_three(t_list **stack)
 	return (x);
 }
 
-int	stack_size(t_list *stack)
+int	stack_size(t_list **stack)
 {
 	int		x;
 	t_list  *s;
 
-	s = stack;
+	s = *stack;
 	if (!s)
 		return (-1);
 	x = 0;

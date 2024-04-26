@@ -1,74 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   pushswap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 20:11:59 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/27 01:30:33 by lbaumeis         ###   ########.fr       */
+/*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
+/*   Updated: 2024/04/21 16:49:26 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+ #define PUSH_SWAP_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <stdio.h>
 # include "libft.h"
+# include <limits.h>
 
-typedef struct s_list	t_list;
+typedef struct s_list t_list;
 
 typedef struct s_list
 {
-	int		data;
+	int 	data;
 	t_list	*next;
 	t_list	*prev;
-}			t_list;
+} 				t_list;
 
-/*push_swap.c*/
-int		ft_max(t_list *s);
-int		next_min(t_list *s, int repeat, int min);
-int		ft_min(t_list *s, int repeat);
-int		ft_mid(int ac, t_list *s);
-void	make_b_three(t_list *a, t_list *b);
-void	sort(t_list *a, int elements);
-void	sort_three_a(t_list *stack);
-void	sort_three_b(t_list *stack);
-void	sort_three(t_list *stack);
+int		is_sorted(t_list **stack);
+void	add(t_list **head, int value);
+int		arr_len(char **input);
+int		check_doubles(char **input, int x);
+void	fill_stack(int ac, char **av, t_list **head);
+int		ft_find(char *str, int c);
+int		valid_arg(char **av);
 
-/*check_ups.c*/
-void	ft_free(t_list *s);
-void	msg(int nbr);
-int		arr_len(char **arr);
-int		check_sort(t_list *stack);
-char	**get_input(int ac, char **av);
-char	**get_split_input(char **av);
-int		check_doubles(char **arr);
-int		presorted(char **arr);
-char	**check_input(int ac, char **av);
+/*from push_swap inprogress*/
+int		sort_three(t_list **stack);
+int		sort_three_b(t_list **stack);
+int		sort_three_a(t_list **stack);
+int		sort(t_list **stack_a, t_list **stack_b);
+int		sort_stack(t_list **stack_a, t_list **stack_b);
+int		sort_more(t_list **stack_a, t_list **stack_b, int elements);
+int		sort_five(t_list **stack_a, t_list **stack_b);
+int		make_b_three(t_list **stack_a, t_list **stack_b);
+int		stack_size(t_list *stack);
+int		find_min(t_list *stack);
+int		find_max(t_list *stack);
 
-/*creations.c*/
-t_list	*add_node(t_list *stack, int value);
-t_list	*stack(t_list *stack, char **input, int elements);
-
-/*operations.c*/
-void	swap(t_list *s);
-void	sa(t_list *a);
-void	sb(t_list *b);
-void	ss(t_list *a, t_list *b);
-void	push(t_list *dst, t_list *src);
-void	pa(t_list *a, t_list *b);
-void	pb(t_list *a, t_list *b);
-void	rot(t_list *s);
-void	rev_rot(t_list *s);
-void	ra(t_list *a);
-void	rb(t_list *b);
-void	rr(t_list *a, t_list *b);
-void	rra(t_list *a);
-void	rrb(t_list *b);
-void	rrr(t_list *a, t_list *b);
+/*PUSWSWAP LIBRARY*/
+void	swap(t_list **stack);
+int		sa(t_list **a);
+int		sb(t_list **b);
+int		ss(t_list **a, t_list **b);
+void	push(t_list **src, t_list **dst);
+int		pa(t_list **a, t_list **b);
+int		pb(t_list **a, t_list **b);
+void	rot(t_list **stack);
+int		ra(t_list **a);
+int		rb(t_list **b);
+int		rr(t_list **a, t_list **b);
+void	rev_rot(t_list **stack);
+int		rra(t_list **a);
+int		rrb(t_list **b);
+int		rrr(t_list **a, t_list **b);
 
 #endif

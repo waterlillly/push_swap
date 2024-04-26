@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 04:09:55 by lbaumeis          #+#    #+#             */
-/*   Updated: 2023/10/08 05:09:36 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/14 10:19:45 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	total = ft_strlen(s1) + ft_strlen(s2) + 1;
 	strnew = (char *)malloc(sizeof(char) * total);
 	if (!strnew)
-		return (0);
+		return (NULL);
 	while (s1[i] != '\0')
 	{
 		strnew[i] = s1[i];

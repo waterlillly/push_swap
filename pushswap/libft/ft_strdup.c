@@ -6,21 +6,21 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:40:01 by lbaumeis          #+#    #+#             */
-/*   Updated: 2023/10/08 10:56:42 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/14 10:16:46 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *d)
+char	*ft_strdup(const char *c)
 {
 	size_t	b;
 	char	*duplo;
 
-	b = ft_strlen(d) + 1;
+	b = ft_strlen(c) + 1;
 	duplo = (char *)malloc((sizeof(char) * b));
 	if (!duplo)
 		return (NULL);
-	ft_strlcpy(duplo, d, b);
+	ft_strlcpy(duplo, c, b);
 	return (duplo);
 }

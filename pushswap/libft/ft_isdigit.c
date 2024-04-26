@@ -6,15 +6,15 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:38:41 by lbaumeis          #+#    #+#             */
-/*   Updated: 2023/09/25 16:38:43 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2023/10/14 08:15:08 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int n)
+int	ft_isdigit(int c)
 {
-	if (n >= 48 && n <= 57)
+	if (c >= 48 && c <= 57)
 		return (1);
 	else
 		return (0);

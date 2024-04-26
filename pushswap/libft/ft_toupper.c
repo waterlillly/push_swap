@@ -6,15 +6,15 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:17:49 by lbaumeis          #+#    #+#             */
-/*   Updated: 2023/09/25 19:18:30 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2023/10/14 10:38:57 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int n)
+int	ft_toupper(int c)
 {
-	if (n <= 122 && n >= 97)
-		return (n - 32);
-	return (n);
+	if (c <= 122 && c >= 97)
+		return (c - 32);
+	return (c);
 }

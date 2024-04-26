@@ -5,41 +5,79 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 20:34:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/03/27 11:24:09 by lbaumeis         ###   ########.fr       */
+/*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
+/*   Updated: 2024/04/21 16:44:58 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	show(t_list *stack)
+{
+	t_list	*s;
+
+	s = stack;
+	while (s)
+	{
+		ft_printf("%d\n", s->data);
+		s = s->next;
+	}
+}
+
 int	main(int ac, char **av)
 {
-	char	**arr;
-	int		elements;
 	t_list	*a;
-	
+	t_list	*b;
+	int		x;
+
 	a = NULL;
-	arr = check_input(ac, av);
-	if (!arr)
+	b = NULL;
+	x = 0;
+	if (ac <= 1)
 		return (0);
-	elements = arr_len(arr);
-	if (elements < 2)
-		return (free(arr), 0);
-	a = stack(a, arr, elements);
-	free(arr);
-	if (!a)
-		return (ft_free(a), 0);
-	else if (elements == 2)
-	{
-		if (a && a->next && (a->data < a->next->data))
-			return (ft_printf("sorted!"), ft_free(a), 0);
-		else
-			sa(a);
-	}	
-	else if (elements >= 3)
-		sort(a, elements);
-	if (check_sort(a))	
-		return (ft_free(a), 0);
+	else if (ac == 2 && !(valid_arg(av)))
+		return (0);
 	else
-		return (ft_printf("sorry, not possible to sort"), 0);	
+		fill_stack(ac, av, &a);
+	while (!is_sorted(&a))
+		x += sort(&a, &b);
+	ft_printf("%d steps\n", x);
+	ft_printf("a:\n");
+	show(a);
+	ft_printf("b:\n");
+	show(b);
+	return (0);
 }
+
+/*
+void	ft_free(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	while (s[i] && i >= 0)
+		free(s[i--]);
+	s = NULL;
+	free(s);
+}
+
+void	ft_free_list(t_list **stack)
+{
+	t_list  *s;
+
+	if (!stack)
+		return ;
+	s = *stack;
+	if (s->next != 0)
+		s = s->next;
+	while (s != NULL && s->next != NULL)
+	{
+		free(s->prev);
+		s = s->next;
+	}
+	s = NULL;
+	free(s);
+}
+*/

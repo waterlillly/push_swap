@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:37:43 by lbaumeis          #+#    #+#             */
-/*   Updated: 2023/10/08 05:27:27 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/14 08:04:06 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,29 @@ static int	ft_white(const char *s)
 	return (i);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *nptr)
 {
 	int	i;
 	int	sign;
 	int	result;
 
-	i = ft_white(str);
+	i = ft_white(nptr);
 	sign = 1;
 	result = 0;
-	if (str[i] == '-')
+	if (nptr[i] == '-')
 	{
 		sign = -1;
 		i++;
 	}
-	else if (str[i] == '+')
+	else if (nptr[i] == '+')
 	{
 		sign = 1;
 		i++;
 	}
-	while (ft_isdigit(str[i]))
+	while (ft_isdigit(nptr[i]))
 	{
 		result *= 10;
-		result += str[i] - 48;
+		result += nptr[i] - 48;
 		i++;
 	}
 	return (result * sign);

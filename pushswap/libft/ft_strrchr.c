@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaumeis <lbaumeis@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:41:03 by lbaumeis          #+#    #+#             */
-/*   Updated: 2023/09/25 16:41:03 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2023/10/14 14:03:04 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		i;
+	size_t	i;
 	char	*str;
 	char	find;
 
-	i = (int)ft_strlen(s);
+	i = ft_strlen(s);
 	str = (char *)s;
 	find = (char)c;
-	while (i >= 0)
+	while (i > 0)
 	{
 		if (c == '\0')
 			return (&str[i]);
-		else if (str[i] == find)
+		if (str[i] == find)
 			return (&str[i]);
 		else
 			i--;
 	}
+	if (str[0] == find)
+		return (&str[i]);
 	return (NULL);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allinone.c                                         :+:      :+:    :+:   */
+/*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/21 16:50:09 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/04/28 14:25:02 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	fill_stack(int ac, char **av, t_list **head)
 	}
 	if (!check_doubles(input, x))
 	{
-		ft_printf("doubles in input\n");
+		ft_printf("error: doubles in input\n");
 		return ;
 	}
 	y = arr_len(input) - 1;
@@ -61,5 +61,41 @@ void	fill_stack(int ac, char **av, t_list **head)
 		add(head, ft_atoi(input[y]));
 		y--;
 	}
+	ft_free(input);
 }
 
+void	ft_free(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	while (s[i] && i >= 0)
+	{
+		free(s[i]);
+		i--;
+	}
+	s = NULL;
+	free(s);
+}
+
+void	ft_free_stack(t_list **stack)
+{
+	t_list	*s;
+	t_list	*tmp;
+
+	s = *stack;
+	tmp = NULL;
+	while (s)
+	{
+		tmp = s->next;
+		s = NULL;
+		free(s);
+		s = tmp;
+	}
+	s = NULL;
+	free(s);
+	free(tmp);
+	stack = NULL;
+}

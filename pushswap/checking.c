@@ -1,18 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checking.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/27 18:17:18 by lbaumeis          #+#    #+#             */
+/*   Updated: 2024/04/29 12:49:06 by lbaumeis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_list **stack)
+int	is_sorted(t_list *stack)
 {
 	t_list	*s;
 
-	s = *stack;
+	s = stack;
 	while (s && s->next)
 	{
 		if (s->data > s->next->data)
 			return (0);
 		s = s->next;
 	}
-	*stack = s;
 	return (1);
 }
 
@@ -115,7 +125,7 @@ int	valid_arg(char **av)
 			x++;
 		else if (in[x] == ' ' && (in[x + 1] == '-' || in[x + 1] == ' ')
 					 && in[x + 2] == '\0')
-			return (ft_printf("error: invalid input\n"), 0);
+			return (ft_printf("error: invalid\n"), 0);
 		else
 			return (ft_printf("error\n"), 0);
 	}
@@ -152,4 +162,91 @@ int	find_max(t_list *stack)
 		s = s->next;
 	}
 	return (max);
+}
+
+int	locate(t_list *stack, int data)
+{
+	int	x;
+	t_list	*s;
+
+	x = 0;
+	s = stack;
+	while (s && s->data != data)
+	{
+		x++;
+		s = s->next;
+	}
+	if (s->data == data)
+		return (x);
+	return (-1);
+}
+
+int	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b)
+{
+	int	loc_a;
+	int	loc_b;
+	t_list	*a;
+	t_list	*b;
+
+	loc_a = locate(*stack_a, data_a);
+	loc_b = locate(*stack_b, data_b);
+	if (loc_a == -1 || loc_b == -1)
+		return (-1);
+	a = *stack_a;
+	b = *stack_b;
+	while (a->data != data_a && b->data != data_b)
+	{
+		if ((loc_a <= stack_size(a) / 2)
+			&& (loc_b <= stack_size(b) / 2))
+			rr(&a, &b);
+		else if ((loc_a > stack_size(a) / 2)
+			&& (loc_b > stack_size(b) / 2))
+			rrr(&a, &b);
+		else
+		{
+			if (loc_a <= stack_size(a) / 2)
+				ra(&a);
+			else if (loc_a > stack_size(a) / 2)
+				rra(&a);
+			if (loc_b <= stack_size(b) / 2)
+				rb(&b);
+			else if (loc_b > stack_size(b) / 2)
+				rrb(&b);
+		}
+	}
+	*stack_a = a;
+	*stack_b = b;
+	return (1);
+}
+
+int	rot_until(t_list **stack, int data)
+{
+	int		loc;
+	t_list	*s;
+
+	loc = locate(*stack, data);
+	if (loc == -1)
+		return (-1);
+	s = *stack;
+	while (s->data != data)
+	{
+		if (loc <= stack_size(s) / 2)
+			ra(&s);
+		else
+			rra(&s);
+	}
+	*stack = s;
+	return (1);
+}
+
+void	show(t_list *stack)
+{
+	t_list	*s;
+
+	s = stack;
+	while (s)
+	{
+		ft_printf("%d\n", s->data);
+		s = s->next;
+	}
 }

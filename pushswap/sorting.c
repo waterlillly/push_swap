@@ -1,220 +1,219 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sorting.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/27 18:18:21 by lbaumeis          #+#    #+#             */
+/*   Updated: 2024/04/29 21:21:49 by lbaumeis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	make_b_three(t_list **stack_a, t_list **stack_b)
+int partition(t_list **stack, int low, int high)
 {
-	int		x;
+	int pivot;
+	int i;
+	int j;
+
+	pivot = (*stack)->data;
+	i = low - 1;
+	j = low;
+	while (j <= high - 1)
+	{
+		if ((*stack)->data < pivot)
+		{
+			i++;
+			sa(stack);
+		}
+		ra(stack);
+		j++;
+	}
+	sa(stack);
+	return (i + 1);
+}
+
+void part_sort(t_list **stack, int low, int high)
+{
+	int pi;
+	
+	pi = 0;
+	if (low < high) 
+	{
+		pi = partition(stack, low, high);
+		part_sort(stack, low, pi - 1);
+		part_sort(stack, pi + 1, high);
+	}
+}
+
+void last_sort(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*a;
+	t_list	*b;
+	int		elements;
+	
+	a = *stack_a;
+	b = *stack_b;
+	elements = stack_size(a);
+	if (elements <= 1)
+		return ;
+	part_sort(&a, 0, elements - 1);
+	*stack_a = a;
+	*stack_b = b;
+}
+
+void	sort_five(t_list **stack_a, t_list **stack_b)
+{
 	int		y;
 	t_list	*a;
 	t_list	*b;
 
-	x = 0;
 	y = 0;
 	a = *stack_a;
 	b = *stack_b;
-	while (b)
+	while (y < 2)
 	{
-		x++;
-		b = b->next;
+		rot_until(&a, find_min(a));
+		pb(&a, &b);
+		y++;
 	}
-	while (x < 3)
-	{
-		y += pb(&a, &b);
-		x++;
-	}
+	sort_three(&a);
+	pa(&a, &b);
+	pa(&a, &b);
 	*stack_a = a;
 	*stack_b = b;
-	return (y);
 }
 
-int	sort_five(t_list **stack_a, t_list **stack_b)
-{
-	int		x;
-
-	x = 0;
-	push(stack_a, stack_b);
-	push(stack_a, stack_b);
-	x += 2;
-	ft_printf("pb\npb\n");
-	x += sort_three(stack_a);
-	if ((*stack_b)->data < (*stack_b)->next->data)
-	{
-		swap(stack_b);
-		x++;
-		ft_printf("sb\n");
-	}
-	push(stack_b, stack_a);
-	push(stack_b, stack_a);
-	x += 2;
-	ft_printf("pa\npa\n");
-	return (x);
-}
-
-int	sort_more(t_list **stack_a, t_list **stack_b, int elements)
+void	sort_more(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*a;
 	t_list	*b;
-	int		c;
+	int		x;
 
 	a = *stack_a;
 	b = *stack_b;
-	c = 0;
-	if (elements == 4)
+	x = 0;
+	while (a)
 	{
-		while (a->data != find_min(a))
-			c += ra(&a);
-		c += pb(&a, &b);
-		c += sort_three(&a);
-		c += pa(&a, &b);
+		if (!b)
+			pb(&a, &b);
+		x = rot_double(&a, &b, find_max(a), find_max(b));
+		if (x == -1)
+			return ;
+		pb(&a, &b);
+		if (b->data < b->next->data)
+			sb(&b);
 	}
-	else
-	{
-		while (!is_sorted(&a))
-		{
-			c += ra(&a);
-			c += make_b_three(&a, &b);
-			c += sort_three(&b);
-			c += pa(&a, &b);
-			c += pa(&a, &b);
-			c += pa(&a, &b);
-		}
-	}
+	pushback(&a, &b);
 	*stack_a = a;
 	*stack_b = b;
-	return (c);
 }
 
-int	sort(t_list **stack_a, t_list **stack_b)
+void	pushback(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*a;
 	t_list	*b;
-	int		counter;
+
+	a = *stack_a;
+	b = *stack_b;
+	pa(&a, &b);
+	while (b != NULL)
+	{
+		while (a->data < b->data)
+		{
+			if (a->next->data < a->data)
+				sa(&a);
+			ra(&a);
+		}
+		pa(&a, &b);
+	}
+	*stack_a = a;
+	*stack_b = b;
+}
+
+void	sort(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*a;
+	t_list	*b;
 	int		elements;
 
 	a = *stack_a;
 	b = *stack_b;
-	counter = 0;
-	elements = 0;
-	if (!a)
-		return (0);
 	elements = stack_size(a);
 	if (elements == 3)
-		counter = sort_three(&a);
+		sort_three(&a);
+	else if (elements == 4)
+	{
+		rot_until(&a, find_min(a));
+		pb(&a, &b);
+		sort_three(&a);
+		pa(&a, &b);
+	}
+	else if (elements == 5)
+		sort_five(&a, &b);
 	else
-		counter = sort_more(&a, &b, elements);
+		sort_more(&a, &b);
+	if (!is_sorted(a))
+		last_sort(&a, &b);
 	*stack_a = a;
 	*stack_b = b;
-	//if b == 0:free b, else return error?
-	return (counter);
 }
 
-int	sort_stack(t_list **stack_a, t_list **stack_b)
-{
-	int		min;
-	int		max;
-	int		steps;
-
-	steps = 0;
-	min = find_min(*stack_a);
-	max = find_max(*stack_a);
-	while (!is_sorted(stack_a))
-	{
-		while (*stack_a && (*stack_a)->data != min && (*stack_a)->data != max)
-		{
-			steps++;
-			pb(stack_a, stack_b);
-			if (*stack_a && (*stack_a)->data == min)
-			{
-				steps++;
-				ra(stack_a);
-			}
-			else if (*stack_a && (*stack_a)->data == max)
-			{
-				steps++;
-				rra(stack_a);
-			}
-		}
-		while (*stack_b && (*stack_b)->data != min && (*stack_b)->data != max)
-		{
-			steps++;
-			pa(stack_b, stack_a);
-			if (*stack_b && (*stack_b)->data == min)
-			{
-				steps++;
-				rb(stack_b);
-			}
-			else if (*stack_b && (*stack_b)->data == max)
-			{
-				steps++;
-				rrb(stack_b);
-			}
-		}
-	}
-	return (steps);
-}
-
-int	sort_three_a(t_list **stack)
+void	sort_three_a(t_list **stack)
 {
 	t_list	*s;
-	int		x;
 
 	s = *stack;
-	x = 0;
 	if (s->next->data < s->next->next->data)
-		return (x);
+		return ;
 	else
 	{
 		if (s->data < s->next->next->data)
 		{
-			x = rra(&s);
-			x = sa(&s);
+			rra(&s);
+			sa(&s);
 		}
 		else
-			x = rra(&s);
+			rra(&s);
 	}
 	*stack = s;
-	return (x);
 }
 
-int	sort_three_b(t_list **stack)
+void	sort_three_b(t_list **stack)
 {
 	t_list	*s;
-	int		x;
 
 	s = *stack;
-	x = 0;
 	if (s->next->data < s->next->next->data)
 	{
 		if (s->data < s->next->next->data)
-			x = sa(&s);
+			sa(&s);
 		else
-			x = ra(&s);
+			ra(&s);
 	}
 	else
 	{
 		if (s->data > s->next->next->data)
 		{
-			x = sa(&s);
-			x = rra(&s);
+			sa(&s);
+			rra(&s);
 		}
 	}
 	*stack = s;
-	return (x);
 }
 
-int	sort_three(t_list **stack)
+void	sort_three(t_list **stack)
 {
 	t_list	*s;
-	int		x;
 
 	s = *stack;
-	x = 0;
 	if (!s || !s->next || !s->next->next)
-		return (0);
+		return ;
 	if (s->data < s->next->data)
-		x = sort_three_a(&s);
+		sort_three_a(&s);
 	else
-		x = sort_three_b(&s);
+		sort_three_b(&s);
 	*stack = s;
-	return (x);
 }

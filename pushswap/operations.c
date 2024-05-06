@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:08 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/06 22:29:05 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/06 22:56:38 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ int	sb(t_list **b)
 	return (1);
 }
 
-void	ss(t_list **a, t_list **b)
+int	ss(t_list **a, t_list **b)
 {
 	swap(a);
 	swap(b);
 	ft_printf("ss\n");
+	return (1);
 }
 
 /*	~~~~~~~~~~~~~~~~~~~~~~~~PUSH FROM-TO STACK~~~~~~~~~~~~~~~~~~~~~~~~~~~~	*/

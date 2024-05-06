@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:17:18 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/04/29 12:49:06 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/06 22:32:38 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,35 +99,27 @@ int	valid_arg(char **av)
 {
 	int		x;
 	char	*in;
-	char    c;
 
 	x = 0;
 	in = av[1];
-	c = in[ft_strlen(in)];
-	if (ft_find(in, ' ') == 0 && (ft_isdigit(c)
+	if (ft_find(in, ' ') == 0 && (ft_isdigit(in[ft_strlen(in)])
 					&& (ft_atoi(in) >= INT_MIN && ft_atoi(in) <= INT_MAX)))
-		return (0);
-	else if (c == ' ' || c == '-')
-		return (ft_printf("invalid\n"), 0);
-	if (in[0] == '-')
-		x++;
-	else if (in[0] == ' ')
-		return (0);
+		return (ft_printf("error: invalid\n"), 0);
 	while (in[x])
 	{
 		if (in[x] == '-' && ft_isdigit(in[x + 1]))
 			x++;
 		while (in[x] && ft_isdigit(in[x]))
 			x++;
-		if (in[x] == ' ' && (in[x + 1] == '-' && ft_isdigit(in[x + 1])))
+		if (in[x] == ' ' && x != 0)
+		{
 			x++;
-		else if (in[x] == ' ' && ft_isdigit(in[x + 1]))
-			x++;
-		else if (in[x] == ' ' && (in[x + 1] == '-' || in[x + 1] == ' ')
-					 && in[x + 2] == '\0')
+			if (ft_isdigit(in[x]) || (in[x] == '-' && ft_isdigit(in[x + 1])))
+				x++;
+		}
+		if (((in[x - 1] == ' ' || in[x + 1] == '\0' || x == 0) && in[x] == ' ')
+				|| (in[x] == '-' && !(ft_isdigit(in[x + 1]))))
 			return (ft_printf("error: invalid\n"), 0);
-		else
-			return (ft_printf("error\n"), 0);
 	}
 	return (1);
 }
@@ -181,6 +173,28 @@ int	locate(t_list *stack, int data)
 	return (-1);
 }
 
+int	rot_until(t_list **stack, int data)
+{
+	int		loc;
+	t_list	*s;
+	int		x;
+
+	loc = locate(*stack, data);
+	x = 0;
+	if (loc == -1)
+		return (-1);
+	s = *stack;
+	while (s->data != data)
+	{
+		if (loc <= stack_size(s) / 2)
+			x += ra(&s);
+		else
+			x += rra(&s);
+	}
+	*stack = s;
+	return (x);
+}
+
 int	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b)
 {
 	int	loc_a;
@@ -216,26 +230,6 @@ int	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b)
 	}
 	*stack_a = a;
 	*stack_b = b;
-	return (1);
-}
-
-int	rot_until(t_list **stack, int data)
-{
-	int		loc;
-	t_list	*s;
-
-	loc = locate(*stack, data);
-	if (loc == -1)
-		return (-1);
-	s = *stack;
-	while (s->data != data)
-	{
-		if (loc <= stack_size(s) / 2)
-			ra(&s);
-		else
-			rra(&s);
-	}
-	*stack = s;
 	return (1);
 }
 

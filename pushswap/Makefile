@@ -6,7 +6,7 @@
 #    By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 01:06:37 by lbaumeis          #+#    #+#              #
-#    Updated: 2024/05/06 22:23:50 by lbaumeis         ###   ########.fr        #
+#    Updated: 2024/05/16 22:26:39 by lbaumeis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIB_FLAGS = -L. -lft
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
 
-CFILES = stack.c checking.c sorting.c operations.c main.c
+CFILES = ps.c stack.c checking.c sorting.c operations.c main.c
 OFILES = $(CFILES:.c=.o)
 P_NAME = push_swap
 

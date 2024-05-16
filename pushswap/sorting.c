@@ -6,13 +6,13 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:18:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/06 22:34:56 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/16 22:35:24 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	sort(t_list **stack_a, t_list **stack_b)
+int	sort_five_max(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*a;
 	t_list	*b;
@@ -24,18 +24,16 @@ int	sort(t_list **stack_a, t_list **stack_b)
 	elements = stack_size(a);
 	x = 0;
 	if (elements == 3)
-		sort_three(&a);
+		x += sort_three(&a);
 	else if (elements == 4)
 	{
-		rot_until(&a, find_min(a));
-		pb(&a, &b);
-		sort_three(&a);
-		pa(&a, &b);
+		x += rot_until(&a, find_min(a));
+		x += pb(&a, &b);
+		x += sort_three(&a);
+		x += pa(&a, &b);
 	}
 	else if (elements == 5)
-		sort_five(&a, &b);
-	else
-		x += sort_to_b(&a, &b);
+		x += sort_five(&a, &b);
 	*stack_a = a;
 	*stack_b = b;
 	return (x);
@@ -131,7 +129,7 @@ int	sort_five(t_list **stack_a, t_list **stack_b)
 	*stack_b = b;
 	return (x);
 }
-
+/*
 int	sort_to_b(t_list **stack_a, t_list **stack_b)
 {
 	int		x;
@@ -189,3 +187,25 @@ int	sort_both(t_list **stack_a, t_list **stack_b)
 	//	x += sort_both(stack_a, stack_b);
 	return (x);
 }
+
+int	sort_more(t_list **stack_a, t_list **stack_b)
+{
+	int	x;
+	int	p;
+	int	i;
+	t_list	*a;
+	t_list	*b;
+
+	x = 0;
+	p = //cost analysis;
+	i = 0;
+	a = *stack_a;
+	b = *stack_b;
+	if (!is_sorted(a))
+	{
+		x += pb(&a, &b);
+		x += pb(&a, &b);
+	}
+	while (stack_size(a) > 3)
+}
+*/

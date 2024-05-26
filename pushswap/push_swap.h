@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/20 17:42:12 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:44:30 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_list
 void 	get_target_a(t_list **stack_a, t_list **stack_b);
 void 	get_target_b(t_list **stack_a, t_list **stack_b);
 void	update_index(t_list **stack);
-void	update_price_a(t_list **stack_a, t_list **stack_b);
+void	update_price_a(t_list **stack_a, t_list *b);
 void	update_price_b(t_list **stack_a, t_list **stack_b);
 void	update_cheapest(t_list **stack);
 int		locate_cheapest(t_list *s);
@@ -50,6 +50,12 @@ int		sort_three(t_list **stack);
 int		sort_three_a(t_list **stack);
 int		sort_three_b(t_list **stack);
 int		sort_five(t_list **stack_a, t_list **stack_b);
+int		find_max(t_list *s);
+int		find_min(t_list *s);
+int		find_mid(t_list *s);
+int		do_the_sort(t_list **stack_a, t_list **stack_b);
+int		swapping(t_list **stack_a, t_list **stack_b);
+int		continuing(t_list **stack_a, t_list **stack_b);
 
 /*CHECKING*/
 int		is_sorted(t_list *stack);
@@ -58,9 +64,9 @@ int		check_doubles(char **input, int x);
 int		stack_size(t_list *stack);
 int		ft_find(char *str, int c);
 int		valid_arg(char **av);
-int		find_min(t_list *stack);
-int		find_max(t_list *stack);
-int		locate(t_list *stack, int data);
+//int		find_min(t_list *stack);
+//int		find_max(t_list *stack);
+int		locate(t_list *s, int data);
 int		rot_until(t_list **stack, int data);
 int		rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b);
 void	show(t_list *stack);

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:18:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/16 22:35:24 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:32:26 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,3 +209,131 @@ int	sort_more(t_list **stack_a, t_list **stack_b)
 	while (stack_size(a) > 3)
 }
 */
+
+int	find_max(t_list *s)
+{
+	int	x;
+
+	x = INT_MIN;
+	while (s)
+	{
+		if (s->data > x)
+			x = s->data;
+		s = s->next;
+	}
+	return (x);
+}
+
+int	find_min(t_list *s)
+{
+	int	x;
+
+	x = INT_MAX;
+	while (s)
+	{
+		if (s->data < x)
+			x = s->data;
+		s = s->next;
+	}
+	return (x);
+}
+
+int	find_mid(t_list *s)
+{
+	int	half;
+	int	x;
+	int	mid;
+
+	half = stack_size(s) / 2;
+	x = 0;
+	mid = find_min(s);
+	while (s && x <= half && mid < find_max(s))
+	{
+		if (mid < s->data)
+		{
+			mid = s->data;
+			x++;
+		}
+		s = s->next;
+	}
+	return (mid);
+}
+
+int	do_the_sort(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*a;
+	t_list	*b;
+	int		half;
+	int		x;
+	int		c;
+
+	a = *stack_a;
+	b = *stack_b;
+	half = stack_size(a) / 2;
+	x = find_mid(a);
+	c = 0;
+	while (a && half >= 0)
+	{
+		if (a->data < x)
+		{
+			c += pb(&a, &b);
+			half--;
+		}
+		else
+			c += ra(&a);
+	}
+	while (!(is_sorted(a)) && !(is_sorted(b)) && a && b)
+	{
+		if ((a->data > a->next->data) || (b->data < b->next->data))
+			c += swapping(&a, &b);
+		c += continuing(&a, &b);
+	}
+	x = rot_double(&a, &b, find_min(a), find_max(b));
+	if (x < 0)
+		return (-1);
+	c += x;
+	while (a && b)
+		c += pa(&a, &b);
+	return (c);
+}
+
+int	swapping(t_list **stack_a, t_list **stack_b)
+{
+	int		x;
+	t_list	*a;
+	t_list	*b;
+
+	x = 0;
+	a = *stack_a;
+	b = *stack_b;
+	if ((a->data > a->next->data) && (b->data < b->next->data))
+		x += ss(&a, &b);
+	else if (a->data > a->next->data)
+		x += sa(&a);
+	else if (b->data < b->next->data)
+		x += sb(&b);
+	x += continuing(&a, &b);
+	*stack_a = a;
+	*stack_b = b;
+	return (x);
+}
+
+int	continuing(t_list **stack_a, t_list **stack_b)
+{
+	int		x;
+	t_list	*a;
+	t_list	*b;
+
+	x = 0;
+	a = *stack_a;
+	b = *stack_b;
+	if ((a->data < a->next->data) && (b->data > b->next->data))
+		x += rr(&a, &b);
+	else if (a->data < a->next->data)
+		x += ra(&a);
+	else if (b->data > b->next->data)
+		x += rb(&b);
+	*stack_a = a;
+	*stack_b = b;
+	return (x);
+}

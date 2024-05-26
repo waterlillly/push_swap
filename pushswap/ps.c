@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:27:07 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/20 17:42:07 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:47:17 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,35 +232,15 @@ int	rot_cheapest(t_list **stack_a, t_list **stack_b)
 	return (x);
 }
 
-void	update(t_list **a, t_list **b)
+void	update_price_a(t_list **stack_a, t_list *b)
 {
-	get_target_a(a, b);
-	update_index(a);
-	update_index(b);
-	update_price_a(a, b);
-	update_cheapest(a);
-}
-
-void	final(t_list **a, t_list **b)
-{
-	get_target_b(a, b);
-	update_index(a);
-	update_index(b);
-	update_price_b(a, b);
-	update_cheapest(b);
-}
-
-void	update_price_a(t_list **stack_a, t_list **stack_b)
-{
-	int		x;
+	t_list	*a_stack;
 	t_list	*a;
-	t_list	*b;
 	int		size_a;
 	int		size_b;
 
-	x = 0;
+	a_stack = *stack_a;
 	a = *stack_a;
-	b = *stack_b;
 	size_a = stack_size(a);
 	size_b = stack_size(b);
 	if (!a || !b)
@@ -270,24 +250,24 @@ void	update_price_a(t_list **stack_a, t_list **stack_b)
 		if ((a->index < size_a / 2) && (a->target->index < size_b / 2))
 		{
 			if (a->index < a->target->index)
-				x = a->index + (a->target->index - a->index);
+				a->price = a->index + (a->target->index - a->index);
 			else
-				x = a->target->index + (a->index - a->target->index);
+				a->price = a->target->index + (a->index - a->target->index);
 		}
 		else if ((a->index >= size_a / 2) && (a->target->index >= size_b / 2))
 		{
 			if (a->index < a->target->index)
-				x = a->index + (a->target->index - a->index);
+				a->price = a->index + (a->target->index - a->index);
 			else
-				x = a->target->index + (a->index - a->target->index);
+				a->price = a->target->index + (a->index - a->target->index);
 		}
 		else if ((a->index < size_a / 2) && (a->target->index >= size_b / 2))
-			x = a->index + (size_b - a->target->index);
+			a->price = a->index + (size_b - a->target->index);
 		else if ((a->index >= size_a / 2) && (a->target->index < size_b / 2))
-			x = (size_a - a->index) + a->target->index;
-		a->price = x;
+			a->price = (size_a - a->index) + a->target->index;
 		a = a->next;
 	}
+	*stack_a = a_stack;
 }
 
 void	update_price_b(t_list **stack_a, t_list **stack_b)
@@ -328,4 +308,22 @@ void	update_price_b(t_list **stack_a, t_list **stack_b)
 		b->price = x;
 		b = b->next;
 	}
+}
+
+void	update(t_list **a, t_list **b)
+{
+	get_target_a(a, b);
+	update_index(a);
+	update_index(b);
+	update_price_a(a, *b);
+	update_cheapest(a);
+}
+
+void	final(t_list **a, t_list **b)
+{
+	get_target_b(a, b);
+	update_index(a);
+	update_index(b);
+	update_price_b(a, b);
+	update_cheapest(b);
 }

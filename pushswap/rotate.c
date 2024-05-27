@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:27:07 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 12:44:13 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:24:47 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	rot_cheapest(t_list **stack_a, t_list **stack_b)
 	a = *stack_a;
 	b = *stack_b;
 	loc_a = locate_cheapest(a);
-	loc_b = locate_cheapest_target(a);
+	loc_b = locate_cheapest(b);
 	x = 0;
 	if (loc_a == -1 || loc_b == -1)
 		return (-1);

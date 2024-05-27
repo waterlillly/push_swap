@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 12:44:34 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:29:50 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ typedef struct s_list
 void	update_index(t_list **stack);
 void	update_index_target(t_list **stack);
 void	update_cheapest(t_list **stack);
-void	update_cheapest_target(t_list **stack);
+//void	update_cheapest_target(t_list **stack);
 int		locate_cheapest(t_list *s);
-int		locate_cheapest_target(t_list *s);
+//int		locate_cheapest_target(t_list *s);
 int		rot_both_top(t_list **a, t_list **b, int loc_a, int loc_b);
 int		rot_both_bot(t_list **a, t_list **b, int loc_a, int loc_b);
 int		rot_else_a(t_list **a, int loc_a);

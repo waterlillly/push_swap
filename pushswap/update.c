@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:38:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 12:39:46 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:35:35 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	update_index_target(t_list **stack)
 		s = s->next;
 	}
 }
-
+/*
 void	update_cheapest(t_list **stack)
 {
 	t_list	*s;
@@ -59,10 +59,47 @@ void	update_cheapest(t_list **stack)
 			s->next->cheapest = 1;
 			s->cheapest = 0;
 		}
+		if (s->price == 0)
+		{
+			s = s->next;
+			while (s)
+			{
+				s->cheapest = 0;
+				s = s->next;
+			}
+			return ;
+		}
 		s = s->next;
 	}
 }
+*/
+void	update_cheapest(t_list **stack)
+{
+	t_list	*s;
+	int min;
 
+	s = *stack;
+	min = s->price;
+	s->cheapest = 0;
+	while (s)
+	{
+		if (min > s->price)
+			min = s->price;
+		s->cheapest = 0;
+		s = s->next;
+	}
+	s = *stack;
+	while (s)
+	{
+		if (min == s->price)
+		{
+			s->cheapest = 1;
+			return ;
+		}
+	}
+}
+
+/*
 void	update_cheapest_target(t_list **stack)
 {
 	t_list	*s1;
@@ -77,7 +114,7 @@ void	update_cheapest_target(t_list **stack)
 		s2 = s1->next;
 		t1 = s1->target;
 		t2 = s2->target;
-		if (t2->price > t1->price)
+		if (t1 && t2 && t2->price > t1->price)
 		{
 			t1->cheapest = 1;
 			t2->cheapest = 0;
@@ -90,7 +127,7 @@ void	update_cheapest_target(t_list **stack)
 		s1 = s1->next;
 	}
 }
-
+*/
 int	locate_cheapest(t_list *s)
 {
 	int	x;
@@ -100,16 +137,14 @@ int	locate_cheapest(t_list *s)
 		return (-1);
 	while (s)
 	{
-		if (s->cheapest)
+		if (s && s->cheapest)
 			return (x);
 		x++;
 		s = s->next;
 	}
-	if (x > stack_size(s))
-		return (-1);
 	return (x);
 }
-
+/*
 int	locate_cheapest_target(t_list *s)
 {
 	int		x;
@@ -130,3 +165,4 @@ int	locate_cheapest_target(t_list *s)
 		return (-1);
 	return (x);
 }
+*/

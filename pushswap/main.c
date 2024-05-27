@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 12:14:03 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:20:16 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av)
 		x += sort_five_max(&a, &b);
 	else if (!is_sorted(a))
 	{
-		x += rot_until(&a, find_max(a));
+		x += rot_until(&a, find_min(a));
 		x += pb(&a, &b);
 		x += pb(&a, &b);
 	}
@@ -45,7 +45,12 @@ int	main(int ac, char **av)
 		x += pb(&a, &b);
 	}
 	if (!is_sorted(a))
+	{
+		printf("a\n");
 		x += sort_three(&a);
+		printf("a\n");
+	}
+	x += rot_until(&b, find_max(b));
 	while (b)
 	{
 		final(&a, &b);

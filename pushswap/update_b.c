@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:24:37 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 12:28:47 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:31:39 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,25 @@ void	update_price_b(t_list **stack_a, t_list **stack_b)
 		return ;
 	while (b && b->target && a)
 	{
-		if ((b->index < size_b / 2) && (b->target->index < size_a / 2))
+		if ((b->index <= size_b / 2) && (b->target->index <= size_a / 2))
 		{
 			if (b->index < b->target->index)
 				b->price = b->index + (b->target->index - b->index);
 			else
 				b->price = b->target->index + (b->index - b->target->index);
 		}
-		else if ((b->index >= size_b / 2) && (b->target->index >= size_a / 2))
+		else if ((b->index > size_b / 2) && (b->target->index > size_a / 2))
 		{
 			if (b->index < b->target->index)
 				b->price = b->index + (b->target->index - b->index);
 			else
 				b->price = b->target->index + (b->index - b->target->index);
 		}
-		else if ((b->index < size_b / 2) && (b->target->index >= size_a / 2))
+		else if ((b->index <= size_b / 2) && (b->target->index > size_a / 2))
 			b->price = b->index + (size_a - b->target->index);
-		else if ((b->index >= size_b / 2) && (b->target->index < size_a / 2))
+		else if ((b->index > size_b / 2) && (b->target->index <= size_a / 2))
 			b->price = (size_b - b->index) + b->target->index;
+		ft_printf("price: %d\ntarget: %d\n", b->price, b->target->data);
 		b = b->next;
 	}
 }

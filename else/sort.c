@@ -6,13 +6,13 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 23:16:48 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/08 17:18:27 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/06 22:34:47 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_more_x(t_list **stack_a, t_list **stack_b)
+void	sort_more(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*a;
 	t_list	*b;

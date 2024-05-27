@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/25 21:34:49 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:14:03 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,31 @@ int	main(int ac, char **av)
 	t_list	*a;
 	t_list	*b;
 	int		x;
-	//int		y;
+	int		y;
 
 	a = NULL;
 	b = NULL;
 	x = 0;
-	//y = 0;
+	y = 0;
 	if (ac <= 1 || (ac == 2 && !(valid_arg(av))))
 		return (0);
 	fill_stack(ac, av, &a);
 	if (!is_sorted(a) && stack_size(a) <= 5)
 		x += sort_five_max(&a, &b);
-	/*y = do_the_sort(&a, &b);
-	if (y < 0)
-		return (0);
-	x += y;
-	*/
 	else if (!is_sorted(a))
 	{
+		x += rot_until(&a, find_max(a));
 		x += pb(&a, &b);
 		x += pb(&a, &b);
 	}
 	while (!is_sorted(a) && stack_size(a) > 3)
 	{
 		update(&a, &b);
-		x += rot_cheapest(&a, &b);
+		y = rot_cheapest(&a, &b);
+		if (y == -1)
+			return (-1);
+		else
+			x += y;
 		x += pb(&a, &b);
 	}
 	if (!is_sorted(a))
@@ -49,7 +49,11 @@ int	main(int ac, char **av)
 	while (b)
 	{
 		final(&a, &b);
-		x += rot_cheapest(&a, &b);
+		y = rot_cheapest(&a, &b);
+		if (y == -1)
+			return (-1);
+		else
+			x += y;
 		x += pa(&a, &b);
 	}
 	if (!is_sorted(a))

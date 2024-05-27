@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:17:18 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/06 22:32:38 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:42:08 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,38 +122,6 @@ int	valid_arg(char **av)
 			return (ft_printf("error: invalid\n"), 0);
 	}
 	return (1);
-}
-
-int	find_min(t_list *stack)
-{
-	int	min;
-	t_list  *s;
-
-	min = INT_MAX;
-	s = stack;
-	while (s)
-	{
-		if (s->data < min)
-			min = s->data;
-		s = s->next;
-	}
-	return (min);
-}
-
-int	find_max(t_list *stack)
-{
-	int	max;
-	t_list  *s;
-
-	max = INT_MIN;
-	s = stack;
-	while (s)
-	{
-		if (s->data > max)
-			max = s->data;
-		s = s->next;
-	}
-	return (max);
 }
 
 int	locate(t_list *stack, int data)

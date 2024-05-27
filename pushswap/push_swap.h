@@ -6,14 +6,14 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/25 21:44:30 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:44:34 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
  #define PUSH_SWAP_H
 
-# include "libft.h"
+# include "libft/libft.h"
 # include <limits.h>
 
 typedef struct s_list t_list;
@@ -30,18 +30,30 @@ typedef struct s_list
 } 				t_list;
 
 /*PS*/
-void 	get_target_a(t_list **stack_a, t_list **stack_b);
-void 	get_target_b(t_list **stack_a, t_list **stack_b);
 void	update_index(t_list **stack);
-void	update_price_a(t_list **stack_a, t_list *b);
-void	update_price_b(t_list **stack_a, t_list **stack_b);
+void	update_index_target(t_list **stack);
 void	update_cheapest(t_list **stack);
+void	update_cheapest_target(t_list **stack);
 int		locate_cheapest(t_list *s);
+int		locate_cheapest_target(t_list *s);
 int		rot_both_top(t_list **a, t_list **b, int loc_a, int loc_b);
 int		rot_both_bot(t_list **a, t_list **b, int loc_a, int loc_b);
+int		rot_else_a(t_list **a, int loc_a);
+int		rot_else_b(t_list **b, int loc_b);
 int		rot_else(t_list **a, t_list **b, int loc_a, int loc_b);
 int		rot_cheapest(t_list **stack_a, t_list **stack_b);
+
+/*UPDATE*/
+
+
+/*UPDATE_A*/
+void 	get_target_a(t_list **stack_a, t_list **stack_b);
+void	update_price_a(t_list *a, t_list *b);
 void	update(t_list **a, t_list **b);
+
+/*UPDATE_B*/
+void 	get_target_b(t_list **stack_a, t_list **stack_b);
+void	update_price_b(t_list **stack_a, t_list **stack_b);
 void	final(t_list **a, t_list **b);
 
 /*SORTING*/
@@ -64,8 +76,6 @@ int		check_doubles(char **input, int x);
 int		stack_size(t_list *stack);
 int		ft_find(char *str, int c);
 int		valid_arg(char **av);
-//int		find_min(t_list *stack);
-//int		find_max(t_list *stack);
 int		locate(t_list *s, int data);
 int		rot_until(t_list **stack, int data);
 int		rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b);

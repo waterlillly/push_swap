@@ -6,18 +6,18 @@
 #    By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 01:06:37 by lbaumeis          #+#    #+#              #
-#    Updated: 2024/05/25 20:39:35 by lbaumeis         ###   ########.fr        #
+#    Updated: 2024/05/27 12:44:49 by lbaumeis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g
 LIB_FLAGS = -L. -lft
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
 
-CFILES = ps.c stack.c checking.c sorting.c operations.c main.c
+CFILES = rotate.c update.c update_a.c update_b.c find.c stack.c checking.c sorting.c operations.c main.c
 OFILES = $(CFILES:.c=.o)
 P_NAME = push_swap
 

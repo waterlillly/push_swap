@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/16 22:50:04 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:09:17 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	add(t_list **head, int value)
 {
 	t_list	*node;
 
+	node = NULL;
 	node = (t_list *)malloc(sizeof(t_list));
 	if (!node)
 		return ;

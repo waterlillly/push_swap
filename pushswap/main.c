@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 15:20:16 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:18:21 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,40 +26,12 @@ int	main(int ac, char **av)
 	if (ac <= 1 || (ac == 2 && !(valid_arg(av))))
 		return (0);
 	fill_stack(ac, av, &a);
-	if (!is_sorted(a) && stack_size(a) <= 5)
-		x += sort_five_max(&a, &b);
-	else if (!is_sorted(a))
-	{
-		x += rot_until(&a, find_min(a));
-		x += pb(&a, &b);
-		x += pb(&a, &b);
-	}
-	while (!is_sorted(a) && stack_size(a) > 3)
-	{
-		update(&a, &b);
-		y = rot_cheapest(&a, &b);
-		if (y == -1)
-			return (-1);
-		else
-			x += y;
-		x += pb(&a, &b);
-	}
 	if (!is_sorted(a))
 	{
-		printf("a\n");
-		x += sort_three(&a);
-		printf("a\n");
-	}
-	x += rot_until(&b, find_max(b));
-	while (b)
-	{
-		final(&a, &b);
-		y = rot_cheapest(&a, &b);
+		y = how_to_sort(&a, &b);
 		if (y == -1)
-			return (-1);
-		else
-			x += y;
-		x += pa(&a, &b);
+			return (0);
+		x += y;
 	}
 	if (!is_sorted(a))
 		ft_printf("\nERROR\n");

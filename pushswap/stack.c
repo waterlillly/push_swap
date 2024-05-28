@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 12:09:17 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:10:35 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ void	add(t_list **head, int value)
 	node = NULL;
 	node = (t_list *)malloc(sizeof(t_list));
 	if (!node)
-		return ;
+		return (ft_free_stack(head));
 	node->data = value;
+	node->index = -1;
+	node->price = -1;
+	node->cheapest = -1;
+	node->target = NULL;
 	node->prev = NULL;
 	if (*head)
 	{
@@ -91,12 +95,12 @@ void	ft_free_stack(t_list **stack)
 	while (s)
 	{
 		tmp = s->next;
-		s = NULL;
 		free(s);
+		s = NULL;
 		s = tmp;
 	}
-	s = NULL;
 	free(s);
 	free(tmp);
-	stack = NULL;
+	s = NULL;
+	tmp = NULL;
 }

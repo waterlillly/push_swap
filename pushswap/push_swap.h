@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 13:29:50 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:14:25 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ typedef struct s_list
 } 				t_list;
 
 /*PS*/
-void	update_index(t_list **stack);
-void	update_index_target(t_list **stack);
-void	update_cheapest(t_list **stack);
-//void	update_cheapest_target(t_list **stack);
-int		locate_cheapest(t_list *s);
-//int		locate_cheapest_target(t_list *s);
 int		rot_both_top(t_list **a, t_list **b, int loc_a, int loc_b);
 int		rot_both_bot(t_list **a, t_list **b, int loc_a, int loc_b);
 int		rot_else_a(t_list **a, int loc_a);
@@ -44,7 +38,10 @@ int		rot_else(t_list **a, t_list **b, int loc_a, int loc_b);
 int		rot_cheapest(t_list **stack_a, t_list **stack_b);
 
 /*UPDATE*/
-
+void	update_index(t_list **stack);
+void	update_index_target(t_list **stack);
+void	update_cheapest(t_list **stack);
+int		locate_cheapest(t_list *s);
 
 /*UPDATE_A*/
 void 	get_target_a(t_list **stack_a, t_list **stack_b);
@@ -53,10 +50,13 @@ void	update(t_list **a, t_list **b);
 
 /*UPDATE_B*/
 void 	get_target_b(t_list **stack_a, t_list **stack_b);
-void	update_price_b(t_list **stack_a, t_list **stack_b);
+void	update_price_b(t_list *a, t_list *b_);
 void	final(t_list **a, t_list **b);
 
 /*SORTING*/
+int		how_to_sort(t_list **a, t_list **b);
+int		a_to_b(t_list **a, t_list **b);
+int		b_to_a(t_list **a, t_list **b);
 int		sort_five_max(t_list **stack_a, t_list **stack_b);
 int		sort_three(t_list **stack);
 int		sort_three_a(t_list **stack);

@@ -6,11 +6,80 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:18:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 12:41:17 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:34:19 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	how_to_sort(t_list **a, t_list **b)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	if (!is_sorted(*a) && stack_size(*a) <= 5)
+		x += sort_five_max(a, b);
+	else if (!is_sorted(*a))
+	{
+		x += rot_until(a, find_min(*a));
+		x += pb(a, b);
+		x += pb(a, b);
+	}
+	y = a_to_b(a, b);
+	if (y == -1)
+		return (-1);
+	x += y;
+	if (!is_sorted(*a))
+		x += sort_three(a);
+	y = b_to_a(a, b);
+	if (y == -1)
+		return (-1);
+	x += y;
+	x += rot_until(a, find_min(*a));
+	return (x);
+}
+
+int	a_to_b(t_list **a, t_list **b)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (!is_sorted(*a) && stack_size(*a) > 3)
+	{
+		update(a, b);
+		y = rot_cheapest(a, b);
+		if (y == -1)
+			return (-1);
+		else
+			x += y;
+		x += pb(a, b);
+	}
+	return (x);
+}
+
+int	b_to_a(t_list **a, t_list **b)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (*b)
+	{
+		final(a, b);
+		y = rot_cheapest(a, b);
+		if (y == -1)
+			return (-1);
+		else
+			x += y;
+		x += pa(a, b);
+	}
+	return (x);
+}
 
 int	sort_five_max(t_list **stack_a, t_list **stack_b)
 {

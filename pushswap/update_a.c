@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:24:41 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 15:31:46 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:54:52 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,39 @@
 
 void get_target_a(t_list **stack_a, t_list **stack_b)
 {
-	int		x;
-	t_list	*a;
-	t_list	*b;
-	
+	t_list *a;
+	t_list *b;
+	int 	diff;
+	int 	min_diff;
+
 	a = *stack_a;
 	b = *stack_b;
 	while (a)
 	{
 		b = *stack_b;
-		x = b->data;
-		a->target = b;
-		while (b)
+		if (a->data < find_min(b))
 		{
-			if (x < b->data && a->data > b->data)
+			while (b->data != find_max(b))
+				a = a->next;
+			a->target = a;
+		}
+		else
+		{
+			a->target = b;
+			min_diff = INT_MAX;
+			while (b)
 			{
-				x = b->data;
-				a->target = b;
+				if (b->data > a->data)
+				{
+					diff = b->data - a->data;
+					if (diff < min_diff)
+					{
+						min_diff = diff;
+						a->target = b;
+					}
+				}
+				b = b->next;
 			}
-			b = b->next;
 		}
 		a = a->next;
 	}
@@ -54,16 +68,16 @@ void	update_price_a(t_list *a, t_list *b)
 		if ((a->index <= size_a / 2) && (t->index <= size_b / 2))
 		{
 			if (a->index < t->index)
-				a->price = a->index + (t->index - a->index);
+				a->price = t->index;
 			else
-				a->price = t->index + (a->index - t->index);
+				a->price = a->index;
 		}
 		else if ((a->index > size_a / 2) && (t->index > size_b / 2))
 		{
 			if (a->index < t->index)
-				a->price = a->index + (t->index - a->index);
+				a->price = t->index;
 			else
-				a->price = t->index + (a->index - t->index);
+				a->price = a->index;
 		}
 		else if ((a->index <= size_a / 2) && (t->index > size_b / 2))
 			a->price = a->index + (size_b - t->index);
@@ -77,9 +91,7 @@ void	update(t_list **a, t_list **b)
 {
 	get_target_a(a, b);
 	update_index(a);
-	update_index_target(a);
 	update_index(b);
 	update_price_a(*a, *b);
 	update_cheapest(a);
-	//update_cheapest_target(a);
 }

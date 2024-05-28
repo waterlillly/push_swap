@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:27:07 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 15:24:47 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:47:08 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,24 @@ int	rot_both_top(t_list **a, t_list **b, int loc_a, int loc_b)
 	int	x;
 
 	x = 0;
-	while (loc_a > 0 && loc_b > 0)
+	while (loc_a > 0 || loc_b > 0)
 	{
-		x += rr(a, b);
-		loc_a--;
-		loc_b--;
-	}
-	while (loc_a > 0)
-	{
-		x += ra(a);
-		loc_a--;
-	}
-	while (loc_b > 0)
-	{
-		x += rb(b);
-		loc_b--;
+		if (loc_a > 0 && loc_b > 0)
+		{
+			x += rr(a, b);
+			loc_a--;
+			loc_b--;
+		}
+		else if (loc_a > 0)
+		{
+			x += ra(a);
+			loc_a--;
+		}
+		else if (loc_b > 0)
+		{
+			x += rb(b);
+			loc_b--;
+		}
 	}
 	return (x);
 }
@@ -41,21 +44,24 @@ int	rot_both_bot(t_list **a, t_list **b, int loc_a, int loc_b)
 	int	x;
 
 	x = 0;
-	while (loc_a < stack_size(*a) && loc_b < stack_size(*b))
+	while (loc_a <= stack_size(*a) || loc_b <= stack_size(*b))
 	{
-		x += rrr(a, b);
-		loc_a++;
-		loc_b++;
-	}
-	while (loc_a < stack_size(*a))
-	{
-		x += rra(a);
-		loc_a++;
-	}
-	while (loc_b < stack_size(*b))
-	{
-		x += rrb(b);
-		loc_b++;
+		if (loc_a <= stack_size(*a) && loc_b <= stack_size(*b))
+		{
+			x += rrr(a, b);
+			loc_a++;
+			loc_b++;
+		}
+		else if (loc_a < stack_size(*a))
+		{
+			x += rra(a);
+			loc_a++;
+		}
+		else if (loc_b < stack_size(*b))
+		{
+			x += rrb(b);
+			loc_b++;
+		}
 	}
 	return (x);
 }
@@ -73,9 +79,9 @@ int	rot_else_a(t_list **a, int loc_a)
 			loc_a--;
 		}
 	}
-	else if (*a && loc_a > stack_size(*a) / 2)
+	else if (*a && loc_a >= stack_size(*a) / 2)
 	{
-		while (loc_a <= stack_size(*a))
+		while (loc_a < stack_size(*a))
 		{
 			x += rra(a);
 			loc_a++;
@@ -97,9 +103,9 @@ int	rot_else_b(t_list **b, int loc_b)
 			loc_b--;
 		}
 	}
-	else if (*b && loc_b > stack_size(*b) / 2)
+	else if (*b && loc_b >= stack_size(*b) / 2)
 	{
-		while (loc_b <= stack_size(*b))
+		while (loc_b < stack_size(*b))
 		{
 			x += rrb(b);
 			loc_b++;

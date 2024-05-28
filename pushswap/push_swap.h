@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/28 15:14:25 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:09:35 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ typedef struct s_list
 } 				t_list;
 
 /*PS*/
-int		rot_both_top(t_list **a, t_list **b, int loc_a, int loc_b);
-int		rot_both_bot(t_list **a, t_list **b, int loc_a, int loc_b);
-int		rot_else_a(t_list **a, int loc_a);
-int		rot_else_b(t_list **b, int loc_b);
-int		rot_else(t_list **a, t_list **b, int loc_a, int loc_b);
-int		rot_cheapest(t_list **stack_a, t_list **stack_b);
+void	rot_both_top(t_list **a, t_list **b, int loc_a, int loc_b);
+void	rot_both_bot(t_list **a, t_list **b, int loc_a, int loc_b);
+void	rot_else_a(t_list **a, int loc_a);
+void	rot_else_b(t_list **b, int loc_b);
+void	rot_else(t_list **a, t_list **b, int loc_a, int loc_b);
+void	rot_cheapest(t_list **stack_a, t_list **stack_b);
 
 /*UPDATE*/
 void	update_index(t_list **stack);
@@ -54,20 +54,17 @@ void	update_price_b(t_list *a, t_list *b_);
 void	final(t_list **a, t_list **b);
 
 /*SORTING*/
-int		how_to_sort(t_list **a, t_list **b);
-int		a_to_b(t_list **a, t_list **b);
-int		b_to_a(t_list **a, t_list **b);
-int		sort_five_max(t_list **stack_a, t_list **stack_b);
-int		sort_three(t_list **stack);
-int		sort_three_a(t_list **stack);
-int		sort_three_b(t_list **stack);
-int		sort_five(t_list **stack_a, t_list **stack_b);
+void	how_to_sort(t_list **a, t_list **b);
+void	a_to_b(t_list **a, t_list **b);
+void	b_to_a(t_list **a, t_list **b);
+void	sort_five_max(t_list **stack_a, t_list **stack_b);
+void	sort_three(t_list **stack);
+void	sort_three_a(t_list **stack);
+void	sort_three_b(t_list **stack);
+void	sort_five(t_list **stack_a, t_list **stack_b);
 int		find_max(t_list *s);
 int		find_min(t_list *s);
 int		find_mid(t_list *s);
-int		do_the_sort(t_list **stack_a, t_list **stack_b);
-int		swapping(t_list **stack_a, t_list **stack_b);
-int		continuing(t_list **stack_a, t_list **stack_b);
 
 /*CHECKING*/
 int		is_sorted(t_list *stack);
@@ -77,8 +74,8 @@ int		stack_size(t_list *stack);
 int		ft_find(char *str, int c);
 int		valid_arg(char **av);
 int		locate(t_list *s, int data);
-int		rot_until(t_list **stack, int data);
-int		rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b);
+void	rot_until(t_list **stack, int data);
+void	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b);
 void	show(t_list *stack);
 
 /*STACK*/
@@ -89,19 +86,19 @@ void	ft_free_stack(t_list **stack);
 
 /*PUSHSWAP OPERATIONS*/
 void	swap(t_list **stack);
-int		sa(t_list **a);
-int		sb(t_list **b);
-int		ss(t_list **a, t_list **b);
+void	sa(t_list **a);
+void	sb(t_list **b);
+void	ss(t_list **a, t_list **b);
 void	push(t_list **src, t_list **dst);
-int		pa(t_list **a, t_list **b);
-int		pb(t_list **a, t_list **b);
+void	pa(t_list **a, t_list **b);
+void	pb(t_list **a, t_list **b);
 void	rot(t_list **stack);
-int		ra(t_list **a);
-int		rb(t_list **b);
-int		rr(t_list **a, t_list **b);
+void	ra(t_list **a);
+void	rb(t_list **b);
+void	rr(t_list **a, t_list **b);
 void	rev_rot(t_list **stack);
-int		rra(t_list **a);
-int		rrb(t_list **b);
-int		rrr(t_list **a, t_list **b);
+void	rra(t_list **a);
+void	rrb(t_list **b);
+void	rrr(t_list **a, t_list **b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:17:18 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/28 15:04:04 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:16:15 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,29 +141,26 @@ int	locate(t_list *stack, int data)
 	return (-1);
 }
 
-int	rot_until(t_list **stack, int data)
+void	rot_until(t_list **stack, int data)
 {
 	int		loc;
 	t_list	*s;
-	int		x;
 
 	loc = locate(*stack, data);
-	x = 0;
 	if (loc == -1)
-		return (-1);
+		return ;
 	s = *stack;
 	while (s->data != data)
 	{
 		if (loc <= stack_size(s) / 2)
-			x += ra(&s);
+			ra(&s);
 		else
-			x += rra(&s);
+			rra(&s);
 	}
 	*stack = s;
-	return (x);
 }
 
-int	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b)
+void	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b)
 {
 	int	loc_a;
 	int	loc_b;
@@ -173,7 +170,7 @@ int	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b)
 	loc_a = locate(*stack_a, data_a);
 	loc_b = locate(*stack_b, data_b);
 	if (loc_a == -1 || loc_b == -1)
-		return (-1);
+		return ;
 	a = *stack_a;
 	b = *stack_b;
 	while (a->data != data_a && b->data != data_b)
@@ -198,7 +195,6 @@ int	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b)
 	}
 	*stack_a = a;
 	*stack_b = b;
-	return (1);
 }
 
 void	show(t_list *stack)

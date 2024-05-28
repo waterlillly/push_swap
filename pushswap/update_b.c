@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:24:37 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/28 14:56:08 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:58:29 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,6 @@ void	update_price_b(t_list *a, t_list *b)
 			b->price = b->index + (size_a - t->index);
 		else if ((b->index > size_b / 2) && (t->index <= size_a / 2))
 			b->price = (size_b - b->index) + t->index;
-		ft_printf("\n----------\nSTACK A:\n");
-		show(a);
-		ft_printf("STACK B:\n");
-		show(b);
-		ft_printf("\n%d ---> target: %d\nprice: %d\n----------\n", b->data, b->target->data, b->price);
 		b = b->next;
 	}
 }

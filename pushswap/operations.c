@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:08 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/16 22:50:13 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:01:49 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,23 @@ void	swap(t_list **stack)
 
 /*_____SWAP_OPERATIONS_____*/
 
-int	sa(t_list **a)
+void	sa(t_list **a)
 {
 	swap(a);
 	ft_printf("sa\n");
-	return (1);
 }
 
-int	sb(t_list **b)
+void	sb(t_list **b)
 {
 	swap(b);
 	ft_printf("sb\n");
-	return (1);
 }
 
-int	ss(t_list **a, t_list **b)
+void	ss(t_list **a, t_list **b)
 {
 	swap(a);
 	swap(b);
 	ft_printf("ss\n");
-	return (1);
 }
 
 /*	~~~~~~~~~~~~~~~~~~~~~~~~PUSH FROM-TO STACK~~~~~~~~~~~~~~~~~~~~~~~~~~~~	*/
@@ -83,20 +80,18 @@ void	push(t_list **src, t_list **dst)
 
 /*_____PUSH_B_TO_A_____*/
 
-int	pa(t_list **a, t_list **b)
+void	pa(t_list **a, t_list **b)
 {
 	push(b, a);
 	ft_printf("pa\n");
-	return (1);
 }
 
 /*_____PUSH_A_TO_B_____*/
 
-int	pb(t_list **a, t_list **b)
+void	pb(t_list **a, t_list **b)
 {
 	push(a, b);
 	ft_printf("pb\n");
-	return (1);
 }
 
 /*	~~~~~~~~~~~~~~~~~~~~~~~~~~~~ROTATE STACK~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	*/
@@ -123,26 +118,23 @@ void	rot(t_list **stack)
 }
 /*_____ROTATE_OPERATIONS_____*/
 
-int	ra(t_list **a)
+void	ra(t_list **a)
 {
 	rot(a);
 	ft_printf("ra\n");
-	return (1);
 }
 
-int	rb(t_list **b)
+void	rb(t_list **b)
 {
 	rot(b);
 	ft_printf("rb\n");
-	return (1);
 }
 
-int	rr(t_list **a, t_list **b)
+void	rr(t_list **a, t_list **b)
 {
 	rot(a);
 	rot(b);
 	ft_printf("rr\n");
-	return (1);
 }
 
 /*_____REVERSE_ROTATE_STACK->TAIL_BECOMES_HEAD_____*/
@@ -167,24 +159,21 @@ void	rev_rot(t_list **stack)
 }
 /*_____REV_ROT_OPERATIONS_____*/
 
-int	rra(t_list **a)
+void	rra(t_list **a)
 {
 	rev_rot(a);
 	ft_printf("rra\n");
-	return (1);
 }
 
-int	rrb(t_list **b)
+void	rrb(t_list **b)
 {
 	rev_rot(b);
 	ft_printf("rrb\n");
-	return (1);
 }
 
-int	rrr(t_list **a, t_list **b)
+void	rrr(t_list **a, t_list **b)
 {
 	rev_rot(a);
 	rev_rot(b);
 	ft_printf("rrr\n");
-	return (1);
 }

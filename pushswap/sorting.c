@@ -18,7 +18,7 @@ void	sort(t_list **a, t_list **b)
 		sort_five_max(a, b);
 	else if (!is_sorted(*a))
 	{
-		rot_until(a, find_min(*a));
+		//rot_until(a, find_min(*a));
 		pb(a, b);
 		pb(a, b);
 	}

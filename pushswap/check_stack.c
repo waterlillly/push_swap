@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:17:18 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 12:48:54 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 17:42:37 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,31 +81,22 @@ int	ft_find(char *str, int c)
 	return (occ);
 }
 
-int	valid_arg(char **av)
+int	ft_check_arg(int x, char **input)
 {
-	int		x;
-	char	*in;
+	char *tmp;
 
-	x = 0;
-	in = av[1];
-	if (ft_find(in, ' ') == 0 && (ft_isdigit(in[ft_strlen(in)])
-					&& (ft_atoi(in) >= INT_MIN && ft_atoi(in) <= INT_MAX)))
-		return (0);
-	while (in[x])
+	while (input[x] != NULL)
 	{
-		if (in[x] == '-' && ft_isdigit(in[x + 1]))
-			x++;
-		while (in[x] && ft_isdigit(in[x]))
-			x++;
-		if (in[x] == ' ' && x != 0)
+		tmp = ft_itoa(ft_atoi(input[x]));
+		if (!tmp)
+			return (false);
+		if (ft_strncmp(tmp, input[x], ft_strlen(input[x])) == 0)
 		{
+			free(tmp);
 			x++;
-			if (ft_isdigit(in[x]) || (in[x] == '-' && ft_isdigit(in[x + 1])))
-				x++;
 		}
-		if (((in[x - 1] == ' ' || in[x + 1] == '\0' || x == 0) && in[x] == ' ')
-				|| (in[x] == '-' && !(ft_isdigit(in[x + 1]))))
-			return (0);
+		else
+			return (free(tmp), false);
 	}
-	return (1);
+	return (true);
 }

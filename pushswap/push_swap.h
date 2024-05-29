@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 12:16:45 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 17:42:07 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include <limits.h>
+#include <stdbool.h>
 
 typedef struct s_list t_list;
 
@@ -96,7 +97,7 @@ int		arr_len(char **input);
 int		check_doubles(char **input, int x);
 int		stack_size(t_list *stack);
 int		ft_find(char *str, int c);
-int		valid_arg(char **av);
+int		ft_check_arg(int x, char **input);
 
 /*PUSHSWAP OPERATIONS*/
 /*SWAP*/

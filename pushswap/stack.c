@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 12:51:56 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 17:41:57 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	add(t_list **head, int value)
 	if (!node)
 	{
 		ft_free_stack(head);
-		return ;
+		error();
 	}
 	node->data = value;
 	node->index = 0;
@@ -56,10 +56,10 @@ void	fill_stack(int ac, char **av, t_list **head)
 	{
 		input = ft_split(av[1], ' ');
 		if (!input)
-			return ;
+			error();
 	}
-	if (!check_doubles(input, x))
-		return ;
+	if (!check_doubles(input, x) || ft_check_arg(x, input) == false)
+		error();
 	y = arr_len(input) - 1;
 	while (input[y] && y >= x)
 	{

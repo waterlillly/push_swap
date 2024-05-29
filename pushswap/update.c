@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:38:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/28 14:57:45 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:24:48 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,6 @@ void	update_index(t_list **stack)
 	while (s)
 	{
 		s->index = i;
-		i++;
-		s = s->next;
-	}
-}
-
-void	update_index_target(t_list **stack)
-{
-	t_list	*s;
-	t_list	*t;
-	int		i;
-
-	s = *stack;
-	i = 0;
-	while (s)
-	{
-		t = s->target;
-		t->index = i;
 		i++;
 		s = s->next;
 	}

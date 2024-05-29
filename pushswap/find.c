@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:22:44 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/27 12:29:31 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:04:02 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,19 @@ int	find_mid(t_list *s)
 		s = s->next;
 	}
 	return (mid);
+}
+
+int	locate(t_list *s, int data)
+{
+	int	x;
+
+	x = 0;
+	while (s && s->data != data)
+	{
+		x++;
+		s = s->next;
+	}
+	if (s->data == data)
+		return (x);
+	return (-1);
 }

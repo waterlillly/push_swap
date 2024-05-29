@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:24:37 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/28 17:58:29 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:15:59 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	get_target_b(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*a;
 	t_list	*b;
-	int		diff;
-	int		min_diff;
 
 	a = *stack_a;
 	b = *stack_b;
@@ -31,24 +29,34 @@ void	get_target_b(t_list **stack_a, t_list **stack_b)
 			b->target = a;
 		}
 		else
+			get_target_b_2(&a, &b);
+		b = b->next;
+	}
+}
+
+void	get_target_b_2(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*a;
+	t_list	*b;
+	int		diff;
+	int		min_diff;
+
+	a = *stack_a;
+	b = *stack_b;
+	b->target = a;
+	min_diff = INT_MIN;
+	while (a)
+	{
+		if (b->data < a->data)
 		{
-			b->target = a;
-			min_diff = INT_MAX;
-			while (a)
+			diff = a->data - b->data;
+			if (diff < min_diff)
 			{
-				if (b->data < a->data)
-				{
-					diff = a->data - b->data;
-					if (diff < min_diff)
-					{
-						min_diff = diff;
-						b->target = a;
-					}
-				}
-				a = a->next;
+				min_diff = diff;
+				b->target = a;
 			}
 		}
-		b = b->next;
+		a = a->next;
 	}
 }
 
@@ -56,12 +64,18 @@ void	update_price_b(t_list *a, t_list *b)
 {
 	int		size_a;
 	int		size_b;
-	t_list	*t;
 
 	size_a = stack_size(a);
 	size_b = stack_size(b);
 	if (!a || !b)
 		return ;
+	update_price_b_2(a, b, size_a, size_b);
+}
+
+void	update_price_b_2(t_list *a, t_list *b, int size_a, int size_b)
+{
+	t_list	*t;
+	
 	while (b && a)
 	{
 		t = b->target;

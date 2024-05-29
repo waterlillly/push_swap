@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/28 14:10:35 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:23:25 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ void	add(t_list **head, int value)
 	node = NULL;
 	node = (t_list *)malloc(sizeof(t_list));
 	if (!node)
-		return (ft_free_stack(head));
+	{
+		ft_free_stack(head);
+		error();
+	}
 	node->data = value;
-	node->index = -1;
-	node->price = -1;
-	node->cheapest = -1;
+	node->index = 0;
+	node->price = 0;
+	node->cheapest = 0;
 	node->target = NULL;
 	node->prev = NULL;
 	if (*head)
@@ -53,13 +56,10 @@ void	fill_stack(int ac, char **av, t_list **head)
 	{
 		input = ft_split(av[1], ' ');
 		if (!input)
-			return ;
+			error();
 	}
 	if (!check_doubles(input, x))
-	{
-		ft_printf("error: doubles in input\n");
-		return ;
-	}
+		error();
 	y = arr_len(input) - 1;
 	while (input[y] && y >= x)
 	{

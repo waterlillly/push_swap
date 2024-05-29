@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checking.c                                         :+:      :+:    :+:   */
+/*   check_stack.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:17:18 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/28 18:16:15 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:52:14 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	is_sorted(t_list *stack)
-{
-	t_list	*s;
-
-	s = stack;
-	while (s && s->next)
-	{
-		if (s->data > s->next->data)
-			return (0);
-		s = s->next;
-	}
-	return (1);
-}
 
 int	arr_len(char **input)
 {
@@ -104,7 +90,7 @@ int	valid_arg(char **av)
 	in = av[1];
 	if (ft_find(in, ' ') == 0 && (ft_isdigit(in[ft_strlen(in)])
 					&& (ft_atoi(in) >= INT_MIN && ft_atoi(in) <= INT_MAX)))
-		return (ft_printf("error: invalid\n"), 0);
+		return (error(), 0);
 	while (in[x])
 	{
 		if (in[x] == '-' && ft_isdigit(in[x + 1]))
@@ -119,92 +105,7 @@ int	valid_arg(char **av)
 		}
 		if (((in[x - 1] == ' ' || in[x + 1] == '\0' || x == 0) && in[x] == ' ')
 				|| (in[x] == '-' && !(ft_isdigit(in[x + 1]))))
-			return (ft_printf("error: invalid\n"), 0);
+			return (error(), 0);
 	}
 	return (1);
-}
-
-int	locate(t_list *stack, int data)
-{
-	int	x;
-	t_list	*s;
-
-	x = 0;
-	s = stack;
-	while (s && s->data != data)
-	{
-		x++;
-		s = s->next;
-	}
-	if (s->data == data)
-		return (x);
-	return (-1);
-}
-
-void	rot_until(t_list **stack, int data)
-{
-	int		loc;
-	t_list	*s;
-
-	loc = locate(*stack, data);
-	if (loc == -1)
-		return ;
-	s = *stack;
-	while (s->data != data)
-	{
-		if (loc <= stack_size(s) / 2)
-			ra(&s);
-		else
-			rra(&s);
-	}
-	*stack = s;
-}
-
-void	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b)
-{
-	int	loc_a;
-	int	loc_b;
-	t_list	*a;
-	t_list	*b;
-
-	loc_a = locate(*stack_a, data_a);
-	loc_b = locate(*stack_b, data_b);
-	if (loc_a == -1 || loc_b == -1)
-		return ;
-	a = *stack_a;
-	b = *stack_b;
-	while (a->data != data_a && b->data != data_b)
-	{
-		if ((loc_a <= stack_size(a) / 2)
-			&& (loc_b <= stack_size(b) / 2))
-			rr(&a, &b);
-		else if ((loc_a > stack_size(a) / 2)
-			&& (loc_b > stack_size(b) / 2))
-			rrr(&a, &b);
-		else
-		{
-			if (loc_a <= stack_size(a) / 2)
-				ra(&a);
-			else if (loc_a > stack_size(a) / 2)
-				rra(&a);
-			if (loc_b <= stack_size(b) / 2)
-				rb(&b);
-			else if (loc_b > stack_size(b) / 2)
-				rrb(&b);
-		}
-	}
-	*stack_a = a;
-	*stack_b = b;
-}
-
-void	show(t_list *stack)
-{
-	t_list	*s;
-
-	s = stack;
-	while (s)
-	{
-		ft_printf("%d\n", s->data);
-		s = s->next;
-	}
 }

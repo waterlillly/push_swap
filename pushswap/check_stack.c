@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:17:18 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 11:52:14 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:48:54 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	valid_arg(char **av)
 	in = av[1];
 	if (ft_find(in, ' ') == 0 && (ft_isdigit(in[ft_strlen(in)])
 					&& (ft_atoi(in) >= INT_MIN && ft_atoi(in) <= INT_MAX)))
-		return (error(), 0);
+		return (0);
 	while (in[x])
 	{
 		if (in[x] == '-' && ft_isdigit(in[x + 1]))
@@ -105,7 +105,7 @@ int	valid_arg(char **av)
 		}
 		if (((in[x - 1] == ' ' || in[x + 1] == '\0' || x == 0) && in[x] == ' ')
 				|| (in[x] == '-' && !(ft_isdigit(in[x + 1]))))
-			return (error(), 0);
+			return (0);
 	}
 	return (1);
 }

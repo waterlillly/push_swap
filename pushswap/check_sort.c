@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:04:30 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 11:42:18 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:46:28 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error(void)
 {
 	ft_putstr_fd("Error\n", 2);
-	exit(1);
+	exit(EXIT_FAILURE);
 }
 
 int	is_sorted(t_list *stack)

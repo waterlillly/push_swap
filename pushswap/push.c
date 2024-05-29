@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:08 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 12:18:50 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:49:27 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	push(t_list **src, t_list **dst)
 
 	s = *src;
 	if (!s)
-		error();
+		return ;
 	value = s->data;
 	add(dst, value);
 	if (s->next)

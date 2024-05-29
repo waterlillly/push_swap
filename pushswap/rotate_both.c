@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:08:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 12:21:01 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:49:59 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b)
 	loc_a = locate(*stack_a, data_a);
 	loc_b = locate(*stack_b, data_b);
 	if (loc_a == -1 || loc_b == -1)
-		error();
+		return ;
 	a = *stack_a;
 	b = *stack_b;
 	while (a->data != data_a && b->data != data_b)

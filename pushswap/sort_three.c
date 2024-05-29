@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:16:13 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 12:21:42 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:50:48 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sort_three(t_list **stack)
 
 	s = *stack;
 	if (!s || !s->next || !s->next->next)
-		error();
+		return ;
 	if (s->data < s->next->data)
 		sort_three_a(&s);
 	else

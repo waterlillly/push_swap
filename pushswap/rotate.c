@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:27:07 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 12:20:30 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:50:21 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	rot_cheapest(t_list **stack_a, t_list **stack_b)
 	loc_a = locate_cheapest(a);
 	loc_b = locate_cheapest(b);
 	if (loc_a == -1 || loc_b == -1)
-		error();
+		return ;
 	else if (a && b && (loc_a <= stack_size(a) / 2) && (loc_b <= stack_size(b) / 2))
 		rot_both_top(&a, &b, loc_a, loc_b);
 	else if (a && b && (loc_a > stack_size(a) / 2) && (loc_b > stack_size(b) / 2))
@@ -89,7 +89,7 @@ void	rot_until(t_list **stack, int data)
 
 	loc = locate(*stack, data);
 	if (loc == -1)
-		error();
+		return ;
 	s = *stack;
 	while (s->data != data)
 	{

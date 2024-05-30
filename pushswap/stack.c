@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 09:40:58 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 09:52:55 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ void	ft_free_stack(t_list **stack)
 		s = NULL;
 		s = tmp;
 	}
-	free(s);
-	free(tmp);
 	s = NULL;
 	tmp = NULL;
 }

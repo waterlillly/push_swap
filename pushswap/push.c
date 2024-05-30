@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 20:09:08 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 14:36:21 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:02:56 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 void	push(t_list **src, t_list **dst)
 {
 	t_list	*s;
+	t_list	*tmp;
 	int		value;
 
 	s = *src;
@@ -27,11 +28,16 @@ void	push(t_list **src, t_list **dst)
 	add(dst, value);
 	if (s->next)
 	{
+		tmp = s;
 		s = s->next;
+		free(tmp);
 		s->prev = NULL;
 	}
 	else
+	{
+		free(s);
 		s = NULL;
+	}
 	*src = s;
 }
 

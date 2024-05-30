@@ -12,17 +12,14 @@
 
 #include "push_swap.h"
 
-void	add(t_list **head, int value)
+bool	add(t_list **head, int value)
 {
 	t_list	*node;
 
 	node = NULL;
 	node = (t_list *)malloc(sizeof(t_list));
 	if (!node)
-	{
-		ft_free_stack(head);
-		error();
-	}
+		return (1);
 	node->data = value;
 	node->index = 0;
 	node->price = 0;
@@ -38,18 +35,21 @@ void	add(t_list **head, int value)
 	else
 		node->next = NULL;
 	*head = node;
+	return (0);
 }
 
-void	fill_stack_2(char **input, int x, int y, t_list **head)
+bool	fill_stack_2(char **input, int x, int y, t_list **head)
 {
-	while (input[y] && y >= x)
+	while (y >= x && input[y])
 	{
-		add(head, ft_atoi(input[y]));
+		if (add(head, ft_atoi(input[y])))
+			return (1);
 		y--;
 	}
+	return (0);
 }
 
-void	fill_stack(int ac, char **av, t_list **head)
+bool	fill_stack(int ac, char **av, t_list **head)
 {
 	char	**input;
 	int		x;
@@ -66,13 +66,16 @@ void	fill_stack(int ac, char **av, t_list **head)
 	{
 		input = ft_split(av[1], ' ');
 		if (!input)
-			error();
+			error(head, NULL);
 	}
 	if (!check_doubles(input, x) || ft_check_arg(x, input) == false)
-		error();
+		err_check(ac, input, head);
 	y = arr_len(input) - 1;
-	fill_stack_2(input, x, y, head);
-	ft_free(input);
+	if (fill_stack_2(input, x, y, head))
+		err_check(ac, input, head);
+	if (ac == 2)
+		ft_free(input);
+	return (0);
 }
 
 void	ft_free(char **s)
@@ -82,13 +85,13 @@ void	ft_free(char **s)
 	i = 0;
 	while (s[i])
 		i++;
-	while (s[i] && i >= 0)
+	while (i >= 0)
 	{
 		free(s[i]);
 		i--;
 	}
-	s = NULL;
 	free(s);
+	s = NULL;
 }
 
 void	ft_free_stack(t_list **stack)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 16:29:23 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:25:24 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ typedef struct s_list
 }				t_list;
 
 /*STACK*/
-void	add(t_list **head, int value);
-void	fill_stack_2(char **input, int x, int y, t_list **head);
-void	fill_stack(int ac, char **av, t_list **head);
+bool	add(t_list **head, int value);
+bool	fill_stack_2(char **input, int x, int y, t_list **head);
+bool	fill_stack(int ac, char **av, t_list **head);
 void	ft_free(char **s);
 void	ft_free_stack(t_list **stack);
 
@@ -65,7 +65,6 @@ void	final(t_list **a, t_list **b);
 
 /*SORTING*/
 void	sort(t_list **a, t_list **b);
-void	a_to_b(t_list **a, t_list **b);
 void	b_to_a(t_list **a, t_list **b);
 
 /*SORT_FIVE*/
@@ -84,7 +83,8 @@ int		find_mid(t_list *s);
 int		locate(t_list *s, int data);
 
 /*CHECK_SORT*/
-void	error(void);
+void	err_check(int ac, char **input, t_list **head);
+void	error(t_list **a, t_list **b);
 int		is_sorted(t_list *stack);
 
 /*CHECK_STACK*/

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 10:08:57 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:24:31 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	add(t_list **head, int value)
 	node->index = 0;
 	node->price = 0;
 	node->cheapest = 0;
+	node->seq = 0;
 	node->target = NULL;
 	node->prev = NULL;
 	if (*head)

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 17:43:12 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:33:18 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int ac, char **av)
 	b = NULL;
 	if (ac <= 1)
 		return (0);
+	longest_sorted_seq(a);
 	fill_stack(ac, av, &a);
 	if (!is_sorted(a))
 		sort(&a, &b);

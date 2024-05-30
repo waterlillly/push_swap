@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 10:09:12 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:48:05 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_list
 	int		index;
 	int		price;
 	int		cheapest;
+	int		seq;
 	t_list	*target;
 	t_list	*next;
 	t_list	*prev;
@@ -41,7 +42,7 @@ void	ft_free_stack(t_list **stack);
 void	rot_else_a(t_list **a, int loc_a);
 void	rot_else_b(t_list **b, int loc_b);
 void	rot_else(t_list **a, t_list **b, int loc_a, int loc_b);
-void	rot_cheapest(t_list **stack_a, t_list **stack_b);
+int		rot_cheapest(t_list **stack_a, t_list **stack_b);
 void	rot_until(t_list **stack, int data);
 
 /*ROTATE_BOTH*/
@@ -99,6 +100,13 @@ int		check_doubles(char **input, int x);
 int		stack_size(t_list *stack);
 int		ft_find(char *str, int c);
 int		ft_check_arg(int x, char **input);
+
+/*SEQUENCE*/
+void	mark_seq(t_list *start, t_list *end, int mark);
+void	update_max_seq(int cur_l, int *max_l, t_list *start, t_list *p, t_list **s, t_list **e);
+int		check_seq(t_list **stack_a, int cur_l);
+void	reset_seq(t_list **s_a, int *cur_l, int *max_l, t_list **s, t_list **e);
+void	longest_sorted_seq(t_list *a);
 
 /*PUSHSWAP OPERATIONS*/
 /*SWAP*/

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 11:48:05 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:57:28 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,10 @@ int		ft_find(char *str, int c);
 int		ft_check_arg(int x, char **input);
 
 /*SEQUENCE*/
-void	mark_seq(t_list *start, t_list *end, int mark);
-void	update_max_seq(int cur_l, int *max_l, t_list *start, t_list *p, t_list **s, t_list **e);
-int		check_seq(t_list **stack_a, int cur_l);
-void	reset_seq(t_list **s_a, int *cur_l, int *max_l, t_list **s, t_list **e);
-void	longest_sorted_seq(t_list *a);
+int		how_many(t_list *a);
+void	mark_seq(t_list *a);
+void	reset_seq(t_list *a);
+t_list	*best_start(t_list *a);
 
 /*PUSHSWAP OPERATIONS*/
 /*SWAP*/

@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:27:07 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 11:51:48 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 13:52:40 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	rot_cheapest(t_list **stack_a, t_list **stack_b)
 	loc_a = locate_cheapest(a);
 	loc_b = locate_cheapest(b);
 	if (a->seq == 1 || a->seq == 2)
-		return (-1);
+		return (1);
 	if (loc_a == -1 || loc_b == -1)
 		return (-1);
 	else if (a && b && (loc_a <= stack_size(a) / 2)

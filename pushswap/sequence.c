@@ -6,80 +6,78 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:11:20 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 11:31:34 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:01:36 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	mark_seq(t_list *start, t_list *end, int mark)
+int	how_many(t_list *a)
 {
-	t_list	*p;
+	int	c;
 
-	p = start;
-	while (p)
-	{
-		p->seq = mark;
-		if (p == end)
-		{
-			p->seq = 2;
-			break ;
-		}
-		p = p->next;
-	}
-}
-
-void	update_max_seq(int cur_l, int *max_l, t_list *start, t_list *p, t_list **s, t_list **e)
-{
-	if (cur_l > *max_l)
-	{
-		if (*s)
-			mark_seq(*s, *e, 0);
-		*s = start;
-		*e = p;
-		*max_l = cur_l;
-	}
-}
-
-int	check_seq(t_list **stack_a, int cur_l)
-{
-	t_list	*p;
-
-	p = *stack_a;
-	if ((*stack_a)->next && (*stack_a)->next->data > p->data)
-		cur_l++;
-	return (cur_l);
-}
-
-void	reset_seq(t_list **s_a, int *cur_l, int *max_l, t_list **s, t_list **e)
-{
-	t_list	*p;
-	t_list	*start;
-
-	p = *s_a;
-	start = *s_a;
-	update_max_seq(*cur_l, max_l, start, p, s, e);
-	*cur_l = 1;
-	*s_a = (*s_a)->next;
-}
-
-void	longest_sorted_seq(t_list *a)
-{
-	int		max_l;
-	int		cur_l;
-	t_list	*s;
-	t_list	*e;
-
-	max_l = 0;
-	cur_l = 1;
-	s = NULL;
-	e = NULL;
+	c = 0;
 	while (a)
 	{
-		cur_l = check_seq(&a, cur_l);
-		if (cur_l == 1)
-			reset_seq(&a, &cur_l, &max_l, &s, &e);
+		if (a->seq == 1)
+			c++;
+		a = a->next;
 	}
-	if (s)
-		mark_seq(s, e, 1);
+	return (c);
+}
+
+void	mark_seq(t_list *a)
+{
+	t_list	*cur;
+
+	cur = a;
+	a->seq = 1;
+	while (a->next)
+	{
+		if (a->next->data > cur->data)
+		{
+			cur = a->next;
+			a->next->seq = 1;
+		}
+		else
+			a->next->seq = 0;
+		a = a->next;
+	}
+}
+
+void	reset_seq(t_list *a)
+{
+	while (a)
+	{
+		a->seq = 0;
+		a = a->next;
+	}
+}
+
+t_list	*best_start(t_list *a)
+{
+	int		max_len;
+	int		cur_len;
+	int		x;
+	t_list	*best;
+
+	max_len = 0;
+	cur_len = 0;
+	x = 0;
+	best = a;
+	while (a && x <= stack_size(a) / 2)
+	{
+		mark_seq(a);
+		cur_len = how_many(a);
+		if (cur_len > max_len)
+		{
+			max_len = cur_len;
+			best = a;
+		}
+		reset_seq(a);
+		a = a->next;
+		x++;
+	}
+	mark_seq(best);
+	return (best);
 }

@@ -17,9 +17,9 @@
 
 void	swap(t_list **stack)
 {
-	t_list  *one;
+	t_list	*one;
 	t_list	*two;
-	
+
 	one = *stack;
 	two = (*stack)->next;
 	if (!one || !two)
@@ -27,7 +27,7 @@ void	swap(t_list **stack)
 	if (two->next == NULL)
 		one->next = NULL;
 	else
-	    one->next = two->next;
+		one->next = two->next;
 	two->next = one;
 	one->prev = two;
 	two->prev = NULL;

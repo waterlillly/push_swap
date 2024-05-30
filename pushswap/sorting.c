@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:18:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 11:50:35 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 09:41:43 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	sort(t_list **a, t_list **b)
 		sort_five_max(a, b);
 	else if (!is_sorted(*a))
 	{
-		//rot_until(a, find_min(*a));
 		pb(a, b);
 		pb(a, b);
 	}

@@ -19,7 +19,6 @@ int	main(int ac, char **av)
 
 	a = NULL;
 	b = NULL;
-
 	if (ac <= 1)
 		return (0);
 	fill_stack(ac, av, &a);

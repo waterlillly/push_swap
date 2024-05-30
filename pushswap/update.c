@@ -30,7 +30,7 @@ void	update_index(t_list **stack)
 void	update_cheapest(t_list **stack)
 {
 	t_list	*s;
-	int min;
+	int		min;
 
 	s = *stack;
 	if (!s)

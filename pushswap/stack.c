@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 17:41:57 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 09:40:58 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	fill_stack(int ac, char **av, t_list **head)
 	int		x;
 	int		y;
 
-	input = NULL;
 	x = 0;
 	if (ac > 2)
 	{

@@ -18,7 +18,7 @@
 void	push(t_list **src, t_list **dst)
 {
 	t_list	*s;
-	int    value;
+	int		value;
 
 	s = *src;
 	if (!s)
@@ -50,4 +50,3 @@ void	pb(t_list **a, t_list **b)
 	push(a, b);
 	ft_printf("pb\n");
 }
-

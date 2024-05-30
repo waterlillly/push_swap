@@ -75,7 +75,7 @@ void	update_price_b(t_list *a, t_list *b)
 void	update_price_b_2(t_list *a, t_list *b, int size_a, int size_b)
 {
 	t_list	*t;
-	
+
 	while (b && a)
 	{
 		t = b->target;

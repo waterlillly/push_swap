@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-void get_target_a(t_list **stack_a, t_list **stack_b)
+void	get_target_a(t_list **stack_a, t_list **stack_b)
 {
-	t_list *a;
-	t_list *b;
+	t_list	*a;
+	t_list	*b;
 
 	a = *stack_a;
 	b = *stack_b;
@@ -38,8 +38,8 @@ void	get_target_a_2(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*a;
 	t_list	*b;
-	int 	diff;
-	int 	min_diff;
+	int		diff;
+	int		min_diff;
 
 	a = *stack_a;
 	b = *stack_b;

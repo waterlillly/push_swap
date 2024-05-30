@@ -49,7 +49,7 @@ int	check_doubles(char **input, int x)
 int	stack_size(t_list *stack)
 {
 	int		x;
-	t_list  *s;
+	t_list	*s;
 
 	s = stack;
 	if (!s)
@@ -83,7 +83,7 @@ int	ft_find(char *str, int c)
 
 int	ft_check_arg(int x, char **input)
 {
-	char *tmp;
+	char	*tmp;
 
 	while (input[x] != NULL)
 	{

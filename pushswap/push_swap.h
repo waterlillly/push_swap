@@ -11,24 +11,24 @@
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
- #define PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include "libft/libft.h"
 # include <limits.h>
-#include <stdbool.h>
+# include <stdbool.h>
 
-typedef struct s_list t_list;
+typedef struct s_list	t_list;
 
 typedef struct s_list
 {
-	int 	data;
+	int		data;
 	int		index;
 	int		price;
 	int		cheapest;
 	t_list	*target;
 	t_list	*next;
 	t_list	*prev;
-} 				t_list;
+}				t_list;
 
 /*STACK*/
 void	add(t_list **head, int value);
@@ -55,14 +55,14 @@ void	update_cheapest(t_list **stack);
 int		locate_cheapest(t_list *s);
 
 /*UPDATE_A*/
-void 	get_target_a(t_list **stack_a, t_list **stack_b);
+void	get_target_a(t_list **stack_a, t_list **stack_b);
 void	get_target_a_2(t_list **stack_a, t_list **stack_b);
 void	update_price_a(t_list *a, t_list *b);
 void	update_price_a_2(t_list *a, t_list *b, int size_a, int size_b);
 void	update(t_list **a, t_list **b);
 
 /*UPDATE_B*/
-void 	get_target_b(t_list **stack_a, t_list **stack_b);
+void	get_target_b(t_list **stack_a, t_list **stack_b);
 void	get_target_b_2(t_list **stack_a, t_list **stack_b);
 void	update_price_b(t_list *a, t_list *b_);
 void	update_price_b_2(t_list *a, t_list *b, int size_a, int size_b);

@@ -31,4 +31,3 @@ int	is_sorted(t_list *stack)
 	}
 	return (1);
 }
-

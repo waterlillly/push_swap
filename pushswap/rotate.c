@@ -14,7 +14,6 @@
 
 void	rot_else_a(t_list **a, int loc_a)
 {
-
 	if (*a && loc_a <= stack_size(*a) / 2)
 	{
 		while (loc_a > 0)
@@ -72,9 +71,11 @@ void	rot_cheapest(t_list **stack_a, t_list **stack_b)
 	loc_b = locate_cheapest(b);
 	if (loc_a == -1 || loc_b == -1)
 		return ;
-	else if (a && b && (loc_a <= stack_size(a) / 2) && (loc_b <= stack_size(b) / 2))
+	else if (a && b && (loc_a <= stack_size(a) / 2)
+		&& (loc_b <= stack_size(b) / 2))
 		rot_both_top(&a, &b, loc_a, loc_b);
-	else if (a && b && (loc_a > stack_size(a) / 2) && (loc_b > stack_size(b) / 2))
+	else if (a && b && (loc_a > stack_size(a) / 2)
+		&& (loc_b > stack_size(b) / 2))
 		rot_both_bot(&a, &b, loc_a, loc_b);
 	else
 		rot_else(&a, &b, loc_a, loc_b);

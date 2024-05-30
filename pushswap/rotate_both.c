@@ -60,8 +60,8 @@ void	rot_both_bot(t_list **a, t_list **b, int loc_a, int loc_b)
 
 void	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b)
 {
-	int	loc_a;
-	int	loc_b;
+	int		loc_a;
+	int		loc_b;
 	t_list	*a;
 	t_list	*b;
 
@@ -81,24 +81,24 @@ void	rot_double_2(t_list **stack_a, t_list **stack_b, int loc_a, int loc_b)
 {
 	t_list	*a;
 	t_list	*b;
-	
+
 	a = *stack_a;
 	b = *stack_b;
 	if ((loc_a <= stack_size(a) / 2)
-			&& (loc_b <= stack_size(b) / 2))
-			rr(&a, &b);
-		else if ((loc_a > stack_size(a) / 2)
-			&& (loc_b > stack_size(b) / 2))
-			rrr(&a, &b);
-		else
-		{
-			if (loc_a <= stack_size(a) / 2)
-				ra(&a);
-			else if (loc_a > stack_size(a) / 2)
-				rra(&a);
-			if (loc_b <= stack_size(b) / 2)
-				rb(&b);
-			else if (loc_b > stack_size(b) / 2)
-				rrb(&b);
-		}
+		&& (loc_b <= stack_size(b) / 2))
+		rr(&a, &b);
+	else if ((loc_a > stack_size(a) / 2)
+		&& (loc_b > stack_size(b) / 2))
+		rrr(&a, &b);
+	else
+	{
+		if (loc_a <= stack_size(a) / 2)
+			ra(&a);
+		else if (loc_a > stack_size(a) / 2)
+			rra(&a);
+		if (loc_b <= stack_size(b) / 2)
+			rb(&b);
+		else if (loc_b > stack_size(b) / 2)
+			rrb(&b);
+	}
 }

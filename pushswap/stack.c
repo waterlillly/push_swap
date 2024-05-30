@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:14:40 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 10:05:13 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:08:57 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ void	add(t_list **head, int value)
 	*head = node;
 }
 
+void	fill_stack_2(char **input, int x, int y, t_list **head)
+{
+	while (input[y] && y >= x)
+	{
+		add(head, ft_atoi(input[y]));
+		y--;
+	}
+}
+
 void	fill_stack(int ac, char **av, t_list **head)
 {
 	char	**input;
@@ -61,11 +70,7 @@ void	fill_stack(int ac, char **av, t_list **head)
 	if (!check_doubles(input, x) || ft_check_arg(x, input) == false)
 		error();
 	y = arr_len(input) - 1;
-	while (input[y] && y >= x)
-	{
-		add(head, ft_atoi(input[y]));
-		y--;
-	}
+	fill_stack_2(input, x, y, head);
 	ft_free(input);
 }
 

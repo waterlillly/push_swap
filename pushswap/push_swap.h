@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 17:42:07 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:09:12 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_list
 
 /*STACK*/
 void	add(t_list **head, int value);
+void	fill_stack_2(char **input, int x, int y, t_list **head);
 void	fill_stack(int ac, char **av, t_list **head);
 void	ft_free(char **s);
 void	ft_free_stack(t_list **stack);

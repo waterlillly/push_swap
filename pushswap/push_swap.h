@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 15:46:32 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:29:23 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,6 @@ void	rot_double_2(t_list **stack_a, t_list **stack_b, int loc_a, int loc_b);
 void	update_index(t_list **stack);
 void	update_cheapest(t_list **stack);
 int		locate_cheapest(t_list *s);
-
-/*UPDATE_A*/
-void	get_target_a(t_list **stack_a, t_list **stack_b);
-void	get_target_a_2(t_list **stack_a, t_list **stack_b);
-void	update_price_a(t_list *a, t_list *b);
-void	update_price_a_2(t_list *a, t_list *b, int size_a, int size_b);
-void	update(t_list **a, t_list **b);
 
 /*UPDATE_B*/
 void	get_target_b(t_list **stack_a, t_list **stack_b);

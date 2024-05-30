@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:18:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 15:08:45 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:45:37 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	sort(t_list **a, t_list **b)
 			x--;
 		}
 	}
+	//a_to_b(a, b);
 	b_to_a(a, b);
 	rot_until(a, find_min(*a));
 }
@@ -42,12 +43,8 @@ void	a_to_b(t_list **a, t_list **b)
 	while (!is_sorted(*a))
 	{
 		update(a, b);
-		if (rot_cheapest(a, b) == -1)
-			return ;
-		else if (rot_cheapest(a, b) != 1)
-			pb(a, b);
-		else
-			rra(a);
+		rot_cheapest(a, b);
+		pb(a, b);
 	}
 }
 

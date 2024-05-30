@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 14:57:28 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:46:32 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_free_stack(t_list **stack);
 void	rot_else_a(t_list **a, int loc_a);
 void	rot_else_b(t_list **b, int loc_b);
 void	rot_else(t_list **a, t_list **b, int loc_a, int loc_b);
-int		rot_cheapest(t_list **stack_a, t_list **stack_b);
+void	rot_cheapest(t_list **stack_a, t_list **stack_b);
 void	rot_until(t_list **stack, int data);
 
 /*ROTATE_BOTH*/

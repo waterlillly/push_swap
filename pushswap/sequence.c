@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:11:20 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 15:01:36 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:46:23 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_list	*best_start(t_list *a)
 	cur_len = 0;
 	x = 0;
 	best = a;
-	while (a && x <= stack_size(a) / 2)
+	while (a && x <= stack_size(a))
 	{
 		mark_seq(a);
 		cur_len = how_many(a);

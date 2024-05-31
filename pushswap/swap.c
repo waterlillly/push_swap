@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:12:43 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 11:13:39 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 22:17:18 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@ void	swap(t_list **stack)
 {
 	t_list	*one;
 	t_list	*two;
+	t_list	*three;
 
 	one = *stack;
 	two = (*stack)->next;
 	if (!one || !two)
 		return ;
-	if (two->next == NULL)
-		one->next = NULL;
-	else
-		one->next = two->next;
+	three = two->next;
+	one->next = three;
 	two->next = one;
 	one->prev = two;
 	two->prev = NULL;
+	if (three)
+		three->prev = one;
 	*stack = two;
 }
 

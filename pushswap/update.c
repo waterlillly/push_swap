@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:38:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/31 17:48:05 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 22:56:43 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	update_cheapest(t_list **stack)
 		s = s->next;
 	}
 	s = *stack;
-	if (min == INT_MAX)
-		return ;
 	while (s)
 	{
 		if (min == s->price)

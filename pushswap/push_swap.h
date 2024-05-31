@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/31 17:54:55 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 23:07:39 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ void	ft_free_stack(t_list **stack);
 void	rot_else_a(t_list **a, int loc_a);
 void	rot_else_b(t_list **b, int loc_b);
 void	rot_else(t_list **a, t_list **b, int loc_a, int loc_b);
-void	rot_cheapest(t_list **stack_a, t_list **stack_b);
-void	rot_cheap(t_list **stack_a, t_list **stack_b);
 void	rot_until(t_list **stack, int data);
+void	rot_until_b(t_list **stack, int data);
+
+/*ROTATE_CHEAPEST*/
+void	rot_cheap(t_list **stack_a, t_list **stack_b);
+void	rot_cheap_b(t_list **stack_a, t_list **stack_b);
+void	rot_cheapest(t_list **stack_a, t_list **stack_b);
 
 /*ROTATE_BOTH*/
 void	rot_both_top(t_list **a, t_list **b, int loc_a, int loc_b);
@@ -58,6 +62,7 @@ void	update_index(t_list **stack);
 void	update_cheapest(t_list **stack);
 int		locate_cheapest(t_list *s);
 t_list	*loc_cheapest(t_list *s);
+void	printing(t_list *s);
 
 /*UPDATE_A*/
 void	get_target_a(t_list **stack_a, t_list **stack_b);

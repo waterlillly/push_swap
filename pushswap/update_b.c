@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_b.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:24:37 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/31 17:47:08 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 20:59:55 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	get_target_b_2(t_list **stack_a, t_list **stack_b)
 	a = *stack_a;
 	b = *stack_b;
 	b->target = a;
-	min_diff = INT_MIN;
+	min_diff = INT_MAX;
 	while (a)
 	{
 		if (b->data < a->data)

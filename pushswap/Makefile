@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+         #
+#    By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 01:06:37 by lbaumeis          #+#    #+#              #
-#    Updated: 2024/05/31 17:46:52 by lbaumeis         ###   ########.fr        #
+#    Updated: 2024/05/31 23:04:26 by lbaumeis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIB_FLAGS = -L. -lft
 
 CFILES = stack.c rotate.c rotate_both.c update.c update_a.c update_b.c
 CFILES += sorting.c sort_five.c sort_three.c find.c check_sort.c check_stack.c
-CFILES += swap.c push.c rot.c rev_rot.c main.c
+CFILES += swap.c push.c rot.c rev_rot.c rotate_cheapest.c main.c
 OFILES = $(CFILES:.c=.o)
 P_NAME = push_swap
 

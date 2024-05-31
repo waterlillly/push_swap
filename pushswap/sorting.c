@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:18:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/31 17:47:26 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 22:55:50 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	sort(t_list **a, t_list **b)
 {
-	if (!is_sorted(*a) && stack_size(*a) <= 5)
-		sort_five_max(a, b);
-	else if (!is_sorted(*a))
+	if (!is_sorted(*a) && stack_size(*a) > 3)
 	{
 		pb(a, b);
 		pb(a, b);
@@ -30,7 +28,7 @@ void	sort(t_list **a, t_list **b)
 
 void	a_to_b(t_list **a, t_list **b)
 {
-	while (!is_sorted(*a) && stack_size(*a)	> 3)
+	while (!is_sorted(*a) && stack_size(*a) > 3)
 	{
 		update(a, b);
 		rot_cheap(a, b);
@@ -43,7 +41,7 @@ void	b_to_a(t_list **a, t_list **b)
 	while (*b)
 	{
 		final(a, b);
-		rot_cheap(a, b);
+		rot_cheap_b(a, b);
 		pa(a, b);
 	}
 }

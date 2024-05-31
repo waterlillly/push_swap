@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rot.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:13:08 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 11:14:31 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 22:19:44 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ void	rot(t_list **stack)
 	{
 		temp = *stack;
 		*stack = (*stack)->next;
+		temp->next = NULL;
+		(*stack)->prev = NULL;
 		last = *stack;
 		while (last->next)
 			last = last->next;
-		temp->next = NULL;
 		last->next = temp;
 		temp->prev = last;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_both.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:08:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/31 17:48:30 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 22:54:16 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	rot_both(t_list **stack_a, t_list **stack_b)
 {
 	int		loc_a;
 	int		loc_b;
-	
+
 	loc_a = locate_cheapest(*stack_a);
 	loc_b = locate_cheapest(*stack_b);
 	if (loc_a == -1 || loc_b == -1)

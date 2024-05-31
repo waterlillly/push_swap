@@ -6,7 +6,7 @@
 #    By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 01:06:37 by lbaumeis          #+#    #+#              #
-#    Updated: 2024/05/30 16:29:33 by lbaumeis         ###   ########.fr        #
+#    Updated: 2024/05/31 12:02:21 by lbaumeis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ LIB_FLAGS = -L. -lft
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
 
-CFILES = stack.c rotate.c rotate_both.c update.c update_b.c
+CFILES = stack.c rotate.c rotate_both.c update.c update_a.c update_b.c
 CFILES += sorting.c sort_five.c sort_three.c find.c check_sort.c check_stack.c
-CFILES += swap.c push.c rot.c rev_rot.c sequence.c main.c
+CFILES += swap.c push.c rot.c rev_rot.c main.c
 OFILES = $(CFILES:.c=.o)
 P_NAME = push_swap
 

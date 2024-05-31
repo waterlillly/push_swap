@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:18:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 16:29:38 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 12:07:10 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,28 @@
 
 void	sort(t_list **a, t_list **b)
 {
-	t_list	*start;
-	int		x;
-
 	if (!is_sorted(*a) && stack_size(*a) <= 5)
 		sort_five_max(a, b);
 	else if (!is_sorted(*a))
 	{
-		start = best_start(*a);
-		rot_until(a, start->data);
-		x = stack_size(*a);
-		while (a && x > 0)
-		{
-			if ((*a)->seq == 0)
-				pb(a, b);
-			else
-				ra(a);
-			x--;
-		}
+		pb(a, b);
+		pb(a, b);
 	}
+	a_to_b(a, b);
+	if (!is_sorted(*a))
+		sort_three(a);
 	b_to_a(a, b);
 	rot_until(a, find_min(*a));
+}
+
+void	a_to_b(t_list **a, t_list **b)
+{
+	while (!is_sorted(*a))
+	{
+		update(a, b);
+		rot_cheapest(a, b);
+		pb(a, b);
+	}
 }
 
 void	b_to_a(t_list **a, t_list **b)

@@ -25,7 +25,8 @@ void	push(t_list **src, t_list **dst)
 	if (!s)
 		return ;
 	value = s->data;
-	add(dst, value);
+	if (add(dst, value))
+		error(src, dst);
 	if (s->next)
 	{
 		tmp = s;

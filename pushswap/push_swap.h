@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/31 11:49:00 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 12:43:26 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ typedef struct s_list
 }				t_list;
 
 /*STACK*/
-void	add(t_list **head, int value);
-void	fill_stack_2(char **input, int x, int y, t_list **head);
-void	fill_stack(int ac, char **av, t_list **head);
+bool	add(t_list **head, int value);
+bool	fill_stack_2(char **input, int x, int y, t_list **head);
+bool	fill_stack(int ac, char **av, t_list **head);
 void	ft_free(char **s);
 void	ft_free_stack(t_list **stack);
 
@@ -91,7 +91,8 @@ int		find_mid(t_list *s);
 int		locate(t_list *s, int data);
 
 /*CHECK_SORT*/
-void	error(void);
+void	err_check(int ac, char **input, t_list **head);
+void	error(t_list **a, t_list **b);
 int		is_sorted(t_list *stack);
 
 /*CHECK_STACK*/

@@ -12,8 +12,19 @@
 
 #include "push_swap.h"
 
-void	error(void)
+void	err_check(int ac, char **input, t_list **head)
 {
+	if (ac == 2)
+		ft_free(input);
+	error(head, NULL);
+}
+
+void	error(t_list **a, t_list **b)
+{
+	if (a)
+		ft_free_stack(a);
+	if (b)
+		ft_free_stack(b);
 	ft_putstr_fd("Error\n", 2);
 	exit(EXIT_FAILURE);
 }

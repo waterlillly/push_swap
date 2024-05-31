@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:38:54 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 16:29:36 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:48:05 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	update_cheapest(t_list **stack)
 	min = INT_MAX;
 	while (s)
 	{
+		s->cheapest = 0;
 		if (min > s->price)
 			min = s->price;
 		s = s->next;
@@ -52,6 +53,7 @@ void	update_cheapest(t_list **stack)
 			s->cheapest = 1;
 			return ;
 		}
+		s = s->next;
 	}
 }
 
@@ -68,4 +70,15 @@ int	locate_cheapest(t_list *s)
 		s = s->next;
 	}
 	return (x);
+}
+
+t_list	*loc_cheapest(t_list *s)
+{
+	while (s)
+	{
+		if (s->cheapest == 1)
+			return (s);
+		s = s->next;
+	}
+	return (NULL);
 }

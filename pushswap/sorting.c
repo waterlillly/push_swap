@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:18:21 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/31 12:07:10 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:47:26 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	sort(t_list **a, t_list **b)
 
 void	a_to_b(t_list **a, t_list **b)
 {
-	while (!is_sorted(*a))
+	while (!is_sorted(*a) && stack_size(*a)	> 3)
 	{
 		update(a, b);
-		rot_cheapest(a, b);
+		rot_cheap(a, b);
 		pb(a, b);
 	}
 }
@@ -43,7 +43,7 @@ void	b_to_a(t_list **a, t_list **b)
 	while (*b)
 	{
 		final(a, b);
-		rot_cheapest(a, b);
+		rot_cheap(a, b);
 		pa(a, b);
 	}
 }

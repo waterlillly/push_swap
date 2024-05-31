@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:27:07 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 15:46:16 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:47:40 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	rot_cheapest(t_list **stack_a, t_list **stack_b)
 	a = *stack_a;
 	b = *stack_b;
 	loc_a = locate_cheapest(a);
-	loc_b = locate_cheapest(b);
+	loc_b = locate_cheapest(a->target);
 	if (loc_a == -1 || loc_b == -1)
 		return ;
 	else if (a && b && (loc_a <= stack_size(a) / 2)
@@ -79,6 +79,23 @@ void	rot_cheapest(t_list **stack_a, t_list **stack_b)
 		rot_both_bot(&a, &b, loc_a, loc_b);
 	else
 		rot_else(&a, &b, loc_a, loc_b);
+	*stack_a = a;
+	*stack_b = b;
+}
+
+void	rot_cheap(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*loc_a;
+	t_list	*a;
+	t_list	*b;
+
+	a = *stack_a;
+	b = *stack_b;
+	loc_a = loc_cheapest(a);
+	if (!loc_a)
+		return ;
+	rot_until(&a, loc_a->data);
+	rot_until(&b, loc_a->target->data);
 	*stack_a = a;
 	*stack_b = b;
 }
@@ -94,7 +111,7 @@ void	rot_until(t_list **stack, int data)
 	s = *stack;
 	while (s->data != data)
 	{
-		if (loc <= stack_size(s) / 2)
+		if (loc < stack_size(s) / 2)
 			ra(&s);
 		else
 			rra(&s);

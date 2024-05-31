@@ -6,7 +6,7 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:19:32 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/31 12:43:26 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:54:55 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,21 @@ void	rot_else_a(t_list **a, int loc_a);
 void	rot_else_b(t_list **b, int loc_b);
 void	rot_else(t_list **a, t_list **b, int loc_a, int loc_b);
 void	rot_cheapest(t_list **stack_a, t_list **stack_b);
+void	rot_cheap(t_list **stack_a, t_list **stack_b);
 void	rot_until(t_list **stack, int data);
 
 /*ROTATE_BOTH*/
 void	rot_both_top(t_list **a, t_list **b, int loc_a, int loc_b);
 void	rot_both_bot(t_list **a, t_list **b, int loc_a, int loc_b);
-void	rot_double(t_list **stack_a, t_list **stack_b, int data_a, int data_b);
-void	rot_double_2(t_list **stack_a, t_list **stack_b, int loc_a, int loc_b);
+void	rot_else_one(t_list **stack_a, t_list **stack_b, int loc_a, int loc_b);
+void	rot_else_two(t_list **stack_a, t_list **stack_b, int loc_a, int loc_b);
+void	rot_both(t_list **stack_a, t_list **stack_b);
 
 /*UPDATE*/
 void	update_index(t_list **stack);
 void	update_cheapest(t_list **stack);
 int		locate_cheapest(t_list *s);
+t_list	*loc_cheapest(t_list *s);
 
 /*UPDATE_A*/
 void	get_target_a(t_list **stack_a, t_list **stack_b);

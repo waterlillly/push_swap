@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sort_five.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:17:19 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/06/01 15:44:24 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:09:48 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	sort_five_max(t_list **stack_a, t_list **stack_b)
 {

@@ -6,11 +6,11 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:11:20 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/30 16:29:40 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:09:48 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	how_many(t_list *a)
 {

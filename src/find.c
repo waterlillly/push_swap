@@ -6,11 +6,11 @@
 /*   By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:22:44 by lbaumeis          #+#    #+#             */
-/*   Updated: 2024/05/29 12:04:02 by lbaumeis         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:09:48 by lbaumeis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	find_max(t_list *s)
 {

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbaumeis <lbaumeis@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbaumeis <lbaumeis@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 01:06:37 by lbaumeis          #+#    #+#              #
-#    Updated: 2024/05/31 23:04:26 by lbaumeis         ###   ########.fr        #
+#    Updated: 2025/02/03 14:12:31 by lbaumeis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,10 @@ LIB_FLAGS = -L. -lft
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
 
-CFILES = stack.c rotate.c rotate_both.c update.c update_a.c update_b.c
-CFILES += sorting.c sort_five.c sort_three.c find.c check_sort.c check_stack.c
-CFILES += swap.c push.c rot.c rev_rot.c rotate_cheapest.c main.c
+CFILES = src/stack.c src/rotate.c src/rotate_both.c src/update.c src/update_a.c src/update_b.c
+CFILES += src/sorting.c src/sort_five.c src/sort_three.c src/find.c src/check_sort.c src/check_stack.c
+CFILES += src/swap.c src/push.c src/rot.c src/rev_rot.c src/rotate_cheapest.c src/main.c
+
 OFILES = $(CFILES:.c=.o)
 P_NAME = push_swap
 

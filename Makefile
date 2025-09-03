@@ -29,15 +29,15 @@ OBJ = $(SRCS:.c=.o)
 all: $(P_NAME)
 
 $(P_NAME): $(OBJ)
-	make -C ./libft all
+	@make -C ./libft all
 	$(CC) $(CFLAGS) -o $@ $^ ./libft/libft.a
 
 clean:
-	make -C ./libft clean
+	@make -C ./libft clean
 	rm -f $(OBJ)
 
 fclean: clean
-	make -C ./libft fclean
+	@make -C ./libft fclean
 	rm -f $(P_NAME)
 
 re: fclean all

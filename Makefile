@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 P_NAME = push_swap
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 SRCS =	srcs/stack.c \
 		srcs/rotate.c \
@@ -30,15 +30,15 @@ all: $(P_NAME)
 
 $(P_NAME): $(OBJ)
 	@make -C ./libft all
-	$(CC) $(CFLAGS) -o $@ $^ ./libft/libft.a
+	@$(CC) $(CFLAGS) -o $@ $^ ./libft/libft.a
 
 clean:
 	@make -C ./libft clean
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
 	@make -C ./libft fclean
-	rm -f $(P_NAME)
+	@rm -f $(P_NAME)
 
 re: fclean all
 
